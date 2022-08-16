@@ -2,13 +2,7 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 83: expected statement.
-    player *Flinches* "What!?! What happened?!"
-           ^
-
-File "game/script.rpy", line 95: expected statement.
-    "You decide to walk forward in hopes of bumping into something. The tip of your shoe manages to make contact with something rough and sturdy. You trail your hand across the surface."    \
-                                                                                                                                                                                              ^
+File "game/script.rpy", line 153: Indentation mismatch.
 
 Ren'Py Version: Ren'Py 8.0.1.22070801
-Wed Aug 10 22:59:15 2022
+Sun Aug 14 21:18:13 2022
