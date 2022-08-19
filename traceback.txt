@@ -1,28 +1,52 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/script.rpy", line 142, in script
-    if pockets:
-  File "game/script.rpy", line 142, in <module>
-    if pockets:
-NameError: name 'pockets' is not defined
+  File "game/script.rpy", line 161, in script
+    C "OH GOSH!"
+TypeError: Unexpected keyword arguments: 'new_item'
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 142, in script
-    if pockets:
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\ast.py", line 2115, in execute
-    if renpy.python.py_eval(condition):
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\python.py", line 1080, in py_eval
-    return py_eval_bytecode(code, globals, locals)
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\python.py", line 1073, in py_eval_bytecode
-    return eval(bytecode, globals, locals)
-  File "game/script.rpy", line 142, in <module>
-    if pockets:
-NameError: name 'pockets' is not defined
+  File "game/script.rpy", line 161, in script
+    C "OH GOSH!"
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\ast.py", line 921, in execute
+    renpy.exports.say(who, what, *args, **kwargs)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\exports.py", line 1373, in say
+    who(what, *args, **kwargs)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\character.py", line 1266, in __call__
+    self.do_display(who, what, cb_args=self.cb_args, dtt=dtt, **display_args)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\character.py", line 927, in do_display
+    display_say(who,
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\character.py", line 666, in display_say
+    rv = renpy.ui.interact(mouse='say', type=type, roll_forward=roll_forward)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\ui.py", line 299, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\core.py", line 3377, in interact
+    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs) # type: ignore
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\core.py", line 3804, in interact_core
+    root_widget.visit_all(lambda i : i.per_interact())
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\core.py", line 582, in visit_all
+    d.visit_all(callback, seen)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\core.py", line 582, in visit_all
+    d.visit_all(callback, seen)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\core.py", line 582, in visit_all
+    d.visit_all(callback, seen)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\screen.py", line 451, in visit_all
+    callback(self)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\core.py", line 3804, in <lambda>
+    root_widget.visit_all(lambda i : i.per_interact())
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\screen.py", line 462, in per_interact
+    self.update()
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\screen.py", line 653, in update
+    self.screen.function(**self.scope)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\ast.py", line 294, in apply_arguments
+    return parameters.apply(args, kwargs, ignore_errors)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\ast.py", line 279, in apply
+    raise TypeError(
+TypeError: Unexpected keyword arguments: 'new_item'
 
 Windows-10-10.0.19043 AMD64
 Ren'Py 8.0.1.22070801
 The Cave 0.1.1.1
-Sun Aug 14 21:12:52 2022
+Wed Aug 17 22:54:43 2022

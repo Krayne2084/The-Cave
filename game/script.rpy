@@ -32,14 +32,11 @@ screen item(item_name):
 label start:
 
 python:
-    minor_injuries_C = 0
-    minor_injuries_p = 0
-    majour_injuries_C = 0
-    majour_injuries_p = 0
+    injuries_C = 0
+    injuries_player = 0
     artifact_found = False
     artifact_have = False
-
-$ bag = []
+    bag = []
 
 scene bg darkness
 
@@ -126,7 +123,7 @@ label choice2_wall:
     extend "\n*step*{w=1}\n*step*{w=1}\n*step*"
     C "NO, wait for me!!" 
     "In a sudden panic, Charlotte blindly runs in the direction where she last heard [player]'s voice."
-    $ minor_injuries_C = minor_injuries_C + 1
+    $ injuries_C = injuries_C + 1
 
     "Charlotte, oblivious that her shoelace was undone the whole time, steps on the lace and lifts her other foot. She stumbles and lands on her knees, scraping them on the cold rugged ground. The impact of her fall echoes around the cave walls."
     C "Owwww... That was stupid."
@@ -155,7 +152,10 @@ label get_lighter:
     extend "osh*"
 
     hide screen inventory_bar
-    $ bag.append("Lighter")
+    python:
+        new_item = "Lighter"
+        bag.append(new_item)
+        renpy.notify("You have obtained " + new_item)
     show screen inventory_bar(bag = bag)
 
     C "OH GOSH!"
@@ -168,7 +168,10 @@ label get_lighter:
     "You rummage through your own pouch and pull out an item."
 
     hide screen inventory_bar
-    $ bag.append("Pocketknife")
+    python:
+        new_item = "Pocketknife"
+        bag.append(new_item)
+        renpy.notify("You have obtained " + new_item)
     show screen inventory_bar(bag = bag)
 
     player "How's a pocket knife sound?"
@@ -208,7 +211,7 @@ label choice3_crevice:
     player "Never thought I'd be shimmyin' today. I shoulda stretched first haha."
     C "Honestly... same. I'm stiff as a rusty door."
 
-    if minor_injuries_C>0 or majour_injuries_C>0:
+    if injuries_C > 0:
         C "I'd be more limber if only SOMEONE didn't pretend to abandon me earlier."
         C "*Glares*"
         player "*Whistles*\n*Avoids eye contact*"
@@ -230,15 +233,21 @@ label choice3_crevice:
     "You give the lighter back to Charlotte to hold and open the flap of your bag. In it are some snacks and a half empty water bottle. {w}Nothing too exciting until you pull out a bundle of paracord and your half-finished wooden statue."
     
     hide screen inventory_bar
-    $ bag.append("Paracord (80m)") 
-    $ bag.append("Half-finished Wooden Statue")
+    python:
+        new_item = "Paracord (80m)"
+        bag.append(new_item)
+        renpy.notify("You have obtained " + new_item)
+        new_item = "Half-finished Wooden Statue"
+        bag.append(new_item)
+        renpy.notify("You have obtained " + new_item)
     show screen inventory_bar(bag = bag)
 
     player "It don't look like much but hey, it's a good start."
     C "You carve things? Oh! That would explain your pocket knife huh?"
     player "Yeah, very perceptive of you."
     C "*Shrugs* I try."
-    "You sling the bag onto your back"
+    "You sling the bag onto your back and Charlotte returns the lighter to you."
+    player "Let's keep goin'."
 
     jump choice3_done
 
@@ -246,7 +255,7 @@ label choice3_cavern:
     "You scratch your chin, debating on which option would help you two the best."
     player "Let's check the cavern first. It'd be a waste to not investigate."
     
-    if minor_injuries_C > 0 or majour_injuries_C > 0:
+    if injuries_C > 0:
         player "And hey, maybe we can find something to treat your wounds right? Win-win for you~"
         C "Awww, are you worried about me? If you're worried you coulda just said so."
         player "Look who's flirting now."
@@ -272,10 +281,10 @@ label choice3_cavern:
     $ bag.append("First Aid Kit")
     show screen inventory_bar(bag = bag)
 
-    extend "Oh wait, there's more!" 
+    extend  "\nKinda empty but we can still make do with it. Oh wait, there's more!"
     C "*Pulls out a flashlight*{p}This'll really brighten things up!"
 
-    if minor_injuries_C>0 or majour_injuries_C>0:
+    if injuries_C > 0:
         C "Wow, you weren't kidding when you said it was a win-win!" 
         player "I honestly didn't think that win-win moment would come now, but might as well get you patched up."
         "You use the newly acquired flashlight to help Charlotte assess her injuries."
@@ -289,10 +298,246 @@ label choice3_cavern:
         C "No need to tell me twice. Also, don't jinx it! I really wouldn't want to be forced to use    it." 
         "Charlotte drops the first aid kit in her bag, zips it closed, and slings it on her back."
 
-
     jump choice3_done
 
 label choice3_done:
+
+"The two of you start to walk back towards the crevice. An unexpected rumble startles you both as you scramble to hug the walls for stability. Now that Charlotte has a flashlight, you can clearly see the stone ceiling above the crevice crumble and fall, sealing off your intended path."
+player "Well, uh, looks like that's not an option anymore?"
+C "*moves her flashlight around*{p}Haha, you know what they say. When one door closes, another opens and well, something did open."
+"You follow the direction of her flashlight and see a broken wall on the other side of the cavern. You walk towards and and see a path to who knows where. You look at each other."
+C "Any other options?"
+player "Nope."
+
+"The path felt like a long one. No unexpected twists and turns, but seemed never ending. You two walked in silence, not because of the exhaustion of it all nor the fear of mundane conversation, but to recollect your thoughts and take the time to breathe. After what seemed like an hour, you finally reach a large open area.It's been a while since you've been in a well lit room and you finally get a glimpse of your surroundings. This cavern is significantly larger than the one you passed earlier. The hole in the ceiling convenient lights majority of the cavern. In front of you is a pool of water with another area, unfortunately still shadowed in darkness, on the other side with what looks to be a possible exit."
+C "Oh my gosh, light! *Turns off flashlight* Nice to know we're at least near the surface. Maybe someone will be near by by the time we reach an exit."
+player "That'd be a convenient coincidence now wouldn't it. *Puts the lighter away*" 
+"Charlotte scans around the area and notices something up ahead."
+C "Speaking of people, I think I see something over there."
+player  "*Flinches*{w=0.5}\nW-What!?! Where?! A person?!"
+C "Oh whoops! I meant these."
+"Charlotte walks you to one of the cave walls and points to what looks to be a series of bronze objects protruding from the walls."
+player "Charlotte, please be more specific. I almost had a heart attack thinking you saw a person."
+C "Yeah, yeah, sorry but these pitons are pretty clear evidence of people before us. Maybe longer ago than we thought though."
+player "*Looks up*\nLook, there's a ledge with an opening up there too! Could be a way to an exit. Maybe we can use them to climb up!"
+C "True, true. There's also that area past the water. We got some options on our hands." 
+
+menu:
+    "Climb the Wall":
+        jump choice4_climb
+
+    "Wade through the Water":
+        jump choice4_water
+
+label choice4_climb:
+
+    player "How do you feel about climbing? I mean, if there were people that used those to climb, that seems like a good sign, dontcha think?"
+    C "I don't want to toot my own horn or anything but I'm pretty good at free solo haha."
+    player "At what?"
+    C "Climbing without equipment."
+
+    if "Paracord" in bag:
+        player "*Pulls out paracord from bag*\nAlright muscles, you think you can climb all the way up there and then send this down for me?"
+        C "*Stretches*\nI got this."
+        if injuries_C > 0:
+            C "Of course, I'd feel more confident if my legs were in better shape but it's not like I have that luxury." 
+            player "*Stares* {p}You're really just gonna guilt trip me now, are you?"
+            C "Relax, it's just a joke with a seed of truth in it."
+            "Charlotte places her hand on your shoulder as if to reassure you."
+
+        "You give Charlotte the paracord and she walks up to the wall, assessing her route. She mimes out her actions and you couldn't help but join in too. With surprising strength and patience, Charlotte scales the wall as if it's second nature. She manages to reach the top ledge."
+        C "Lemme find something to tie this cord to- Oh what's this?"
+        player "Hey, don't leave me here!"
+        C "Don't worry. *Throws paracord down* Just went to secure it to something while you climb up. Also! I found something!"
+        "You start to climb the paracord."
+        player "{i}I should start working out after this... I'm sweatin' up a storm."
+        "You reach the top and Charlotte lends you a hand and pulls you up."
+        C "Nice to see ya!"
+        player "Likewise~ So what were you saying earlier? You found something?"
+        C "Yeah, I walked a bit a head while waiting for you and snagged this"
+        "She holds out her other hand."
+
+        jump choice4a_getknocker
+
+    else
+        player "I gotta say, I'm not as confident as you are. This body is not meant for climbing."
+        "You wiggle your arms like noodles."
+        C "Pfft, I wasn't gonna point it out but now that you mentioned it, you do have noodle arms. Say what you will but, maybe I have faith that you can pull it off." 
+        player "I don't know if I should feel offended or encouraged."
+        C "As long as you follow exactly what I do, you should be fine."
+        "Both of you stretch and loosen up a bit before Charlotte takes the lead. She mimes out her visual route and starts to climb, with you tagging behind. As she climbs and grabs onto a pattern of protrusions and pitons, Charlotte details her movements for you to follow suit. You start to feel your strength wither away, arms and legs both shaking. You grab onto a piton and it snaps, your hand slips and ends up wedged into a crack in the wall. You screech as the pain shoots from your wrist and up into your shoulders."
+        C "[player]!"
+        "Charlotte shoots up onto the ledge and reaches her arm out."
+        C "I'm here! I got you!"
+        "You take the risk and with all the strength you can muster in your legs. You jump and grab Charlotte's arm to hoist you up. You curl up holding your wrist with your other hand."
+        
+        $ injuries_player = injuries_player + 1
+
+        if "First Aid Kit" in bag:
+            C "H-Hold on! \n*Takes her bag off and pulls out the first aid kit*" 
+            C "*Looks around for a stick* \nDid you feel it break? Or is it a sprain or something."
+            player "Uhhhh... \n*Dazed*"
+            C "It's fine. Let's just do this for now just in case."
+            "Charlotte takes your hand, places the firm stick on your forearm and wraps your arm with the leftover gauze in the first aid kit."
+            "..."
+            C "How're you feeling?"
+            player "Better than before I suppose."
+            C "Yeah...You kinda passed out? I wasn't sure what to do so I just waited here. Sorry, I kinda ate a good amount of our snacks, but the water's still available haha."
+            player "*Looks at wrist*\nThanks for your help. I owe ya."
+            C "You owe me double! 'Cause look what I found."
+            "She holds out her hand."
+
+            $ injuries_player = injuries_player - 1
+
+            jump choice4a_getknocker
+
+        else:
+            C "*Helps you hold your wrist in place*\nIs it broken or do you think its a sprain?? Scale of 1 to 10 how painful?? 10 is the highest."
+            player "Uhhh... 7?"
+            C "Oh good. Maybe it's not serious. Uh, maybe try to move your wrist around slowly once you feel the pain ease up."
+            player "Sure thing boss. *Flashes a thumbs up and winces*"
+            C "Wait here, I'll scout out the path ahead if there's anything we can use."
+            player "Hey, don't go too far. We can go together."
+            C "*Sighs* Alright, Alright. I'll walk in your field of vision."
+            "..."
+            player "Found anything?"
+            "She holds out her hand."
+
+            jump choice4a_getknocker
+
+    label choice4a_getknocker:
+        player "A giant ring?"
+        C "Yup. But doesn't it look like one of those fancy door knocker things? Y'know, the ones that make you feel spiffy when you use it to knock instead of your knuckles."
+        player "Now that you mention it, yes, it does. It could come in use so let's bring it. Who knows, maybe we'll find a door to knock on."
+        C "Haha alright. *Loops it through her belt and buckles her belt up again.*"
+    
+    jump choice4_done
+
+label choice4_water:
+    player "Let's go across the water, I'm not too confident in my arm strength."
+    C "With noodles like those I ain't too surprised."
+    "You both approach the water"
+
+    if "Flashlight" in bag
+        player "Could you do me a favor and shine up the water for me? I wanna see how deep it is."
+        "Charlotte lights up the water."
+        C "Hey look, there's an underwater ledge! I think it goes all the way across? *Whistle*\nIt's wide enough to walk normal."
+        player "Whew, I thought we were gonna have to wade over. Glad only our little piggies need to take the plunge."
+        "You both cross the water with only slightly damp feet."
+
+    else
+        "[player] sticks his leg into the water all the way and it still doesn't reach the bottom."
+        player "Well, {w}wish me luck."
+        "[player] plunges into the water"
+        player "{size=+20}CO- {size=-5}*Gurgle*"
+        C "[player]! What happened!?"
+        "Charlotte reaches into the water and grabs [player]'s arm to pull him up but she notices some oddly warm water on the arm she grabbed"
+        player "*surfaces*\n Ah tits, be more gentle will ya!"
+        "[player] clambers back onto land, cursing in ways Charlotte never heard before"
+        Charlotte "What happened? Why's your arm covered in blood!?"
+        player "^%#$%$ rock happened that's what! Gashed me bloomin' arm!"
+        C "A rock? Where?"
+        player "'Towards the left wall, the sneaky bugger, thinks the darkness means it can surprise folk like that, @%#$ piece of @%#$&# in a pile of *#^$%&. I hope you crumble to dust."
+        C "Ummmm... so do you want the good news first or the bad news?"
+        player "Tear that bandage right off, what's our latrine being filled with?"
+        C "You didn't need to get wet. The good news is that the rock seems to be a ledge and I think I can barely see it going all the way over."
+        "[player] begins to curse for several minutes."
+        "You both cross the water as you curse up another storm about how blood loss and hypothermia are having a race to see who can kill him first"
+        "By the time you get to the other side, you've calmed down significantly and even your accent seems to have retreated."
+        C "So British huh?"
+        player "Sort of, grew up all over Europe but yeah I was born in Britain. Ma and Pa loved road trips before the triplets. Hopefully when the triplets grow up, Ma and Pa find the energy to go on road trips again. "
+
+        injuries_player = injuries_player + 1
+
+    "As you reach the end of the pool, you notice the ground getting{cps=4}...{/cps}{w=0.3} fuzzy"
+    player "Great, another slippin' hazard. {w}At least this one's hard to miss."
+    C "Wait...{w} Is this what I think it is?"
+    player "I just see some fuzzy patches of asininity waiting to get our arses bruised."
+    C "First off, this species of moss is mostly under whatever surface it's on and the parts in open air are usually bone dry and therefore not slippery."
+    C "Secondly, this moss is super rare and in high demand since it has very strong healing and antibacterial properties."
+    player "So that means we don't gotta worry about any more injuries! At least in the long term."
+    C "THIRDLY, a side effect of how it grows means that the surface part, the only part we can even gather right now, is mostly air. So we're gonna need basically everything we see just for a poultice big enough"
+    if pockets = False:
+        extend " for this knee."
+    else if injuries_player > 0:
+        extend " for yer arm."
+    else:
+        extend " for anything larger than a scraped knee."
+    if injuries_C > 0 and injuries_player > 0:
+        player "So you wanna use it? Your gash looks way uncomfortable to walk on."
+        C "Eh, I got used to it. I got used to getting scratched up and powering through when I got these babies. \n*Points at the badges on her sleeves*"
+
+    menu:
+        "Heal Charlotte":
+            jump choice4a_C
+
+        "Heal yourself":
+            jump choice4a_player
+
+    label choice4a_C:
+        player "I insist, you must've powered through more than enough injuries to be as nonplussed as you are about your knee. I think I should take a page from your book and /"build some character/" myself"
+        "You and Charlotte grab all the moss you see and as you mix it with water, the armload you both got really did end up being barely enough to cover the gash on her knee"
+        "You both decide to get back to getting out of here"
+
+        jump choice4a_done
+
+    label choice4a_player:
+        player "Yeah I guess you do seem to be doin' fine with that leg."
+        player "Me on the other hand.{w} I feel like I'd faint if so much as a breeze touches me arm."
+        "You and Charlotte grab all the moss you see and as you mix it with water, the armload you both got really did end up being barely enough to cover the gash on your arm."
+        "You both decide to get back to getting out of here"
+        
+        jump choice4a_done
+
+    label choice4a_done:
+    C "Sure do hope this tunnel ain't a dead end."
+    player "Only one way to find out."
+    jump choice4_done
+
+
+label choice4_done:
+
+"You two continue down the path."
+C "Don't you think it's strange?"
+player "What's strange?"
+C "These tunnels are pretty clear. Like sure, there's rubble and such, but for the most part, we haven't really had any issues walking around this place. How big do you think this cave even is?"
+player "Who knows. Maybe it was once a home for a small community or somethin'. I wouldn't be surprised."
+C "True... I could see that, if we weren't stuck here I mean."
+player "We're not gonna be here for long. We're gettin' outta here together."
+C "Haha, got that right! Let's go to a buffet after all this is done n' over."
+player "Aww you're gonna pay for me? Thanks, I accept your invitation~"
+C "Wait, what?!"
+
+"You and Charlotte sit in an open section of the path you've been walking, the light from outside giving you a bit of warmth and hope. Drinking the last drops of water and remaining snacks you get up from your spot and dust off your uniform."
+C "Almost feels like we're in the homestretch huh? I gotta say, we just met not too long ago, but it's a nice feeling not having to shoulder the burden of life and death alone."
+player "You gettin' poetic on me?"
+C "Nah, *scratches neck* just feels like the best time to say it."
+player "That ain't ominous at all."
+C "Ughhh, you know what I mean. Anyway, the moment's gone now so you lost your chance to be sentimental."
+"Charlotte skips ahead and you can't help but chuckle at your new friend."
+C "Hey [player], check this out!"
+"You follow the sound of Charlotte's voice and find her looking up at a section of the ceiling where a piece of rock juts out to form some sort of shelf. You squint and notice something relatively large balancing laying on it. The object looks as if it could be pulled off with some effort."
+player "Think it's worth it?"
+C "Anything's worth it if it helps us out. Of course if we don't injure ourselves in the process."
+
+if "Paracord" and "Large Knocker Ring" in bag:
+    "You look at Charlotte's belt, at the large knocker ring you found recently."
+    player "I got an idea, it involves that ring of yours."
+    "You pull out your paracord and Charlotte removes the ring from her belt and hands it to you. Tying a secure knot around the ring, you do some test throws with it to ensure the ring doesn't go rogue."
+    C "How nifty. Nice to know the gears are still turning in there after who knows how long."
+    player "Haha, ye. You're lucky I still got some brain battery left over."
+    "Swinging the paracord, you take your aim. It takes a few attempts but you finally managed to slot the cylindrical object into the ring and yank it down. Charlotte catches the item in her arms."
+    player "What a catch! What fish did we reel in?"
+    C "Uhhhh. *Shows you a stone idol* This?"
+    player "A stone idol huh? I wonder what it was used for."
+    C "Well, now that we have it, we can find out maybe?"
+    player "Yup. I'm sure the opportunity will present itself."
+    "Charlotte places it in her bag. Due to its height, it now comically pokes its head out of her bag."
+else:
+    if injuries_C < 1 and injuries_player < 1:
+
+
+
 
 return
 
