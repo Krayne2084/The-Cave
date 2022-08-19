@@ -3,38 +3,77 @@
 # Declare characters used by this game. The color argument colorizes the
 # name of the character.
 
+#CHARACTERS
 define e = Character("Eileen")
 define b = Character("You")
 define g = Character("Girl")
 
-transform right:
-    ypos 0.15
-    yanchor 0
+#ITEMS
+define firstaidkit = "First Aid Kit"
+define paracord = "Paracord (80m)"
+define pocketknife = "Pocketknife"
+define lighter = "Lighter"
+define statue = "Half-Finished Wooden Statue"
+define flashlight = "Flashlight"
+
+#IMAGES
+image item lighter = "item lighter.png"
+image charlotte neutral = "charlotte neutral.png"
+
+#TRANSFORMS
+transform character_right:
+    yalign 1
     xanchor 0.5
     xpos 0.85
+    zoom 0.35
 
+transform bg_top:
+    yalign 0
+
+transform bg_topish:
+    yalign 0.25
+
+transform bg_mid:
+    yalign 0.5
+
+transform bg_bottomish:
+    yalign 0.75
+
+transform bg_bottom:
+    yalign 1.0
+
+#EFFECTS
 define flashbulb = Fade(0.2, 0.0, 0.8, color='#fff')
 
+#SCREENS
 screen inventory_bar(bag = []):
     $ Bag = bag
     frame:
         xalign 0 ypos 0
 
         has hbox spacing 20
-        text "Inventory:"
+        text "Inventory:":
+            xalign 0
+            yalign 0.5
+        #for i in Bag:
+        #    if i != "":
+        #        use item(i)
         for i in Bag:
             if i != "":
                 use item(i)
 
 screen item(item_name):
-    text "[item_name]" xalign 0
+    #text "[item_name]" xalign 0
+    add item_name:
+        xalign 0 
+        zoom 0.05
 
+#START
 label start:
 
 python:
     injuries_C = 0
     injuries_player = 0
-    artifact_found = False
     artifact_have = False
     bag = []
 
@@ -103,11 +142,11 @@ menu:
 
 label choice2_pockets:
     $ pockets = True
-    show screen inventory_bar(bag = bag)
     player "*pats pockets*{p}*rummages through waist pouch*"
     C "Watcha doin' there bud?"
     player "Checkin' if I got anythin' useful on me"
     C "Ah! Good call. {size=-18}Why didn't I think of that?{/size}"
+
     jump get_lighter
     
 
@@ -123,6 +162,7 @@ label choice2_wall:
     extend "\n*step*{w=1}\n*step*{w=1}\n*step*"
     C "NO, wait for me!!" 
     "In a sudden panic, Charlotte blindly runs in the direction where she last heard [player]'s voice."
+    
     $ injuries_C = injuries_C + 1
 
     "Charlotte, oblivious that her shoelace was undone the whole time, steps on the lace and lifts her other foot. She stumbles and lands on her knees, scraping them on the cold rugged ground. The impact of her fall echoes around the cave walls."
@@ -143,19 +183,21 @@ label get_lighter:
         player "What's all that rustlin'?"
         C "I'm seeing if I got anything useful before I start wanderin' in this pitch blackness again."
         player "{i}That's a bright idea{cps=4}...{/cps}{p}Good thing I didn't say that aloud."
-        "Charlotte pulls out a lighter from the ineer pocket of her pouch."
 
     "*click*{p}*click*{p}*Fwo{nw}"
 
-    show soul idle at right with flashbulb
+    scene bg cave1_warm at bg_bottomish
+
+    show charlotte neutral at character_right with flashbulb:
     
     extend "osh*"
 
     hide screen inventory_bar
     python:
-        new_item = "Lighter"
+        new_item = "item lighter.png"
+        new_item_name = lighter
         bag.append(new_item)
-        renpy.notify("You have obtained " + new_item)
+        renpy.notify("You have obtained " + new_item_name)
     show screen inventory_bar(bag = bag)
 
     C "OH GOSH!"
@@ -169,7 +211,8 @@ label get_lighter:
 
     hide screen inventory_bar
     python:
-        new_item = "Pocketknife"
+        new_item = "item pocketknife.png"
+        new_item_name = pocketknife
         bag.append(new_item)
         renpy.notify("You have obtained " + new_item)
     show screen inventory_bar(bag = bag)
@@ -203,6 +246,7 @@ label choice3_crevice:
     "The two of you walk up to the crevice and Charlotte gives you her lighter and gestures to the crevice"
     C "Lead the way~"
     "You begin to side step into the narrow entrance, arm outstretched for an optimal view of the path."
+    scene bg crevice_edit
     player "Damn, this shimmy session is gonna be longer than I thought it'd be."
     C "Wha?? You gotta be kidding me. I haven't even step in yet and I'm already exhausted from hearing you say that."
     player "You say that as if you're not gonna be in here soon haha."
@@ -234,10 +278,10 @@ label choice3_crevice:
     
     hide screen inventory_bar
     python:
-        new_item = "Paracord (80m)"
+        new_item = paracord
         bag.append(new_item)
         renpy.notify("You have obtained " + new_item)
-        new_item = "Half-finished Wooden Statue"
+        new_item = statue
         bag.append(new_item)
         renpy.notify("You have obtained " + new_item)
     show screen inventory_bar(bag = bag)
@@ -278,7 +322,10 @@ label choice3_cavern:
     C "*Pulls out a first aid kit*"
 
     hide screen inventory_bar
-    $ bag.append("First Aid Kit")
+    python:
+        new_item = firstaidkit
+        bag.append(new_item)
+        renpy.notify("You have obtained " + new_item)
     show screen inventory_bar(bag = bag)
 
     extend  "\nKinda empty but we can still make do with it. Oh wait, there's more!"
@@ -292,7 +339,14 @@ label choice3_cavern:
         C "Sure felt like a scrape. Can't change the past now."
         "You look away, feeling a bit queasy, while Charlotte focuses on disinfecting and wrapping her wounds."
         C "All good to go!"
+        
+        python:
+            injuries_C = injuries_C - 1
+            bag.remove(firstaidkit)
+            renpy.notify("You have used " + firstaidkit)
+        
         player "*Trying not to gag* {p}Mhm *Thumbs up*"
+
     else:
         player "Keep that first aid kit close. Who knows if we'll need it down the line."
         C "No need to tell me twice. Also, don't jinx it! I really wouldn't want to be forced to use    it." 
@@ -336,7 +390,7 @@ label choice4_climb:
     player "At what?"
     C "Climbing without equipment."
 
-    if "Paracord" in bag:
+    if paracord in bag:
         player "*Pulls out paracord from bag*\nAlright muscles, you think you can climb all the way up there and then send this down for me?"
         C "*Stretches*\nI got this."
         if injuries_C > 0:
@@ -359,7 +413,7 @@ label choice4_climb:
 
         jump choice4a_getknocker
 
-    else
+    else:
         player "I gotta say, I'm not as confident as you are. This body is not meant for climbing."
         "You wiggle your arms like noodles."
         C "Pfft, I wasn't gonna point it out but now that you mentioned it, you do have noodle arms. Say what you will but, maybe I have faith that you can pull it off." 
@@ -373,7 +427,7 @@ label choice4_climb:
         
         $ injuries_player = injuries_player + 1
 
-        if "First Aid Kit" in bag:
+        if firstaidkit in bag:
             C "H-Hold on! \n*Takes her bag off and pulls out the first aid kit*" 
             C "*Looks around for a stick* \nDid you feel it break? Or is it a sprain or something."
             player "Uhhhh... \n*Dazed*"
@@ -418,14 +472,14 @@ label choice4_water:
     C "With noodles like those I ain't too surprised."
     "You both approach the water"
 
-    if "Flashlight" in bag
+    if flashlight in bag:
         player "Could you do me a favor and shine up the water for me? I wanna see how deep it is."
         "Charlotte lights up the water."
         C "Hey look, there's an underwater ledge! I think it goes all the way across? *Whistle*\nIt's wide enough to walk normal."
         player "Whew, I thought we were gonna have to wade over. Glad only our little piggies need to take the plunge."
         "You both cross the water with only slightly damp feet."
 
-    else
+    else:
         "[player] sticks his leg into the water all the way and it still doesn't reach the bottom."
         player "Well, {w}wish me luck."
         "[player] plunges into the water"
@@ -447,7 +501,7 @@ label choice4_water:
         C "So British huh?"
         player "Sort of, grew up all over Europe but yeah I was born in Britain. Ma and Pa loved road trips before the triplets. Hopefully when the triplets grow up, Ma and Pa find the energy to go on road trips again. "
 
-        injuries_player = injuries_player + 1
+        $ injuries_player = injuries_player + 1
 
     "As you reach the end of the pool, you notice the ground getting{cps=4}...{/cps}{w=0.3} fuzzy"
     player "Great, another slippin' hazard. {w}At least this one's hard to miss."
@@ -459,10 +513,11 @@ label choice4_water:
     C "THIRDLY, a side effect of how it grows means that the surface part, the only part we can even gather right now, is mostly air. So we're gonna need basically everything we see just for a poultice big enough"
     if pockets = False:
         extend " for this knee."
-    else if injuries_player > 0:
-        extend " for yer arm."
     else:
-        extend " for anything larger than a scraped knee."
+        if injuries_player > 0:
+            extend " for yer arm."
+        else:
+            extend " for anything larger than a scraped knee."
     if injuries_C > 0 and injuries_player > 0:
         player "So you wanna use it? Your gash looks way uncomfortable to walk on."
         C "Eh, I got used to it. I got used to getting scratched up and powering through when I got these babies. \n*Points at the badges on her sleeves*"
@@ -475,7 +530,7 @@ label choice4_water:
             jump choice4a_player
 
     label choice4a_C:
-        player "I insist, you must've powered through more than enough injuries to be as nonplussed as you are about your knee. I think I should take a page from your book and /"build some character/" myself"
+        player "I insist, you must've powered through more than enough injuries to be as nonplussed as you are about your knee. I think I should take a page from your book and \"build some character\" myself"
         "You and Charlotte grab all the moss you see and as you mix it with water, the armload you both got really did end up being barely enough to cover the gash on her knee"
         "You both decide to get back to getting out of here"
 
@@ -520,7 +575,7 @@ C "Hey [player], check this out!"
 player "Think it's worth it?"
 C "Anything's worth it if it helps us out. Of course if we don't injure ourselves in the process."
 
-if "Paracord" and "Large Knocker Ring" in bag:
+if paracord and "Large Knocker Ring" in bag:
     "You look at Charlotte's belt, at the large knocker ring you found recently."
     player "I got an idea, it involves that ring of yours."
     "You pull out your paracord and Charlotte removes the ring from her belt and hands it to you. Tying a secure knot around the ring, you do some test throws with it to ensure the ring doesn't go rogue."
@@ -535,7 +590,90 @@ if "Paracord" and "Large Knocker Ring" in bag:
     "Charlotte places it in her bag. Due to its height, it now comically pokes its head out of her bag."
 else:
     if injuries_C < 1 and injuries_player < 1:
+        player "Wanna try an old fashioned boost?"
+        C "Gladly!"
+        "You give Charlotte a boost. Unfortunately she comes up short."
+        player "Lemme have a go."
 
+        jump boost_C
+
+    if injuries_C > 0:
+        player "Wanna try an old fashion boost?"
+        C "Yeah...maybe not, my knees are takin' their toll."
+        player "*Looks at Charlotte's relatively fresh skid marks on her knees* Ah shoot, sorry, I completely forgot."
+        C "No biggie."
+        player "Sorry about that by the way... Dumb move on my part."
+        C "Hey, don't worry about it. We're past that now. Anywho, let's just move on. Doesn't look like we'll get to uncover that treasure."
+
+    if injuries_player > 0:
+        player "I'd boost ya, but my whole arm is outta commission."
+        C "I can try to boost you."
+        player "Aight. Let's do this."
+
+        jump boost_C
+  
+    label boost_C:
+        "Charlotte boosts you and her arms immediately start shaking."
+        C "Dude, are you made of lead or something!?! Why are you so heavy!"
+        player "Hey! Has anyone told you not to mention a man's weight! *reaching out*"
+        "You jump back to the ground."
+        player "Mission failed on this one."
+        player "At least we can say we tried."
+        C "Yeah... It's prob'ly not important anyway. At least, that's what I'm gonna tell myself."
+        player "I concur. Let's save our energy while we still have some."
+
+"A fork in the tunnel presents itself."
+C "Oh wow, we got a choice on our hands! Been a while hasn't it."
+player "Left or Right huh?"
+C "Yup! Better be careful which one you choose."
+player "Why do I gotta choose."
+C "'Cause I don't wanna be responsible if something bad happens~"
+"You groan while Charlotte's cackle bounces around the cave walls."
+
+menu:
+    "Go Left":
+        jump choice5_left
+    
+    "Go Right":
+        jump choice5_right
+
+label choice5_left:
+    player "Left it is."
+    "You and Charlotte go into the tunnel on the left."
+    "A few minutes later."
+    player "Is it just me or is the cave looking{cps=4}...{/cps} cleaner?"
+    C "What do you mean?"
+    player "It feels like the cave is traveling straighter, like it's more intentional now. I don't know, I could just be imaginin' things."
+    C "I don't think you're imagining it..."
+    "You and Charlotte stop in your tracks"
+    player "Is that a brazier?"
+    C "Either that or a real fancy stalagmite."
+    "You start walking towards the brazier. It felt as if it was calling you. Surprisingly, there are hot coals inside it, hot enough to light something on fire."
+
+    if pocketknife and statue in bag:
+        player "Ah!"
+        "You reach into your bag and grab the wooden statue you were working on and whip the pocket knife out of your pouch. Charlotte watches you and you shave off bits of wood from your carving.The wood shavings start to burn and flames bloom to life."
+        C "Whoa [player], there's something emerging from the coal!"
+        "Staring into the flames, you noticed a stone pedestal"
+
+    else:
+        C "What are you doing? It's not like we can do anything with it. There's nothing in it for us to use either. Unless you wanna throw coal at each other."
+        player "I guess you're right. But I can't shake this feeling' like we could've done somethin' here."
+        "You walk away, look back at the brazier, then head back to retrace your steps and check out the other path."
+        jump choice5_right
+
+label choice5_right:
+    player "Right it is."
+    "You and Charlotte go into the tunnel on the right."
+    "After walking for several minutes, Charlotte notices something."
+    C "I hear birds.{p} I think we-{nw}"
+    player "Hup. {w=0.5}Zip it. Don't jinx it."
+    C "Fine, then I guess those are bats and we accidentally made our way deeper.\nNyeh *Sticks out Tongue*"
+    player "Better."
+    "You stop in your tracks as you stare at the sight before your eyes. You and Charlotte look down at the bottomless gap before you. It's just large enough that you would need to jump to even start climbing. Thankfully, the ledge is just short enough that if one of you gives the other a boost, they should be able to reach the ledge. You can only hope that there's something on the other side that you can use to help the other one across."
+    C "Looks like we can boost each other. One of us is sure to make it."
+    player "Heh. You must be a mind reader 'cause I was thinkin' the same thing."
+    C "Well, you were making a face. Like you were staring into the void...well technically you were but y'know what I mean."
 
 
 

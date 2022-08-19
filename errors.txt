@@ -2,33 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 362: expected ':' not found.
-    else
-        ^
-
-File "game/script.rpy", line 421: reached end of line when expecting ':'.
-    if "Flashlight" in bag
-                          ^
-
-File "game/script.rpy", line 428: expected statement.
-    else
-        ^
-
-File "game/script.rpy", line 462: expected ':' not found.
-    else if injuries_player > 0:
-         ^
-
-File "game/script.rpy", line 464: expected statement.
-    else:
-        ^
-
-File "game/script.rpy", line 478: end of line expected.
-    player "I insist, you must've powered through more than enough injuries to be as nonplussed as you are about your knee. I think I should take a page from your book and /"build some character/" myself"
-                                                                                                                                                                              ^
-
-File "game/script.rpy", line 537: if statement expects a non-empty block.
-    if injuries_C < 1 and injuries_player < 1:
+File "game/script.rpy", line 191: end of line expected.
+    show charlotte neutral at right with zoom 0.5 with flashbulb
                                               ^
 
 Ren'Py Version: Ren'Py 8.0.1.22070801
-Thu Aug 18 20:53:56 2022
+Thu Aug 18 23:11:59 2022
