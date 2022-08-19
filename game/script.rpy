@@ -200,18 +200,21 @@ label get_lighter:
         renpy.notify("You have obtained " + new_item_name)
     show screen inventory_bar(bag = bag)
 
+    show charlotte shocked
     C "OH GOSH!"
     player "*Flinches* \n What!?! What happened?!"
+    show charlotte worried
     C "O-oh no it's uh.. I just wasn't expecting to see you right away haha."
     player "Are{cps=4}...{/cps}{w=0.25} Are you callin' me ugly?"
     C "No no, not at all" 
-    C "*Coughs*" 
+    C "*Coughs*"
+    show charlotte neutral
     C "Anyways, looks like this is all I have, everything else must've fallen out. You got anything useful?"
     "You rummage through your own pouch and pull out an item."
 
     hide screen inventory_bar
     python:
-        new_item = "item pocketknife.png"
+        #new_item = "item pocketknife.png"
         new_item_name = pocketknife
         bag.append(new_item)
         renpy.notify("You have obtained " + new_item)

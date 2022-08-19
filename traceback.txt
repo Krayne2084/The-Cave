@@ -1,6 +1,6 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
-While loading <renpy.display.im.Image object ('…item pocketknife.png') at 0x0000000004a36820>:
+While loading <renpy.display.im.Image object ('…item pocketknife.png') at 0x0000000003b9d100>:
   File "game/script.rpy", line 220, in script
     player "How's a pocket knife sound?"
 OSError: Couldn't find file 'item pocketknife.png'.
@@ -77,4 +77,4 @@ OSError: Couldn't find file 'item pocketknife.png'.
 Windows-10-10.0.19043 AMD64
 Ren'Py 8.0.1.22070801
 The Cave 0.1.1.1
-Thu Aug 18 23:22:20 2022
+Thu Aug 18 23:36:06 2022
