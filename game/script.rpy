@@ -493,7 +493,7 @@ label choice4_climb:
             C "It's fine. Let's just do this for now just in case."
             "Charlotte takes your hand, places the firm stick on your forearm and wraps your arm with the leftover gauze in the first aid kit."
 
-            firstaidkit.use()
+            $ firstaidkit.use()
             $ injuries_player = injuries_player - 1
 
             "..."
@@ -667,7 +667,7 @@ if paracord and knocker in bag:
     player "What a catch! What fish did we reel in?"
     C "Uhhhh. *Shows you a stone idol* {nw}"
     
-    stoneidol.add_to_bag()
+    $ stoneidol.add_to_bag()
 
     extend "This?"
     player "A stone idol huh? I wonder what it was used for."
