@@ -186,6 +186,7 @@ label choice2_wall:
     $ injuries_C = injuries_C + 1
 
     "Charlotte, oblivious that her shoelace was undone the whole time, steps on the lace and lifts her other foot. She stumbles and lands on her knees, scraping them on the cold rugged ground. The impact of her fall echoes around the cave walls."
+    "{size=+20} *THUD*"
     C "Owwww... That was stupid."
     player "Are you okay?? That didn't sound too good."
     C "*Whimpers* {p}I-it's fine. Just gotta shake it off. It's just a scrape."
@@ -238,9 +239,20 @@ player "Yep. Perfectly normal considering we've been knocked out for who knows h
 C "Pfft. No worries, makes sense. I'd be rambling too if I we didn't have this lighter."
 
 "The two follow a dimly lit path. As they shuffle in the dark, they come across what they assumed to be a large cavern to their left. The lighter flickers and sways."
-C "Airflow? Good news! We're not as deep as I thought we were then, eh?"
+C "Airflow? {w=0.5}{nw}"
+
+show charlotte happy
+
+extend "Good news! We're not as deep as I thought we were then, eh?"
 player "Sounds about right? So airflow means there's an exit somewhere or somethin' right?"
-C "I mean, it's possible. Not too sure tho- {w=0.5}Oh hey look over there!"
+
+show charlotte neutral
+
+C "I mean, it's possible. Not too sure tho- {w=0.5}{nw}"
+
+show charlotte happy
+
+extend "Oh hey look over there!"
 "Charlotte points to a crevice a few meters ahead of them."
 C "It looks big enough for both of us to shimmy through! Maybe that's where the air current is coming from. Worth a shot right?"
 
@@ -260,17 +272,23 @@ label choice3_crevice:
     scene bg crevice_edit at bg_mid
     
     player "Damn, this shimmy session is gonna be longer than I thought it'd be."
-    C "Wha?? You gotta be kidding me. I haven't even step in yet and I'm already exhausted from hearing you say that."
+    
+    show charlotte worried at character_right
+    
+    C "Wha?? You gotta be kidding me. I haven't even stepped in yet and I'm already exhausted from hearing you say that."
     player "You say that as if you're not gonna be in here soon haha."
     C "Ughhh."
+    show charlotte neutral
     "Charlotte follows behind you while you wait for her to catch up."
     player "Never thought I'd be shimmyin' today. I shoulda stretched first haha."
     C "Honestly... same. I'm stiff as a rusty door."
 
     if injuries_C > 0:
         C "I'd be more limber if only SOMEONE didn't pretend to abandon me earlier."
+        show charlotte annoyed
         C "*Glares*"
         player "*Whistles*\n*Avoids eye contact*"
+        hide charlotte
 
     "You and Charlotte are almost out of the crevice and suddenly, you feel the world shake.{nw}"
     
@@ -278,15 +296,26 @@ label choice3_crevice:
     
     extend "{w=1} It wouldn't have been a big deal, until you hear crackles of stones and the walls behind Charlotte start to break down."
     player "{size=+20}LET'S HURRY AND MOVE IT. DON'T LOOK BACK."
-    C "Wha-{p}*looks back*{w=0.5}\nCrap, {size=+10}{w=0.25}crap, {size=+10}{w=0.25}CRAP {size=+20}{w=0.25}MOVEEE!!{/size}"
+    
+    show charlotte worried at character_right
+
+    C "Wha-{p}*looks back*{w=0.5}{nw}"
+    
+    show charlotte shocked
+
+    extend "\nCrap, {size=+10}{w=0.25}crap, {size=+10}{w=0.25}CRAP {size=+20}{w=0.25}MOVEEE!!{/size}"
     "Both of you shimmy as quick as you can without blowing the lighter's flame out. You finally reach the crevice's exit. You take Charlotte's hand and pull her out before the rubble could get to her."
     
     show bg at bg_mid
-    show effect vignette_white
     
+    show charlotte worried
     C "*Huff*{w=0.8} *Huff*{w=1}\nYeah, let's not do that again. {w}No more crevices."
     player "*Huff*{w=0.8} *Huff*{w=1}\nI second that."
-    C "Never thought I'd experience an earthquake like that. {p}*stretches*{w=1} \nWhere are we now?"
+    C "Never thought I'd experience an earthquake like that."
+
+    show charlotte neutral
+
+    extend "\n*stretches*{w=1} \nWhere are we now?"
     player "*moves lighter around*{p}Another cavern I think."
     C "Hey [player], move the lighter to the right would ya? I think I saw something."
     "You move the lighter and see a lump on a large stone slab."
@@ -351,6 +380,7 @@ label choice3_cavern:
         C "All good to go!"
         
         $ injuries_C = injuries_C - 1
+        $ firstaidkit.use()
 
         player "*Trying not to gag* {p}Mhm *Thumbs up*"
 
@@ -370,24 +400,38 @@ label choice3_cavern:
 
 label choice3_done:
 
+hide charlotte
+
 "The path felt like a long one. No unexpected twists and turns, but seemed never ending."
 "You two walked in silence, not because of the exhaustion of it all nor the fear of mundane conversation, but to recollect your thoughts and take the time to breathe."
 "After what seemed like an hour, you finally reach a large open area. It's been a while since you've been in a well lit room and you finally get a glimpse of your surroundings."
-"This cavern is significantly larger than the one you passed earlier. The hole in the ceiling conveniently lights the majority of the cavern. In front of you is a pool of water with another area, unfortunately still shadowed in darkness, on the other side with what looks to be a possible exit."
+
+scene bg largecavern1 at bg_bottomish
+
+"This cavern is significantly larger than the one you passed earlier."
+"The hole in the ceiling conveniently lights the majority of the cavern. In front of you is a pool of water with another area, unfortunately still shadowed in darkness, on the other side with what looks to be a possible exit."
+
+show charlotte happy at character_right
+
 C "Oh my gosh, light! {nw}"
 
 if flashlight in bag:
     extend "*Turns off flashlight* {nw}"
 
-extend "Nice to know we're at least near the surface. Maybe someone will be near by by the time we reach an exit."
+extend "Nice to know we're at least near the surface. Maybe someone will be near by when we reach an exit."
 player "That'd be a convenient coincidence now wouldn't it. *Puts the lighter away*" 
 "Charlotte scans around the area and notices something up ahead."
+
+show charlotte neutral
+
 C "Speaking of people, I think I see something over there."
-player  "*Flinches*{w=0.5}\nW-What!?! Where?! A person?!"
+player  "{cps=200}*Jumps*{w=0.5}\nW-What!?!{w=0.5} Where?!{w=0.5} A person?!{/cps}"
 C "Oh whoops! I meant these."
 "Charlotte walks you to one of the cave walls and points to what looks to be a series of bronze objects protruding from the walls."
-player "Charlotte, please be more specific. I almost had a heart attack thinking you saw a person."
-C "Yeah, yeah, sorry but these pitons are pretty clear evidence of people before us. Maybe longer ago than we thought though."
+player "Charlotte, please be more specific. I almost had a heart attack thinking you saw some stranger. I welcome help but who knows what type we'll meet in the middle of a cave?"
+player "No offense."
+C "None taken."
+C "But yeah sorry, these pitons are pretty clear evidence of people before us. Maybe longer ago than we thought though."
 player "*Looks up*\nLook, there's a ledge with an opening up there too! Could be a way to an exit. Maybe we can use them to climb up!"
 C "True, true. There's also that area past the water. We got some options on our hands." 
 
@@ -399,7 +443,6 @@ menu:
         jump choice4_water
 
 label choice4_climb:
-
     player "How do you feel about climbing? I mean, if there were people that used those to climb, that seems like a good sign, dontcha think?"
     C "I don't want to toot my own horn or anything but I'm pretty good at free solo haha."
     player "At what?"
@@ -408,6 +451,7 @@ label choice4_climb:
     if paracord in bag:
         player "*Pulls out paracord from bag*\nAlright muscles, you think you can climb all the way up there and then send this down for me?"
         C "*Stretches*\nI got this."
+
         if injuries_C > 0:
             C "Of course, I'd feel more confident if my legs were in better shape but it's not like I have that luxury." 
             player "*Stares* {p}You're really just gonna guilt trip me now, are you?"
@@ -448,6 +492,10 @@ label choice4_climb:
             player "Uhhhh... \n*Dazed*"
             C "It's fine. Let's just do this for now just in case."
             "Charlotte takes your hand, places the firm stick on your forearm and wraps your arm with the leftover gauze in the first aid kit."
+
+            firstaidkit.use()
+            $ injuries_player = injuries_player - 1
+
             "..."
             C "How're you feeling?"
             player "Better than before I suppose."
@@ -455,8 +503,6 @@ label choice4_climb:
             player "*Looks at wrist*\nThanks for your help. I owe ya."
             C "You owe me double! 'Cause look what I found."
             "She holds out her hand."
-
-            $ injuries_player = injuries_player - 1
 
             jump choice4a_getknocker
 
@@ -478,7 +524,11 @@ label choice4_climb:
         player "A giant ring?"
         C "Yup. But doesn't it look like one of those fancy door knocker things? Y'know, the ones that make you feel spiffy when you use it to knock instead of your knuckles."
         player "Now that you mention it, yes, it does. It could come in use so let's bring it. Who knows, maybe we'll find a door to knock on."
-        C "Haha alright. *Loops it through her belt and buckles her belt up again.*"
+        C "Haha alright. {nw}"
+        
+        $ knockerring.add_to_bag()
+        
+        extend "\n*Loops it through her belt and buckles her belt up again.*"
     
     jump choice4_done
 
@@ -526,13 +576,22 @@ label choice4_water:
     C "Secondly, this moss is super rare and in high demand since it has very strong healing and antibacterial properties."
     player "So that means we don't gotta worry about any more injuries! At least in the long term."
     C "THIRDLY, a side effect of how it grows means that the surface part, the only part we can even gather right now, is mostly air. So we're gonna need basically everything we see just for a poultice big enough"
+    
     if pockets = False:
         extend " for this knee."
+    
     else:
         if injuries_player > 0:
             extend " for yer arm."
+
         else:
             extend " for anything larger than a scraped knee."
+    
+    C "Regardless, it's a nice thing to have even if we've barely got one use of it."
+    "You and Charlotte grab all the moss you see, the armload you both got really compacting down to the size of both of your fists"
+    $ moss.add_to_bag()
+    C "Wait till you add water to apply it, it'll shrink to like half that."        
+
     if injuries_C > 0 and injuries_player > 0:
         player "So you wanna use it? Your gash looks way uncomfortable to walk on."
         C "Eh, I got used to it. I got used to getting scratched up and powering through when I got these babies. \n*Points at the badges on her sleeves*"
@@ -546,7 +605,11 @@ label choice4_water:
 
     label choice4a_C:
         player "I insist, you must've powered through more than enough injuries to be as nonplussed as you are about your knee. I think I should take a page from your book and \"build some character\" myself"
-        "You and Charlotte grab all the moss you see and as you mix it with water, the armload you both got really did end up being barely enough to cover the gash on her knee"
+        "You mix the moss with water and it shrinks even more, barely enough to cover the gash on her knee"
+        
+        $ moss.use()
+        $ injuries_C = injuries_C - 1
+        
         "You both decide to get back to getting out of here"
 
         jump choice4a_done
@@ -554,7 +617,11 @@ label choice4_water:
     label choice4a_player:
         player "Yeah I guess you do seem to be doin' fine with that leg."
         player "Me on the other hand.{w} I feel like I'd faint if so much as a breeze touches me arm."
-        "You and Charlotte grab all the moss you see and as you mix it with water, the armload you both got really did end up being barely enough to cover the gash on your arm."
+        "You mix the moss with water and it shrinks even more, barely enough to cover the gash on your arm"
+        
+        $ moss.use()
+        $ injuries_player = injuries_player - 1
+        
         "You both decide to get back to getting out of here"
         
         jump choice4a_done
@@ -598,7 +665,11 @@ if paracord and knocker in bag:
     player "Haha, ye. You're lucky I still got some brain battery left over."
     "Swinging the paracord, you take your aim. It takes a few attempts but you finally managed to slot the cylindrical object into the ring and yank it down. Charlotte catches the item in her arms."
     player "What a catch! What fish did we reel in?"
-    C "Uhhhh. *Shows you a stone idol* This?"
+    C "Uhhhh. *Shows you a stone idol* {nw}"
+    
+    stoneidol.add_to_bag()
+
+    extend "This?"
     player "A stone idol huh? I wonder what it was used for."
     C "Well, now that we have it, we can find out maybe?"
     player "Yup. I'm sure the opportunity will present itself."
@@ -642,6 +713,9 @@ C "Oh wow, we got a choice on our hands! Been a while hasn't it."
 player "Left or Right huh?"
 C "Yup! Better be careful which one you choose."
 player "Why do I gotta choose."
+
+show charlotte happy
+
 C "'Cause I don't wanna be responsible if something bad happens~"
 "You groan while Charlotte's cackle bounces around the cave walls."
 

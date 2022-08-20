@@ -1,37 +1,21 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
-While running game code:
-  File "game/script.rpy", line 364, in script
-    C "*moves her flashlight around*{p}Haha, you know what they say. When one door closes, another opens and well, something did open."
-  File "game/script.rpy", line 46, in execute
-    screen inventory_bar():
-  File "game/script.rpy", line 46, in execute
-    screen inventory_bar():
-  File "game/script.rpy", line 47, in execute
-    frame:
-  File "game/script.rpy", line 50, in execute
-    has hbox spacing 20
-  File "game/script.rpy", line 54, in execute
-    for i in bag:
-  File "game/script.rpy", line 55, in execute
-    if i != "":
-  File "game/script.rpy", line 56, in execute
-    use item(i)
-  File "game/script.rpy", line 58, in execute
-    screen item(item_pic):
-  File "game/script.rpy", line 58, in execute
-    screen item(item_pic):
-  File "game/script.rpy", line 59, in execute
-    add item_pic.icon:
-  File "game/script.rpy", line 59, in <module>
-    add item_pic.icon:
-AttributeError: 'str' object has no attribute 'icon'
+While parsing game/script.rpy.
+  File "game/script.rpy", line 376, in script
+    "This cavern is significantly larger than the one you passed earlier. The hole in the ceiling conveniently lights the majority of the cavern. In front of you is a pool of water with another area, unfortunately still shadowed in darkness, on the other side with what looks to be a possible exit."
+  File "renpy/common/00director.rpy", line 1308, in event
+    rv = self.child.event(ev, x, y, st)
+  File "renpy/common/00director.rpy", line 1098, in __call__
+    update_ast()
+  File "renpy/common/00director.rpy", line 457, in update_ast
+    renpy.scriptedit.add_to_ast_before(statement, state.filename, linenumber)
+ScriptError: could not find label '('game/script.rpy', 1661008293, 17)'.
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 364, in script
-    C "*moves her flashlight around*{p}Haha, you know what they say. When one door closes, another opens and well, something did open."
+  File "game/script.rpy", line 376, in script
+    "This cavern is significantly larger than the one you passed earlier. The hole in the ceiling conveniently lights the majority of the cavern. In front of you is a pool of water with another area, unfortunately still shadowed in darkness, on the other side with what looks to be a possible exit."
   File "D:\RenPy\renpy-7.4.11-sdk\renpy\ast.py", line 921, in execute
     renpy.exports.say(who, what, *args, **kwargs)
   File "D:\RenPy\renpy-7.4.11-sdk\renpy\exports.py", line 1373, in say
@@ -46,47 +30,61 @@ Full traceback:
     rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
   File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\core.py", line 3377, in interact
     repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs) # type: ignore
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\core.py", line 3804, in interact_core
-    root_widget.visit_all(lambda i : i.per_interact())
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\core.py", line 582, in visit_all
-    d.visit_all(callback, seen)
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\core.py", line 582, in visit_all
-    d.visit_all(callback, seen)
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\core.py", line 582, in visit_all
-    d.visit_all(callback, seen)
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\screen.py", line 451, in visit_all
-    callback(self)
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\core.py", line 3804, in <lambda>
-    root_widget.visit_all(lambda i : i.per_interact())
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\screen.py", line 462, in per_interact
-    self.update()
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\screen.py", line 653, in update
-    self.screen.function(**self.scope)
-  File "game/script.rpy", line 46, in execute
-    screen inventory_bar():
-  File "game/script.rpy", line 46, in execute
-    screen inventory_bar():
-  File "game/script.rpy", line 47, in execute
-    frame:
-  File "game/script.rpy", line 50, in execute
-    has hbox spacing 20
-  File "game/script.rpy", line 54, in execute
-    for i in bag:
-  File "game/script.rpy", line 55, in execute
-    if i != "":
-  File "game/script.rpy", line 56, in execute
-    use item(i)
-  File "game/script.rpy", line 58, in execute
-    screen item(item_pic):
-  File "game/script.rpy", line 58, in execute
-    screen item(item_pic):
-  File "game/script.rpy", line 59, in execute
-    add item_pic.icon:
-  File "game/script.rpy", line 59, in <module>
-    add item_pic.icon:
-AttributeError: 'str' object has no attribute 'icon'
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\core.py", line 4252, in interact_core
+    rv = root_widget.event(ev, x, y, 0)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 1175, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 1175, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 1175, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\screen.py", line 743, in event
+    rv = self.child.event(ev, x, y, st)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 1175, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+  File "renpy/common/00director.rpy", line 1308, in event
+    rv = self.child.event(ev, x, y, st)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 1399, in event
+    rv = super(Window, self).event(ev, x, y, st)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 279, in event
+    rv = d.event(ev, x - xo, y - yo, st)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 1175, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 1175, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 1399, in event
+    rv = super(Window, self).event(ev, x, y, st)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 279, in event
+    rv = d.event(ev, x - xo, y - yo, st)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 279, in event
+    rv = d.event(ev, x - xo, y - yo, st)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\viewport.py", line 298, in event
+    rv = super(Viewport, self).event(ev, x, y, st)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 279, in event
+    rv = d.event(ev, x - xo, y - yo, st)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 1175, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\behavior.py", line 1064, in event
+    return handle_click(self.clicked)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\behavior.py", line 999, in handle_click
+    rv = run(action)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\behavior.py", line 329, in run
+    return action(*args, **kwargs)
+  File "renpy/common/00director.rpy", line 1098, in __call__
+    update_ast()
+  File "renpy/common/00director.rpy", line 457, in update_ast
+    renpy.scriptedit.add_to_ast_before(statement, state.filename, linenumber)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\scriptedit.py", line 365, in add_to_ast_before
+    renpy.game.log.replace_node(old, block[0])
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\rollback.py", line 561, in replace_node
+    i.context.replace_node(old, new)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\execution.py", line 336, in replace_one
+    n = renpy.game.script.lookup(name)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\script.py", line 927, in lookup
+    raise ScriptError("could not find label '%s'." % str(original))
+ScriptError: could not find label '('game/script.rpy', 1661008293, 17)'.
 
 Windows-10-10.0.19043 AMD64
 Ren'Py 8.0.1.22070801
 The Cave 0.1.1.1
-Sat Aug 20 11:11:34 2022
+Sat Aug 20 11:46:51 2022
