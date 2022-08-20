@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 191: end of line expected.
-    show charlotte neutral at right with zoom 0.5 with flashbulb
-                                              ^
+File "game/script.rpy", line 233: expected statement.
+    lighter.add_to_bag() 
+                         ^
 
 Ren'Py Version: Ren'Py 8.0.1.22070801
-Thu Aug 18 23:11:59 2022
+Sat Aug 20 10:38:17 2022

@@ -12,12 +12,11 @@ define g = Character("Girl")
 define firstaidkit = "First Aid Kit"
 define paracord = "Paracord (80m)"
 define pocketknife = "Pocketknife"
-define lighter = "Lighter"
 define statue = "Half-Finished Wooden Statue"
 define flashlight = "Flashlight"
+define knocker = "Large Knocker Ring"
 
 #IMAGES
-image item lighter = "item lighter.png"
 image charlotte neutral = "charlotte neutral.png"
 
 #TRANSFORMS
@@ -26,6 +25,11 @@ transform character_right:
     xanchor 0.5
     xpos 0.85
     zoom 0.35
+
+transform shake_bg_mid:
+    linear 0.05 ypos 0.52
+    linear 0.05 ypos 0.5
+    repeat
 
 transform bg_top:
     yalign 0
@@ -44,10 +48,10 @@ transform bg_bottom:
 
 #EFFECTS
 define flashbulb = Fade(0.2, 0.0, 0.8, color='#fff')
+define hurt_flash = Fade(0.2, 0.0, 0.8, color='#f00')
 
 #SCREENS
-screen inventory_bar(bag = []):
-    $ Bag = bag
+screen inventory_bar():
     frame:
         xalign 0 ypos 0
 
@@ -58,7 +62,7 @@ screen inventory_bar(bag = []):
         #for i in Bag:
         #    if i != "":
         #        use item(i)
-        for i in Bag:
+        for i in bag:
             if i != "":
                 use item(i)
 
@@ -68,6 +72,19 @@ screen item(item_name):
         xalign 0 
         zoom 0.05
 
+#PYTHON
+init python:
+    class Item:
+        def __init__(self, name, icon):
+            self.name = name
+            self.icon = icon
+        
+        def add_to_bag(self):
+            renpy.hide_screen("inventory_bar")
+            bag.append(self.icon)
+            renpy.show_screen("inventory_bar")
+            renpy.notify("You have obtained " + self.name)
+
 #START
 label start:
 
@@ -76,6 +93,15 @@ python:
     injuries_player = 0
     artifact_have = False
     bag = []
+    
+    #ITEMS
+    lighter = Item("Lighter", "item lighter.png")
+    #define firstaidkit = "First Aid Kit"
+    #define paracord = "Paracord (80m)"
+    #define pocketknife = "Pocketknife"
+    #define statue = "Half-Finished Wooden Statue"
+    #define flashlight = "Flashlight"
+    #define knocker = "Large Knocker Ring"
 
 scene bg darkness
 
@@ -148,7 +174,6 @@ label choice2_pockets:
     C "Ah! Good call. {size=-18}Why didn't I think of that?{/size}"
 
     jump get_lighter
-    
 
 label choice2_wall:
     $ pockets = False
@@ -187,19 +212,12 @@ label get_lighter:
     "*click*{p}*click*{p}*Fwo{nw}"
 
     scene bg cave1_warm at bg_bottomish
-
     show charlotte neutral at character_right with flashbulb:
     
     extend "osh*"
 
-    hide screen inventory_bar
-    python:
-        new_item = "item lighter.png"
-        new_item_name = lighter
-        bag.append(new_item)
-        renpy.notify("You have obtained " + new_item_name)
-    show screen inventory_bar(bag = bag)
-
+    $ lighter.add_to_bag()
+    
     show charlotte shocked
     C "OH GOSH!"
     player "*Flinches* \n What!?! What happened?!"
@@ -212,13 +230,7 @@ label get_lighter:
     C "Anyways, looks like this is all I have, everything else must've fallen out. You got anything useful?"
     "You rummage through your own pouch and pull out an item."
 
-    hide screen inventory_bar
-    python:
-        #new_item = "item pocketknife.png"
-        new_item_name = pocketknife
-        bag.append(new_item)
-        renpy.notify("You have obtained " + new_item)
-    show screen inventory_bar(bag = bag)
+    lighter.add_to_bag() #REPLACE WITH POCKETKNIFE
 
     player "How's a pocket knife sound?"
     C "Better than nothing. At least it's a start."
@@ -249,7 +261,9 @@ label choice3_crevice:
     "The two of you walk up to the crevice and Charlotte gives you her lighter and gestures to the crevice"
     C "Lead the way~"
     "You begin to side step into the narrow entrance, arm outstretched for an optimal view of the path."
-    scene bg crevice_edit
+    
+    scene bg crevice_edit at bg_mid
+    
     player "Damn, this shimmy session is gonna be longer than I thought it'd be."
     C "Wha?? You gotta be kidding me. I haven't even step in yet and I'm already exhausted from hearing you say that."
     player "You say that as if you're not gonna be in here soon haha."
@@ -263,10 +277,18 @@ label choice3_crevice:
         C "*Glares*"
         player "*Whistles*\n*Avoids eye contact*"
 
-    "You and Charlotte are almost out of the crevice and suddenly, you feel the world shake. It wouldn't have been a big deal, until you hear crackles of stones and the walls behind Charlotte start to break down."
+    "You and Charlotte are almost out of the crevice and suddenly, you feel the world shake.{nw}"
+    
+    show bg at shake_bg_mid
+    
+    extend "{w=1} It wouldn't have been a big deal, until you hear crackles of stones and the walls behind Charlotte start to break down."
     player "{size=+20}LET'S HURRY AND MOVE IT. DON'T LOOK BACK."
     C "Wha-{p}*looks back*{w=0.5}\nCrap, {size=+10}{w=0.25}crap, {size=+10}{w=0.25}CRAP {size=+20}{w=0.25}MOVEEE!!{/size}"
     "Both of you shimmy as quick as you can without blowing the lighter's flame out. You finally reach the crevice's exit. You take Charlotte's hand and pull her out before the rubble could get to her."
+    
+    show bg at bg_mid
+    show effect vignette_white
+    
     C "*Huff*{w=0.8} *Huff*{w=1}\nYeah, let's not do that again. {w}No more crevices."
     player "*Huff*{w=0.8} *Huff*{w=1}\nI second that."
     C "Never thought I'd experience an earthquake like that. {p}*stretches*{w=1} \nWhere are we now?"
@@ -279,15 +301,9 @@ label choice3_crevice:
     player "Lemme show ya."
     "You give the lighter back to Charlotte to hold and open the flap of your bag. In it are some snacks and a half empty water bottle. {w}Nothing too exciting until you pull out a bundle of paracord and your half-finished wooden statue."
     
-    hide screen inventory_bar
     python:
-        new_item = paracord
-        bag.append(new_item)
-        renpy.notify("You have obtained " + new_item)
-        new_item = statue
-        bag.append(new_item)
-        renpy.notify("You have obtained " + new_item)
-    show screen inventory_bar(bag = bag)
+        paracord.add_to_bag()
+        statue.add_to_bag()
 
     player "It don't look like much but hey, it's a good start."
     C "You carve things? Oh! That would explain your pocket knife huh?"
@@ -578,7 +594,7 @@ C "Hey [player], check this out!"
 player "Think it's worth it?"
 C "Anything's worth it if it helps us out. Of course if we don't injure ourselves in the process."
 
-if paracord and "Large Knocker Ring" in bag:
+if paracord and knocker in bag:
     "You look at Charlotte's belt, at the large knocker ring you found recently."
     player "I got an idea, it involves that ring of yours."
     "You pull out your paracord and Charlotte removes the ring from her belt and hands it to you. Tying a secure knot around the ring, you do some test throws with it to ensure the ring doesn't go rogue."
@@ -590,7 +606,7 @@ if paracord and "Large Knocker Ring" in bag:
     player "A stone idol huh? I wonder what it was used for."
     C "Well, now that we have it, we can find out maybe?"
     player "Yup. I'm sure the opportunity will present itself."
-    "Charlotte places it in her bag. Due to its height, it now comically pokes its head out of her bag."
+    "Charlotte places it in your bag. Due to its height, it now comically pokes its head out."
 else:
     if injuries_C < 1 and injuries_player < 1:
         player "Wanna try an old fashioned boost?"
