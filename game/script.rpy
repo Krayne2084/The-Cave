@@ -212,11 +212,11 @@ label get_lighter:
 
     "*click*{p}*click*{p}*Fwo{nw}"
 
-    scene bg cave1_warm at bg_bottomish
+    scene bg cave1_warm at bg_bottomish with flashbulb
     if injuries_C > 0:
-        show charlotte injured at character_right with flashbulb
+        show charlotte injured at character_right
     else:
-        show charlotte idle at character_right with flashbulb
+        show charlotte idle at character_right
     
     extend "osh*"
 
@@ -275,9 +275,12 @@ label choice3_crevice:
     player "Like you said, worth the shot so let's try it!"
     "The two of you walk up to the crevice and Charlotte gives you her lighter and gestures to the crevice"
     C "Lead the way~"
+
+    hide charlotte
+
     "You begin to side step into the narrow entrance, arm outstretched for an optimal view of the path."
     
-    scene bg crevice_edit_warm at bg_mid
+    scene bg crevice_edit_warm at bg_mid with dissolve
     
     player "Damn, this shimmy session is gonna be longer than I thought it'd be."
     
@@ -334,13 +337,19 @@ label choice3_crevice:
     "You give the lighter back to Charlotte to hold and open the flap of your bag. In it are some snacks and a half empty water bottle. {w}Nothing too exciting until you pull out a bundle of paracord and your half-finished wooden statue.{w}{nw}"
     
     $ paracord.add_to_bag()
-    extend "{w}{nw}"    
+    extend ""    
     $ statue.add_to_bag()
-    extend "{w}"
+    extend ""
 
     player "It don't look like much but hey, it's a good start."
+    
+    show charlotte happy
+    
     C "You carve things? Oh! That would explain your pocket knife huh?"
     player "Yeah, very perceptive of you."
+
+    show charlotte idle
+
     C "*Shrugs* I try."
     "You sling the bag onto your back and Charlotte returns the lighter to you."
     player "Let's keep goin'."
@@ -348,6 +357,8 @@ label choice3_crevice:
     jump choice3_done
 
 label choice3_cavern:
+    show charlotte idle
+    
     "You scratch your chin, debating on which option would help you two the best."
     player "Let's check the cavern first. It'd be a waste to not investigate."
     
@@ -363,11 +374,20 @@ label choice3_cavern:
     player "*squints*{p}I think I see something."
     C "Where?"
     "You point to a round shape on the ground, dimly lit but visible enough to see its distinct pattern against the coal-coloured ground."
+    
+    show charlotte happy
+    
     C "Is that what I think it is??"
+
+    hide charlotte
+
     "Charlotte starts to move towards the object."
     player "Careful! Don't run off too far- {w=0.5}\nA bag?"
     C "Yeah, it's mine... {w}How'd it even get here?"
     player "Beats me. What do you have in there?"
+
+    show charlotte idle at character_right
+
     C "Let's see, hopefully nothing too important fell out."
     "Charlotte unzips the pockets of her backpack, uncovering essential snacks and water for for the scout's adventuring. You catch a glimpse of a small box in the front pocket of her bag."
     player "What's that?"
@@ -378,7 +398,8 @@ label choice3_cavern:
     extend  "\nKinda empty but we can still make do with it. Oh wait, there's more!"
     
     show bg cave1_lit
-
+    $ flashlight.add_to_bag()
+    
     C "*Pulls out a flashlight*"
     
     show charlotte happy
@@ -390,8 +411,14 @@ label choice3_cavern:
         player "I honestly didn't think that win-win moment would come now, but might as well get you patched up."
         "You use the newly acquired flashlight to help Charlotte assess her injuries."
         player "*chokes* I thought you said it was a scrape?! {w}That doesn't look like 'just a scrape' to me."
+        
+        show charlotte idle
+        
         C "Sure felt like a scrape. Can't change the past now."
         "You look away, feeling a bit queasy, while Charlotte focuses on disinfecting and wrapping her wounds."
+        
+        show charlotte happy
+        
         C "All good to go!"
         
         $ injuries_C = injuries_C - 1
@@ -400,6 +427,7 @@ label choice3_cavern:
         player "*Trying not to gag* {p}Mhm *Thumbs up*"
 
     else:
+        show charlotte idle
         player "Keep that first aid kit close. Who knows if we'll need it down the line."
         C "No need to tell me twice. Also, don't jinx it! I really wouldn't want to be forced to use    it." 
         "Charlotte drops the first aid kit in her bag, zips it closed, and slings it on her back."
@@ -435,7 +463,7 @@ hide charlotte
 "You two walked in silence, not because of the exhaustion of it all nor the fear of mundane conversation, but to recollect your thoughts and take the time to breathe."
 "After what seemed like an hour, you finally reach a large open area. It's been a while since you've been in a well lit room and you finally get a glimpse of your surroundings."
 
-scene bg largecavern1 at bg_bottomish
+scene bg largecavern1 at bg_bottomish with dissolve
 
 "This cavern is significantly larger than the one you passed earlier."
 "The hole in the ceiling conveniently lights the majority of the cavern. In front of you is a pool of water with another area, unfortunately still shadowed in darkness, on the other side with what looks to be a possible exit."
@@ -448,7 +476,7 @@ if flashlight in bag:
     extend "*Turns off flashlight* {nw}"
 
 extend "Nice to know we're at least near the surface. Maybe someone will be near by when we reach an exit."
-player "That'd be a convenient coincidence now wouldn't it. *Puts the lighter away*" 
+player "That'd be a convenient coincidence now wouldn't it. *Turns off lighter*" 
 "Charlotte scans around the area and notices something up ahead."
 
 show charlotte idle
@@ -753,7 +781,7 @@ show charlotte shocked
 
 C "Wait, what?!"
 
-scene bg cave1_lit at bg_top
+scene bg cave1_lit at bg_top with dissolve
 
 "You and Charlotte sit in an open section of the path you've been walking, the light from outside giving you a bit of warmth and hope. Drinking the last drops of water and remaining snacks you get up from your spot and dust off your uniform."
 
@@ -877,7 +905,7 @@ label choice5_left:
     player "Left it is."
     "You and Charlotte go into the tunnel on the left."
 
-    scene bg cavelight at bg_bottomish
+    scene bg cavelight at bg_bottomish with dissolve
 
     "A few minutes later."
     player "Is it just me or is the cave looking{cps=4}...{/cps} cleaner?"
@@ -916,7 +944,7 @@ label choice5_right:
     player "Right it is."
     "You and Charlotte go into the tunnel on the right."
 
-    scene bg cavewall at bg_bottom
+    scene bg cavewall at bg_bottom with dissolve
 
     "After walking for several minutes, Charlotte notices something."
 
@@ -930,7 +958,7 @@ label choice5_right:
     C "Fine, then I guess those are bats and we accidentally made our way deeper.\nNyeh *Sticks out Tongue*"
     player "Better."
 
-    scene bg caveexit at bg_bottom
+    scene bg caveexit at bg_bottom with dissolve
 
     "You stop in your tracks as you stare at the sight before your eyes. You and Charlotte look down at the bottomless gap before you. It's just large enough that you would need to jump to even start climbing. Thankfully, the ledge is just short enough that if one of you gives the other a boost, they should be able to reach the ledge. You can only hope that there's something on the other side that you can use to help the other one across."
     
