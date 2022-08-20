@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 189: end of line expected.
-    show screen say at shake_bg_mid
-                    ^
+File "game/script.rpy", line 596: expected statement.
+    paracord.add_to_bag()
+                         ^
 
-Ren'Py Version: Ren'Py 8.0.1.22070801
-Sat Aug 20 12:00:38 2022
+Ren'Py Version: Ren'Py 8.0.2.22081402
+Sat Aug 20 18:47:54 2022
