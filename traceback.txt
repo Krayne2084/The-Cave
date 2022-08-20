@@ -1,30 +1,92 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/script.rpy", line 222, in script
-    $ lighter.add_to_bag()
-  File "game/script.rpy", line 222, in <module>
-    $ lighter.add_to_bag()
-  File "game/script.rpy", line 85, in add_to_bag
-    bag.append(self.icon)
-AttributeError: 'Item' object has no attribute 'icon'
+  File "game/script.rpy", line 364, in script
+    C "*moves her flashlight around*{p}Haha, you know what they say. When one door closes, another opens and well, something did open."
+  File "game/script.rpy", line 46, in execute
+    screen inventory_bar():
+  File "game/script.rpy", line 46, in execute
+    screen inventory_bar():
+  File "game/script.rpy", line 47, in execute
+    frame:
+  File "game/script.rpy", line 50, in execute
+    has hbox spacing 20
+  File "game/script.rpy", line 54, in execute
+    for i in bag:
+  File "game/script.rpy", line 55, in execute
+    if i != "":
+  File "game/script.rpy", line 56, in execute
+    use item(i)
+  File "game/script.rpy", line 58, in execute
+    screen item(item_pic):
+  File "game/script.rpy", line 58, in execute
+    screen item(item_pic):
+  File "game/script.rpy", line 59, in execute
+    add item_pic.icon:
+  File "game/script.rpy", line 59, in <module>
+    add item_pic.icon:
+AttributeError: 'str' object has no attribute 'icon'
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 222, in script
-    $ lighter.add_to_bag()
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\ast.py", line 1131, in execute
-    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\python.py", line 1049, in py_exec_bytecode
-    exec(bytecode, globals, locals)
-  File "game/script.rpy", line 222, in <module>
-    $ lighter.add_to_bag()
-  File "game/script.rpy", line 85, in add_to_bag
-    bag.append(self.icon)
-AttributeError: 'Item' object has no attribute 'icon'
+  File "game/script.rpy", line 364, in script
+    C "*moves her flashlight around*{p}Haha, you know what they say. When one door closes, another opens and well, something did open."
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\ast.py", line 921, in execute
+    renpy.exports.say(who, what, *args, **kwargs)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\exports.py", line 1373, in say
+    who(what, *args, **kwargs)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\character.py", line 1266, in __call__
+    self.do_display(who, what, cb_args=self.cb_args, dtt=dtt, **display_args)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\character.py", line 927, in do_display
+    display_say(who,
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\character.py", line 666, in display_say
+    rv = renpy.ui.interact(mouse='say', type=type, roll_forward=roll_forward)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\ui.py", line 299, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\core.py", line 3377, in interact
+    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs) # type: ignore
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\core.py", line 3804, in interact_core
+    root_widget.visit_all(lambda i : i.per_interact())
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\core.py", line 582, in visit_all
+    d.visit_all(callback, seen)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\core.py", line 582, in visit_all
+    d.visit_all(callback, seen)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\core.py", line 582, in visit_all
+    d.visit_all(callback, seen)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\screen.py", line 451, in visit_all
+    callback(self)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\core.py", line 3804, in <lambda>
+    root_widget.visit_all(lambda i : i.per_interact())
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\screen.py", line 462, in per_interact
+    self.update()
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\screen.py", line 653, in update
+    self.screen.function(**self.scope)
+  File "game/script.rpy", line 46, in execute
+    screen inventory_bar():
+  File "game/script.rpy", line 46, in execute
+    screen inventory_bar():
+  File "game/script.rpy", line 47, in execute
+    frame:
+  File "game/script.rpy", line 50, in execute
+    has hbox spacing 20
+  File "game/script.rpy", line 54, in execute
+    for i in bag:
+  File "game/script.rpy", line 55, in execute
+    if i != "":
+  File "game/script.rpy", line 56, in execute
+    use item(i)
+  File "game/script.rpy", line 58, in execute
+    screen item(item_pic):
+  File "game/script.rpy", line 58, in execute
+    screen item(item_pic):
+  File "game/script.rpy", line 59, in execute
+    add item_pic.icon:
+  File "game/script.rpy", line 59, in <module>
+    add item_pic.icon:
+AttributeError: 'str' object has no attribute 'icon'
 
 Windows-10-10.0.19043 AMD64
 Ren'Py 8.0.1.22070801
 The Cave 0.1.1.1
-Sat Aug 20 10:31:31 2022
+Sat Aug 20 11:11:34 2022

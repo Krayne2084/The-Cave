@@ -8,14 +8,6 @@ define e = Character("Eileen")
 define b = Character("You")
 define g = Character("Girl")
 
-#ITEMS
-define firstaidkit = "First Aid Kit"
-define paracord = "Paracord (80m)"
-define pocketknife = "Pocketknife"
-define statue = "Half-Finished Wooden Statue"
-define flashlight = "Flashlight"
-define knocker = "Large Knocker Ring"
-
 #IMAGES
 image charlotte neutral = "charlotte neutral.png"
 
@@ -59,16 +51,12 @@ screen inventory_bar():
         text "Inventory:":
             xalign 0
             yalign 0.5
-        #for i in Bag:
-        #    if i != "":
-        #        use item(i)
         for i in bag:
             if i != "":
                 use item(i)
 
-screen item(item_name):
-    #text "[item_name]" xalign 0
-    add item_name:
+screen item(item_pic):
+    add item_pic.icon:
         xalign 0 
         zoom 0.05
 
@@ -81,9 +69,13 @@ init python:
         
         def add_to_bag(self):
             renpy.hide_screen("inventory_bar")
-            bag.append(self.icon)
+            bag.append(self)
             renpy.show_screen("inventory_bar")
             renpy.notify("You have obtained " + self.name)
+
+        def use(self):
+            bag.remove(self)
+            renpy.notify("You have used " + self.name)
 
 #START
 label start:
@@ -96,12 +88,15 @@ python:
     
     #ITEMS
     lighter = Item("Lighter", "item lighter.png")
-    #define firstaidkit = "First Aid Kit"
-    #define paracord = "Paracord (80m)"
-    #define pocketknife = "Pocketknife"
-    #define statue = "Half-Finished Wooden Statue"
-    #define flashlight = "Flashlight"
-    #define knocker = "Large Knocker Ring"
+    firstaidkit = Item("First Aid Kit", "item firstaid.png")
+    paracord = Item("Paracord (80m)", "item paracord.png")
+    pocketknife = Item("Pocketknife", "item pocketknife.png")
+    statue = Item("Half-Finished Wooden Statue", "item woodenstatue.png")
+    flashlight = Item("Flashlight", "item flashlight.png")
+    knocker = Item("Large Knocker Ring", "item knockerring")
+    moss = Item("Healing Moss", "item moss.png")
+    stoneidol = Item("Stone Idol", "item stoneidol.png")
+    lifeidol = Item("Life Idol", "item totemwhite.png")
 
 scene bg darkness
 
@@ -230,7 +225,7 @@ label get_lighter:
     C "Anyways, looks like this is all I have, everything else must've fallen out. You got anything useful?"
     "You rummage through your own pouch and pull out an item."
 
-    lighter.add_to_bag() #REPLACE WITH POCKETKNIFE
+    $ pocketknife.add_to_bag()
 
     player "How's a pocket knife sound?"
     C "Better than nothing. At least it's a start."
@@ -299,11 +294,12 @@ label choice3_crevice:
     player "It's my bag! Now that's what I'm talkin' about!"
     C "Finally some good news. What's inside?"
     player "Lemme show ya."
-    "You give the lighter back to Charlotte to hold and open the flap of your bag. In it are some snacks and a half empty water bottle. {w}Nothing too exciting until you pull out a bundle of paracord and your half-finished wooden statue."
+    "You give the lighter back to Charlotte to hold and open the flap of your bag. In it are some snacks and a half empty water bottle. {w}Nothing too exciting until you pull out a bundle of paracord and your half-finished wooden statue.{w}{nw}"
     
-    python:
-        paracord.add_to_bag()
-        statue.add_to_bag()
+    $ paracord.add_to_bag()
+    extend "{w}{nw}"    
+    $ statue.add_to_bag()
+    extend "{w}"
 
     player "It don't look like much but hey, it's a good start."
     C "You carve things? Oh! That would explain your pocket knife huh?"
@@ -340,12 +336,7 @@ label choice3_cavern:
     player "What's that?"
     C "*Pulls out a first aid kit*"
 
-    hide screen inventory_bar
-    python:
-        new_item = firstaidkit
-        bag.append(new_item)
-        renpy.notify("You have obtained " + new_item)
-    show screen inventory_bar(bag = bag)
+    $ firstaidkit.add_to_bag()
 
     extend  "\nKinda empty but we can still make do with it. Oh wait, there's more!"
     C "*Pulls out a flashlight*{p}This'll really brighten things up!"
@@ -359,11 +350,8 @@ label choice3_cavern:
         "You look away, feeling a bit queasy, while Charlotte focuses on disinfecting and wrapping her wounds."
         C "All good to go!"
         
-        python:
-            injuries_C = injuries_C - 1
-            bag.remove(firstaidkit)
-            renpy.notify("You have used " + firstaidkit)
-        
+        $ injuries_C = injuries_C - 1
+
         player "*Trying not to gag* {p}Mhm *Thumbs up*"
 
     else:
@@ -371,19 +359,27 @@ label choice3_cavern:
         C "No need to tell me twice. Also, don't jinx it! I really wouldn't want to be forced to use    it." 
         "Charlotte drops the first aid kit in her bag, zips it closed, and slings it on her back."
 
+    "The two of you start to walk back towards the crevice. An unexpected rumble startles you both as you scramble to hug the walls for stability. Now that Charlotte has a flashlight, you can clearly see the stone ceiling above the crevice crumble and fall, sealing off your intended path."
+    player "Well, uh, looks like that's not an option anymore?"
+    C "*moves her flashlight around*{p}Haha, you know what they say. When one door closes, another opens and well, something did open."
+    "You follow the direction of her flashlight and see a broken wall on the other side of the cavern. You walk towards and and see a path to who knows where. You look at each other."
+    C "Any other options?"
+    player "Nope."
+
     jump choice3_done
 
 label choice3_done:
 
-"The two of you start to walk back towards the crevice. An unexpected rumble startles you both as you scramble to hug the walls for stability. Now that Charlotte has a flashlight, you can clearly see the stone ceiling above the crevice crumble and fall, sealing off your intended path."
-player "Well, uh, looks like that's not an option anymore?"
-C "*moves her flashlight around*{p}Haha, you know what they say. When one door closes, another opens and well, something did open."
-"You follow the direction of her flashlight and see a broken wall on the other side of the cavern. You walk towards and and see a path to who knows where. You look at each other."
-C "Any other options?"
-player "Nope."
+"The path felt like a long one. No unexpected twists and turns, but seemed never ending."
+"You two walked in silence, not because of the exhaustion of it all nor the fear of mundane conversation, but to recollect your thoughts and take the time to breathe."
+"After what seemed like an hour, you finally reach a large open area. It's been a while since you've been in a well lit room and you finally get a glimpse of your surroundings."
+"This cavern is significantly larger than the one you passed earlier. The hole in the ceiling conveniently lights the majority of the cavern. In front of you is a pool of water with another area, unfortunately still shadowed in darkness, on the other side with what looks to be a possible exit."
+C "Oh my gosh, light! {nw}"
 
-"The path felt like a long one. No unexpected twists and turns, but seemed never ending. You two walked in silence, not because of the exhaustion of it all nor the fear of mundane conversation, but to recollect your thoughts and take the time to breathe. After what seemed like an hour, you finally reach a large open area.It's been a while since you've been in a well lit room and you finally get a glimpse of your surroundings. This cavern is significantly larger than the one you passed earlier. The hole in the ceiling convenient lights majority of the cavern. In front of you is a pool of water with another area, unfortunately still shadowed in darkness, on the other side with what looks to be a possible exit."
-C "Oh my gosh, light! *Turns off flashlight* Nice to know we're at least near the surface. Maybe someone will be near by by the time we reach an exit."
+if flashlight in bag:
+    extend "*Turns off flashlight* {nw}"
+
+extend "Nice to know we're at least near the surface. Maybe someone will be near by by the time we reach an exit."
 player "That'd be a convenient coincidence now wouldn't it. *Puts the lighter away*" 
 "Charlotte scans around the area and notices something up ahead."
 C "Speaking of people, I think I see something over there."

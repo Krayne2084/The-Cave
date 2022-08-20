@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 233: expected statement.
-    lighter.add_to_bag() 
-                         ^
+File "game/script.rpy", line 376: reached end of line when expecting ':'.
+    if flashlight in bag
+                        ^
 
 Ren'Py Version: Ren'Py 8.0.1.22070801
-Sat Aug 20 10:38:17 2022
+Sat Aug 20 11:09:57 2022
