@@ -45,7 +45,7 @@ transform bg_bottom:
 
 #EFFECTS
 define flashbulb = Fade(0.2, 0.0, 0.8, color='#fff')
-define hurt_flash = Fade(0.2, 0.0, 0.8, color='#f00')
+define hurt_flash = Fade(0.2, 0.0, 0.8, color='#f00')    
 
 #SCREENS
 screen inventory_bar():
@@ -77,10 +77,29 @@ init python:
             bag.append(self)
             renpy.show_screen("inventory_bar")
             renpy.notify("You have obtained " + self.name)
+            renpy.play("audio/ding-36029.mp3", "sound")
 
         def use(self):
             bag.remove(self)
             renpy.notify("You have used " + self.name)
+            renpy.play("audio/foley_zip_zipper_long_05.wav", "sound")
+    
+    class Sound:
+        def __init__(self):
+            self
+
+        def run(self):
+            renpy.play("audio/footstep_gravel_run_13.wav", "sound")
+            renpy.sound.queue("audio/footstep_gravel_run_14.wav", "sound")
+            renpy.sound.queue("audio/footstep_gravel_run_11.wav", "sound")
+            renpy.sound.queue("audio/footstep_gravel_run_13.wav", "sound")
+            renpy.sound.queue("audio/footstep_gravel_run_11.wav", "sound")
+
+        def walk_loop(self):
+            renpy.play("audio/footstep_gravel_walk_11.wav", "sound", relative_volume = 0.3)
+            renpy.sound.queue(["audio/footstep_gravel_walk_10.wav", "audio/footstep_gravel_walk_11.wav"], "sound", loop = True, relative_volume = 0.3)
+
+    renpy.music.register_channel("music_overlay", "music")
 
 #START
 label start:
@@ -103,13 +122,23 @@ python:
     stoneidol = Item("Stone Idol", "item stoneidol.png")
     lifeidol = Item("Life Idol", "item totemwhite.png")
 
+    #SOUNDS
+    Play_Sound = Sound()
+
 scene bg darkness
 play music "audio/Cave 4 Loop.wav"
 
 b "{i}Uugghhh my head..."
 b "{i}Feels like I got hit by a semi..."
 b "{i}Where am I? Why can't I see nothing?"
-"{cps=15}*Rocks Shifting*"
+
+play sound "audio/rocks-6129.mp3"
+
+"{cps=15}*Rocks Shifting*{nw}"
+
+stop sound fadeout 1
+extend ""
+
 b "{i}The hell was that?"
 menu:
     "Call out":
@@ -125,7 +154,15 @@ label choice1_call:
 
 label choice1_throw:
     b "{i}If it's some kind of animal or creature, I'd better throw something far away to not draw attention to my position.{/i}"
-    "*Throws*{p}*Clatters*"
+    "*Throws*"
+    
+    play sound "audio/dropping-rocks-5996.mp3"
+    extend "\n*Clatters*{nw}"
+    stop sound fadeout 1
+    extend ""
+
+    
+    
     g "{size=+20}EEEEP{/size}"
     b "A girl?{p}Hello?{w} Sorry if I scared you, I didn't know you were a person."
     b "What's your name?"
@@ -195,6 +232,9 @@ label choice2_wall:
     
 
     C "NO, wait for me!!" 
+    
+    $ Play_Sound.run()
+
     "In a sudden panic, Charlotte blindly runs in the direction where she last heard [player]'s voice."
     "Charlotte, oblivious that her shoelace was undone the whole time, steps on the lace and lifts her other foot. She stumbles and lands on her knees, scraping them on the cold rugged ground. The impact of her fall echoes around the cave walls."
     
@@ -222,7 +262,11 @@ label get_lighter:
         C "I'm seeing if I got anything useful before I start wanderin' in this pitch blackness again."
         player "{i}That's a bright idea{cps=4}...{/cps}{p}Good thing I didn't say that aloud."
 
-    "*click*{p}*click*{p}*Fwo{nw}"
+    "*click*{p}*click*"
+    
+    extend "\n*Fwo{nw}"
+
+    play sound "audio/fire-39294.mp3"
 
     scene bg cave1_warm at bg_bottomish with flashbulb
     if injuries_C > 0:
@@ -316,7 +360,7 @@ label choice3_crevice:
     "You and Charlotte are almost out of the crevice and suddenly, you feel the world shake.{nw}"
     
     show bg at shake_bg_mid
-    play sound "audio/earth-rumble-6953.mp3"
+    play music_overlay "audio/earth-rumble-6953.mp3"
     
     extend "{w=1} It wouldn't have been a big deal, until you hear crackles of stones and the walls behind Charlotte start to break down."
     player "{size=+20}LET'S HURRY AND MOVE IT. DON'T LOOK BACK."
@@ -331,7 +375,8 @@ label choice3_crevice:
     "Both of you shimmy as quick as you can without blowing the lighter's flame out. You finally reach the crevice's exit. You take Charlotte's hand and pull her out before the rubble could get to her."
     
     show bg at bg_mid
-    play sound "audio/stones-falling-6375.mp3" fadeout 1
+    stop music_overlay fadeout 3
+    play sound "audio/stones-falling-6375.mp3" volume 0.7
     
     show charlotte worried
     C "*Huff*{w=0.8} *Huff*{w=1}\nYeah, let's not do that again. {w}No more crevices."
@@ -476,10 +521,15 @@ label choice3_done:
 hide charlotte
 
 "The path felt like a long one. No unexpected twists and turns, but seemed never ending."
+
+$ Play_Sound.walk_loop()
+
 "You two walked in silence, not because of the exhaustion of it all nor the fear of mundane conversation, but to recollect your thoughts and take the time to breathe."
 "After what seemed like an hour, you finally reach a large open area. It's been a while since you've been in a well lit room and you finally get a glimpse of your surroundings."
 
+stop sound fadeout 1
 scene bg largecavern1 at bg_bottomish with dissolve
+play music_overlay "audio/water-drops-6223.mp3"
 
 "This cavern is significantly larger than the one you passed earlier."
 "The hole in the ceiling conveniently lights the majority of the cavern. In front of you is a pool of water with another area, unfortunately still shadowed in darkness, on the other side with what looks to be a possible exit."
@@ -491,7 +541,7 @@ C "Oh my gosh, light! {nw}"
 if flashlight in bag:
     extend "*Turns off flashlight* {nw}"
 
-extend "Nice to know we're at least near the surface. Maybe someone will be near by when we reach an exit."
+extend "Nice to know we're at least near the surface. Maybe someone will be nearby when we reach an exit."
 player "That'd be a convenient coincidence now wouldn't it. *Turns off lighter*" 
 "Charlotte scans around the area and notices something up ahead."
 
@@ -557,6 +607,7 @@ label choice4_climb:
         player "{i}I should start working out after this... I'm sweatin' up a storm."
         "You reach the top and Charlotte lends you a hand and pulls you up."
 
+        $ paracord.add_to_bag()
         show charlotte happy at character_right
 
         C "Nice to see ya!"
@@ -635,10 +686,7 @@ label choice4_climb:
             jump choice4a_getknocker
 
     label choice4a_getknocker:
-        "Charlotte hands you something while she starts collecting the paracord."
-
-        $ paracord.add_to_bag()
-
+        "Charlotte hands you something."
         player "A giant ring?"
         show charlotte idle
         C "Yup. But doesn't it look like one of those fancy door knocker things? Y'know, the ones that make you feel spiffy when you use it to knock instead of your knuckles."
