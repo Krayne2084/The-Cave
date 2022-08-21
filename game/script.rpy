@@ -121,6 +121,13 @@ init python:
             renpy.play("audio/footstep_gravel_walk_11.wav", "sound", relative_volume = 0.3)
             renpy.sound.queue(["audio/footstep_gravel_walk_10.wav", "audio/footstep_gravel_walk_11.wav"], "sound", loop = True, relative_volume = 0.3)
 
+        def walk(self):
+            renpy.play("audio/footstep_gravel_walk_11.wav", "sound", relative_volume = 0.3)
+            renpy.sound.queue("audio/footstep_gravel_walk_10.wav", "sound", relative_volume = 0.3)
+            renpy.sound.queue("audio/footstep_gravel_walk_11.wav", "sound", relative_volume = 0.3)
+            renpy.sound.queue("audio/footstep_gravel_walk_10.wav", "sound", relative_volume = 0.3)
+            renpy.sound.queue("audio/footstep_gravel_walk_11.wav", "sound", relative_volume = 0.3)
+            
     renpy.music.register_channel("music_overlay", "music")
 
 #START
@@ -350,6 +357,9 @@ menu:
         jump choice3_cavern
 
 label choice3_crevice:
+
+    show charlotte idle
+
     player "Like you said, worth the shot so let's try it!"
     "The two of you walk up to the crevice and Charlotte gives you her lighter and gestures to the crevice"
     C "Lead the way~"
@@ -619,9 +629,10 @@ label choice4_climb:
             C "Relax, it's just a joke with a seed of truth in it."
             "Charlotte places her hand on your shoulder as if to reassure you."
 
+        hide charlotte
+
         "You give Charlotte the paracord and she walks up to the wall, assessing her route. She mimes out her actions and you couldn't help but join in too. With surprising strength and patience, Charlotte scales the wall as if it's second nature. She manages to reach the top ledge."
         
-        hide charlotte
 
         C "Lemme find something to tie this cord to- Oh what's this?"
         player "Hey, don't leave me here!"
@@ -811,15 +822,25 @@ label choice4_water:
         player "So you wanna use it? Your gash looks way uncomfortable to walk on."
         C "Eh, I got used to it. I got used to getting scratched up and powering through when I got these babies. \n*points at the badges on her sleeves*"
 
-    menu:
-        "Heal Charlotte":
+        menu:
+            "Heal Charlotte":
+                jump choice4a_C
+
+            "Heal yourself":
+                jump choice4a_player
+
+    else:
+        if injuries_C > 0:
             jump choice4a_C
 
-        "Heal yourself":
+        if injuries_player > 0:
             jump choice4a_player
 
+        jump choice4a_done
+
     label choice4a_C:
-        player "I insist, you must've powered through more than enough injuries to be as nonplussed as you are about your knee. I think I should take a page from your book and \"build some character\" myself"
+        if injuries_player > 0:
+            player "I insist, you must've powered through more than enough injuries to be as nonplussed as you are about your knee. I think I should take a page from your book and \"build some character\" myself"
         "You mix the moss with water and it shrinks even more, barely enough to cover the gash on her knee."
         
         $ moss.use()
@@ -830,8 +851,9 @@ label choice4_water:
         jump choice4a_done
 
     label choice4a_player:
-        player "Yeah I guess you do seem to be doin' fine with that leg."
-        player "Me on the other hand.{w} I feel like I'd faint if so much as a breeze touches me arm."
+        if injuries_C > 0:
+            player "Yeah I guess you do seem to be doin' fine with that leg."
+            player "Me on the other hand.{w} I feel like I'd faint if so much as a breeze touches me arm."
         "You mix the moss with water and it shrinks even more, barely enough to cover the gash on your arm."
         
         $ moss.use()
@@ -851,7 +873,10 @@ label choice4_done:
 
 "You two continue down the path."
 
-show charlotte thinking
+show bg cave1_warm at bg_topish with dissolve
+show charlotte thinking at character_right
+stop music_overlay fadeout 1
+$ Play_Sound.walk_loop()
 
 C "Don't you think it's strange?"
 player "What's strange?"
@@ -869,8 +894,10 @@ show charlotte shocked
 
 C "Wait, what?!"
 
-stop music_overlay fadeout 1
-scene bg cave1_lit at bg_top with dissolve
+hide charlotte
+#stop music_overlay fadeout 1
+#scene bg cave1_lit at bg_top with dissolve
+stop sound
 
 "You and Charlotte sit in an open section of the path you've been walking, the light from outside giving you a bit of warmth and hope. Drinking the last drops of water and remaining snacks you get up from your spot and dust off your uniform."
 
@@ -912,11 +939,11 @@ if paracord in bag and knocker in bag:
     
     $ paracord.use()
     
-    "and Charlotte removes the ring from her belt {nw}"
+    extend "and Charlotte removes the ring from her belt {nw}"
     
     $ knocker.use()
     
-    "and hands it to you. Tying a secure knot around the ring, you do some test throws with it to ensure the ring doesn't go rogue."
+    extend "and hands it to you. Tying a secure knot around the ring, you do some test throws with it to ensure the ring doesn't go rogue."
     C "How nifty. Nice to know the gears are still turning in there after who knows how long."
     player "Haha, ye. You're lucky I still got some brain battery left over."
     "Swinging the paracord, you take your aim. It takes a few attempts but you finally managed to slot the cylindrical object into the ring and yank it down. Charlotte catches the item in her arms while you collect the paracord and knocker."
@@ -1030,38 +1057,96 @@ label choice5_left:
 
     if pocketknife in bag and statue in bag:
         player "Ah!"
-        "You reach into the side of your bag and grab the wooden statue you were working on and whip the pocket knife out of your pouch."
+        "You reach into the side of your bag and grab the wooden statue{nw}"
+        
+        $ statue.use()
+
+        extend " you were working on and whip the pocket knife{nw}"
+        
+        $ pocketknife.use()
+        
+        extend " out of your pouch."
         "Charlotte watches you as you shave off bits of wood from your carving."
         
         play sound "audio/fire-39294.mp3"
         
         "The wood shavings start to burn and flames bloom to life."
+
+        $ statue.add_to_bag()
+
+        extend "{w=1.5}{nw}"
+
+        $ pocketknife.add_to_bag()
+
+        extend ""
         
         show charlotte shocked
         
         C "Whoa [player], there's something emerging from the coal!"
+
+        show charlotte idle
         "Staring into the flames, you noticed a stone pedestal sprout from the coal."
         C "*pulls out the stone idol from your bag*"
-        extend "Wild assumption, but do you think this is meant to be on there?."
+
+        $ stoneidol.use()
+        show charlotte thinking
+
+        extend "\nWild assumption, but do you think this is meant to be on there?"
         player "*stares into the idol's eyes*"
-        extend "Be my guest."
-        "Charlotte places the idol carefully onto the pedestal, careful not to burn arms in the flames. The idol starts to heat up and...glow?"
+        extend "\nBe my guest."
+
+        show charlotte idle
+
+        "You hand the idol to Charlotte and she places it carefully onto the pedestal, careful not to burn arms in the flames. {w}The idol starts to heat up and{cps=4}...{/cps}glow?"
+
+        show charlotte worried
+
         C "Whaa?? How is it glowing?"
-        "The ground starts to rumble as you hear something open in the distance. You whip your head around and see a stone door opening on the cave wall, debris falling as the doors separates from the wall."
-        player "Uh excuse me? Was that door always there??"
-        C "What in the world is goin' on around here."
-        player "You're guess is as good as mine."
-        "The two walk into the open door and find footprints in the otherwise undisturbed dust leading into a temple where you find an array of 5 idols similar to the stone idol you used to get into this place, but of varying colours: Red, Blue, Yellow, Green, and White. Yellow and Green, are placed opposite each other as are Red and Blue, but there seems to be an empty space where something used to be opposite the White Idol. Upon a second look, you notice that the footprints lead right to that now empty spot."
+
+        play sound 'audio/earth-rumble-6953.mp3'
+
+        "The ground starts to rumble as you hear something open in the distance."
+
+        stop sound fadeout 3
+        
+        scene bg cavetemple_edit at bg_bottom
+        
+        extend "You whip your head around and see a stone door opening on the cave wall, debris falling as the doors separates from the wall."
+        player "Uh excuse me? Was that building always there??"
+
+        show charlotte worried at character_right
+
+        C "What in the world is goin' on around here?"
+        player "Your guess is as good as mine."
+        
+        $ Play_Sound.walk()
+
+        "The two walk into the open door and find footprints in the otherwise undisturbed dust leading into a temple."
+        "Inside, you find an array of 5 idols of varying colours: Red and Blue opposite each other, Yellow and Green, and White."# Yellow and Green, are placed opposite each other as are Red and Blue, but there seems to be an empty space where something used to be opposite the White Idol. Upon a second look, you notice that the footprints lead right to that now empty spot."
         player "Despite feelin' a bit creeped out, you gotta admit this temple looks amazing."
+        
+        show charlotte idle
+        
         C "Pretty well kept too. You'd think it was sealed for centuries if not for these footprints huh."
-        "You find a tablet beside the entrance to the temple. You don't know what language it is but it's definitely not English. Despite that, you can both seem to understand what it says subconsciously. 'Pay tribute to the 6 elements of creation! Fire and Water in harmony gives us just the heat we need to live, no more no less. Earth and Air in harmony give us the substance and emptiness that gives us form so that we can move. Life and Death in harmony gives us sustainability so that we can return the favour that Mother Nature has given us so it can be given again in the future. Pray that our tributes may be enough for the elements to allow us to channel them through their Idols so that we may tip the scales but never break them.'"
+        "You find a tablet beside the entrance to the temple. You don't know what language it is but it's definitely not English. Despite that, you can both seem to understand what it says subconsciously."
+        "{i}Pay tribute to the 6 elements of creation!"
+        "{i}Fire and Water in harmony gives us the warmth we need to survive."
+        "{i}Earth and Air in harmony gives us form to be and space to move."
+        "{i}Life and Death in harmony gives us growth and change so that we may move forwards."
+        "{i}Pray that our tributes may be enough for the elements to allow us to channel them through their Idols"
+        "{i}That we may tip the scales but never break them.{/i}"
         C "Wait. There's supposed to be 6."
         player "Good point. If red is fire and blue is water then... *thinking* the Death Idol is missing."
-        C "That doesn't sound ominous at all. Wonder where it could've gone."
-        "A strange feeling has been resonating within you the longer you stay in the temple. It feels like the temple is asking you to take the White Idol away, The Idol of Life. The absence of the Idol of Death has created an imbalance and with it nowhere to be found, the only feasible solution is to take away the Idol of Life as well to restore some semblance of balance. You start to pick up The Idol of Life."
-        C "[player]! Don't touch it! What if something bad happens 'cause we took it? *holds onto the idol with you*"
+        C "That doesn't sound ominous at all. Especially with those footprints leading right to where it used to be. Wonder where it could've gone."
+        "A strange feeling has begun resonating in you the longer you stay in the temple. It feels like the temple is asking you to take the White Idol away, {w}The Idol of Life."
+        "You start to pick up The Idol of Life."
 
-        if Charlotte is injured:
+        show charlotte shocked
+
+        C "[player]! Don't touch it! What if something bad happens 'cause we took it?"
+        "In trying to stop you, Charlotte also makes contact with the Idol."
+
+        if injuries_C > 0:
             C "Whoa..."
             player "Whoa what?"
             C "*removes her hands from the idol then touches the idol again* When I touch the idol... I don't feel the pain on my knees."
@@ -1072,7 +1157,7 @@ label choice5_left:
             C "Are you serious?"
             jump choice5_healthy
 
-        if player is injured:
+        if injuries_player > 0:
             player "Whoa..."
             C "Whoa what?"
             player "*you remove your hands from the idol then touch the idol again* When I touch the idol... I don't feel the throbbing pain in my arm."
@@ -1087,11 +1172,20 @@ label choice5_left:
         
         label choice5_healthy:
             player "You remember what the tablet said right? It needs a counterpart. Something bad'll happen if we don't take it! It's currently imbalance since the Death idol isn't here."
+
+            show charlotte worried
+
             C "That's just our speculation though, you know we both can't read whatever language that is!"
             player "*sighs* Aight look, I wasn't gonna say it since I didn't wanna look crazy but the temple is telling me to bring it with us."
+            
+            $ lifeidol.add_to_bag()
+
             "You put The Idol of Life carefully in your bag, it fits nice and snug compared to the large stone idol from before. You are able to zip your bag up."
             C "You do sound crazy, but honestly, this whole day's already been flipped and twisted all over."
             player "Yup, might as well take the chance on this."
+
+            show charlotte idle
+
             "The both of you look around the area to see if there's any path for you to progress."
             C "Looks like we gotta backtrack."
             player "At least we got the chance to pass by this place."
@@ -1108,8 +1202,9 @@ label choice5_left:
         jump choice5_right
 
 label choice5_right:
-    player "Right it is."
-    "You and Charlotte go into the tunnel on the right."
+    if lifeidol not in bag:
+        player "Right it is."
+        "You and Charlotte go into the tunnel on the right."
 
     scene bg cavewall at bg_bottomish with dissolve
 
@@ -1139,157 +1234,86 @@ label choice5_right:
     player "Heh. You must be a mind reader 'cause I was thinkin' the same thing."
     C "Well, you were making a face. Like you were staring into the void...well technically you were but y'know what I mean."
 
-label endgame:
+#ENDGAME
+show bg at bg_shake_exit
+show charlotte shocked
+play music_overlay "audio/earth-rumble-6953.mp3"
+
+"The ground starts to shake."
+player "Again?!?"
+
+show charlotte worried
 
 if lifeidol in bag:
-
-    if Charlotte is injured:
-        player "Okay Charlotte, you gotta take my bag with you when you jump. It has the idol and the paracord so you can throw it to me and help me make it to the other side."
-        "The ground starts to shake."
-        player "Again?!?"
-        C "We have to get moving then. It's not safe for us here."
-        "Charlotte takes your bag and both of you shake off the nerves and loosen your muscles to prepare for the boost. Charlotte plants her foot in your hands and just when you are about to launch her forward, her knee buckles and she starts to fall forward. In your efforts to try and save her, you lunge forward to catch her, only to realize that the idol on her back added a significant amount of weight to her body. The collective weight sends you forward. You and Charlotte start to fall into the endless abyss and you can't help but replay Charlotte's words from earlier."
-        
-        show effect vignette_white_wide
-
-        C "[player]! Don't touch it! What if something bad happens 'cause we took it?"
-        player "You remember what the tablet said right? It needs a counterpart. Something bad'll happen if we dont take it! It's currently imbalance since the Death idol isn't here."
-        C "That's just our speculation though, you know we both can't read whatever language that is!"
-        
-        hide effect
-
-        "As your consciousness starts to fade, you couldn't help but think." 
-        player "{i} If only I had listened to you...Charlotte, I'm sorry.{/i}"
-
-
-    if player is injured:
-        player "Okay Charlotte, you gotta take my bag with you when you jump. It has the idol and the paracord so you can throw it to me and help me make it to the other side."
-        "The ground starts to shake."
-        player "Again?!?"
-        C "We have to get moving then. It's not safe for us here."
-        "Charlotte takes your bag and both of you shake off the nerves and loosen your muscles to prepare for the boost. Charlotte plants her foot in your hands and just when you are about to launch her forward, Your arm gives out. The whole time you were carrying the idol, the pain in your arm subsided, but not that it's not in your possession, you feel the excruciating pain. Despite this, you see Charlotte falling forward. In your efforts to try and save her, you lunge forward to catch her, only to realize that the idol on her back added a significant amount of weight to her body. The collective weight sends you forward. You and Charlotte start to fall into the endless abyss and you can't help but replay Charlotte's words from earlier."
-
-        show effect vignette_white_wide
-
-        C "[player]! Don't touch it! What if something bad happens 'cause we took it?"
-        player "You remember what the tablet said right? It needs a counterpart. Something bad'll happen if we dont take it! It's currently imbalance since the Death idol isn't here."
-        C "That's just our speculation though, you know we both can't read whatever language that is!"
-
-        hide effect
-
-        "As your consciousness starts to fade, you couldn't help but think." 
-        player "{i} If only I had listened to you...Charlotte, I'm sorry.{/i}"
-        #[Secret's Untold Ending]
-
+    player "Here, you're taking my bag."
+    player "The idol and my paracord are in there so you can toss it to me when you make it on the other side."
+    
     if injuries_C < 1 and injuries_player < 1:
-        player "Here, you're taking my bag. The idol and my paracord are in there so you can toss it to me when you make it on the other side."
-        "The ground starts to shake."
-        player "Again?!?"
-        C "We have to get moving then. Let's stay calm and get it done!"
-        "Charlotte takes your bag and both of you shake off the nerves and loosen your muscles to prepare for the boost. Charlotte plants her foot in your hands and with the strength of your legs, you launch her into the air, across the gap, and she rolls onto the other side unscathed. She looks up and sees the exit to the cave."
-        C "[player]! I See the exit up ahead! *hops with excitement*"
-        player "Yes. Beautiful. Now please throw the paracord or so help me!"
-        C "Ah! Right!"
-        "Charlotte tosses one end of the paracord to you and you tie it securely on your belt. You make a running jump with the available length you have attached to the paracord. You manage to grab the ledge safely,hanging by your fingertips miraculously uninjured. You feel a tug on the rope and with its aid, you hoist your arm up on the ledge. Charlotte expertly ties the other end of the cord to a large, heavy rock and runs to you to lift you up. The ceiling starts to crumble behind you, and with no time to untie the paracord, you unbuckle your belt and both of you sprint to the exit."
-        "The rubble collapses and blocks the exit, sealing the cave."
-        player "*huff* *huff*"
-        extend "Boy am I glad we made it outta there..."
-        C "*huff* *huff*"
-        extend "Smart thinking with your belt. We'd both still be stuck in there if it weren't for that."
-        player "Haha, quit flirtin'."
-        C "Oh shut up."
-        "Charlotte bonks you lightly on the head."
-
-        "As you two celebrate the fact that you are alive, well and breathing, you discuss several unanswered questions: Who took The Idol of Death? Why did they only take the one idol? How long ago did they take it? How large scale of an effect can these Idols have? What do we do now? You two glance at each other and realize that you have some researching to do when you get back to camp."
-        #[Secrets to Unfold Ending]
-
-else:
-    if injuries_C > 0:
-        "The ground starts to shake."
-        player "Again?!?"
+        jump survive_paracord#[Secrets to Unfold Ending]
+    
+    else:
         C "We have to get moving then. It's not safe for us here."
-        "Both of you try to shake off the nerves and loosen your muscles to prepare for the boost. Charlotte plants her foot in your hands and just when you are about to launch her forward, Her knees give out. Charlotte, unable to recover from your weak launch, flails in the air, falls, but manages to grab and hang onto a small ledge 3 feet below on the other side of the gap. In your efforts to try and save her, you lean forward and offer your hand."
-        player "I'm here! Grab my hand!"
-        "Charlotte lifts her legs up against the wall to try and jump for your arm. Unfortunately, she still underestimates her injury and weakly jumps for your hand. She manages to grab it but her weight falling down sends you down the gap with her." 
-            
-        if paracord in bag:
-            "As you fall, you can't but think of all the events that happened today. It slipped your mind that you had a paracord in your bag the whole time."
-            player "{i} This is all my fault...Charlotte, I'm sorry.{/i}"
-        
-        else:
-            "As you fall, you can't but think of all the events that happened today."
-            player "{i} So it all ends like this huh....{/i}"
-            #[Death's Pull Ending]
+        "Charlotte takes your bag and both of you shake off the nerves and loosen your muscles to prepare for the boost."
+        "Charlotte plants her foot in your hands and just when you are about to launch her forward, "
 
-    if injuries_player > 0:
-        "The ground starts to shake."
-        player "Again?!?"
-        C "We have to get moving then. It's not safe for us here."
-        "Both of you try to shake off the nerves and loosen your muscles to prepare for the boost. Charlotte plants her foot in your hands and just when you are about to launch her forward, Your arm gives out. Charlotte, unable to recover from your weak launch, flails in the air, falls, but manages to grab and hang onto a small ledge 3 feet below. In your efforts to try and save her, you lean forward and offer your good hand."
-        C "No! Go without me! Save yourself!"
-        player "Screw that! I'm not leaving you!"
-        "Charlotte grabs your hand and is able to steady her footing against the gap's wall. You struggle to pull her up with only one hand, and it becomes worse when Charlotte's foot slides down the wall, her hands pulling you down with her."
+        if injuries_C > 0:
+            extend "her knee buckles and she starts to fall forward."
+        else: 
+            if injuries_player > 0:
+                extend "your arm gives out."
         
         show charlotte at character_fall_down
 
-        "Your proclamation came true as your collective weight sends you down the gap with her." 
+        "In your efforts to try and save her, you lunge forward to catch her, only to realize that the idol on her back added a significant amount of weight."
+        "The collective weight was too much for you and sends you over."
+        "You and Charlotte start to fall into the endless abyss and you can't help but replay Charlotte's words from earlier."
         
-        if paracord in bag:
-            "As you fall, you can't but think of all the events that happened today. It slipped your mind that you had a paracord in your bag the whole time."
-            player "{i} This is all my fault...Charlotte, I'm sorry.{/i}"
+        jump flashback
         
-        else:
-            "As you fall, you can't but think of all the events that happened today."
-            player "{i} So it all ends like this huh....{/i}"
-            #[Death's Cold Embrace Ending]
+else:
+    C "We have to get moving then. It's not safe for us here."
+    "Both of you try to shake off the nerves and loosen your muscles to prepare for the boost. Charlotte plants her foot in your hands and just when you are about to launch her forward,  {nw}"
+    
+    if injuries_C > 0:
+        extend "Her knees give out."
 
-if injuries_C < 1 and injuries_player < 1:
+    else:
+        if injuries_player > 0:
+            extend "Your arm gives out."
+
+    show charlotte at character_fall_down
+
+    "Charlotte, unable to recover from the weak launch, flails in the air, falls, but manages to grab and hang onto a small ledge 3 feet below. In your efforts to try and save her, you lean forward and offer "
+    
+    if injuries_player < 1:
+        extend "your hand."
+        player "I'm here! Grab my hand!"
+        "Charlotte lifts her legs up against the wall to try and jump for your arm. Unfortunately, she still underestimates her injury and weakly jumps for your hand. She manages to grab it but her weight falling down sends you down the gap with her." 
+        
+    if injuries_player > 0:
+        extend "your good hand."
+        C "No! Go without me! Save yourself!"
+        player "Screw that! I'm not leaving you!"
+        "Charlotte grabs your hand and is able to steady her footing against the gap's wall. You struggle to pull her up with only one hand, and it becomes worse when Charlotte's foot slides down the wall, her hands pulling you down with her."
+        "Your proclamation came true as your collective weight sends you down the gap with her."
+
+    jump basic_death
+
+    if injuries_C < 1 and injuries_player < 1:
         if paracord in bag:
-            show bg at bg_shake_exit
-            show charlotte shocked
-            play music_overlay "audio/earth-rumble-6953.mp3"
-
-            "The ground starts to shake."
-            player "Again?!?"
-
-            show charlotte worried
-
-            C "We have to get moving then. Let's stay calm and get it done!"
-            "Charlotte takes your bag and both of you shake off the nerves and loosen your muscles to prepare for the boost. Charlotte plants her foot in your hands and with the strength of your legs, you launch her into the air, across the gap, and she rolls onto the other side unscathed. She looks up and sees the exit to the cave."
-            C "[player]! I See the exit up ahead! *hops with excitement*"
-            player "Yes. Beautiful. Now please throw the paracord or so help me!"
-            C "Ah! Right!"
-            "Charlotte tosses one end of the paracord to you and you tie it securely on your belt. You make a running jump with the available length you have attached to the paracord. You manage to grab the ledge safely,hanging by your fingertips miraculously uninjured. You feel a tug on the rope and with its aid, you hoist your arm up on the ledge. Charlotte expertly ties the other end of the cord to a large, heavy rock and runs to you to lift you up. The ceiling starts to crumble behind you, and with no time to untie the paracord, you unbuckle your belt and both of you sprint to the exit."
-            "The rubble collapses and blocks the exit, sealing the cave."
-
-            play music_overlay "audio/birds-19624.mp3" fadeout 3
-            play sound "audio/stones-falling-6375.mp3" volume 0.7
-            show bg outside at bg_topish with dissolve
-
-            player "*huff* *huff*"
-            extend "Boy am I glad we made it outta there..."
-            C "*huff* *huff*"
-            extend "Smart thinking what your belt. We'd both still be stuck in there if it weren't for that."
-            player "Haha, quit flirtin'."
-            C "Oh shut up."
-            "Charlotte bonks you lightly on the head."
-
-            "As you two celebrate the fact that you are alive, well and breathing, you get a sinking feeling in your chest. You see the now sealed exit of the cave and couldn't help but feel that you missed something of grave importance to you, the cave, and maybe even the rest of the world."
+            jump survive_paracord
 
         else:
-            show bg at bg_shake_exit
-            show charlotte shocked
-            play music_overlay "audio/earth-rumble-6953.mp3"
-
-            "The ground starts to shake."
-            player "Again?!?"
-
-            show charlotte worried
-
             C "We have to get moving then. Let's stay calm and get it done!"
             "Both of you shake off the nerves and loosen your muscles to prepare for the boost. Charlotte plants her foot in your hands and with the strength of your legs, you launch her into the air, across the gap, and she rolls onto the other side unscathed. She looks up and sees the exit to the cave."
+            
+            show charlotte happy
+
             C "[player]! I See the exit up ahead! *hops with excitement*"
             player "Yes. Beautiful. Now please try and find something to help me get across!"
+            
+            show charlotte idle
+            
             C "Ah! Right!"
             "Charlotte frantically looks around the cave on her side. She looks at you and runs to the exit." 
 
@@ -1304,7 +1328,7 @@ if injuries_C < 1 and injuries_player < 1:
             show charlotte at character_right
             play sound "audio/wooden-thud-mono-6244.mp3"
 
-            "She lays to act as a bridge and steps on one end. She reachers her arm out."
+            "She lays it to act as a bridge and steps on one end. She reachers her arm out."
             C "Just focus on me and run. I'll grab you when you're in reach!"
             "You quickly but skillfully balance yourself on the log and quickly grab Charlotte's hand to reach the other side and both of you sprint to the exit."
             
@@ -1316,13 +1340,94 @@ if injuries_C < 1 and injuries_player < 1:
             player "*huff* *huff*"
             extend "Boy am I glad we made it outta there..."
             C "*huff* *huff*"
-            extend "Smart thinking what your belt. We'd both still be stuck in there if it weren't for that."
+            extend "Nice job on the log. Didn't know you had it in ya'."
             player "Haha, quit flirtin'."
             C "Oh shut up."
             "Charlotte bonks you lightly on the head."
 
             "As you two celebrate the fact that you are alive, well and breathing, you get a sinking feeling in your chest. You see the now sealed exit of the cave and couldn't help but feel that you missed something of grave importance to you, the cave, and maybe even the rest of the world."
-            #[Bonded Ending]
+            
+            jump ending#[Bonded Ending]
+
+label basic_death:
+    scene bg darkness
+
+    if paracord in bag:
+        "As you fall, you can't but think of all the events that happened today. It slipped your mind that you had a paracord in your bag the whole time."
+        player "{i} This is all my fault...Charlotte, I'm sorry.{/i}"
+    
+    else:
+        "As you fall, you can't but think of all the events that happened today."
+        player "{i} So it all ends like this huh....{/i}"
+        #[Death's Cold Embrace Ending]
+    
+    jump ending
+
+label survive_paracord:
+    C "We have to get moving then. Let's stay calm and get it done!"
+    "Charlotte takes your bag and both of you shake off the nerves and loosen your muscles to prepare for the boost."
+    "Charlotte plants her foot in your hands and with the strength of your whole body, you launch her into the air, across the gap, and she rolls onto the other side unscathed."
+    "She looks up and sees the exit to the cave."
+
+    show charlotte happy
+
+    C "[player]! I See the exit up ahead! *hops with excitement*"
+    player "Yes. Beautiful. Now please throw the paracord or so help me!"
+
+    show charlotte idle
+
+    C "Ah! Right!"
+    "Charlotte tosses one end of the paracord to you and you tie it securely on your belt. You make a running jump with the available length you have attached to the paracord."
+    "You manage to grab the ledge safely, hanging by your fingertips miraculously uninjured. You feel a tug on the rope and with its aid, you hoist your arm up on the ledge."
+    "Charlotte expertly ties the other end of the cord to a large, heavy rock and runs to you to lift you up."
+    "The ceiling starts to crumble behind you, and with no time to untie the paracord, you unbuckle your belt and both of you sprint to the exit."
+    "The rubble collapses and blocks the exit, sealing the cave."
+
+    play music_overlay "audio/birds-19624.mp3" fadeout 3
+    play sound "audio/stones-falling-6375.mp3" volume 0.7
+    show bg outside at bg_topish with dissolve
+
+    player "*huff* *huff*"
+    extend "\nBoy am I glad we made it outta there..."
+    C "*huff* *huff*"
+    extend "\nSmart thinking what your belt. We'd both still be stuck in there if it weren't for that."
+    player "Haha, quit flirtin'."
+    C "Oh shut up."
+    "Charlotte bonks you lightly on the head."
+
+    if lifeidol in bag:
+        "As you two celebrate the fact that you are alive, well and breathing, you discuss several unanswered questions:"
+        "Who took The Idol of Death?"
+        "Why did they only take the one idol?"
+        "How long ago did they take it?"
+        "How powerful can the Idols get?"
+        "What do we do now?"
+        "You two glance at each other and realize that you have some researching to do when you get back to camp."
+
+    else:
+        "As you two celebrate the fact that you are alive, well, and breathing, you get a sinking feeling in your chest. You see the now sealed exit of the cave and couldn't help but feel that you missed something of grave importance to you, the cave, and maybe even the rest of the world."
+    
+    jump ending
+
+label flashback:
+    scene bg cavetemple_edit at bottom
+    show charlotte worried at character_right
+    show effect vignette_white_wide
+
+    C "[player]! Don't touch it! What if something bad happens 'cause we took it?"
+    player "You remember what the tablet said right? It needs a counterpart. Something bad'll happen if we dont take it! It's currently imbalance since the Death idol isn't here."
+    C "That's just our speculation though, you know we both can't read whatever language that is!"
+
+    scene bg darkness
+
+    "As your consciousness starts to fade, you couldn't help but think." 
+    player "{i} If only I had listened to you...Charlotte, I'm sorry.{/i}"
+    #[Secret's Untold Ending]
+    jump ending
+
+label ending:
+stop sound fadeout 1
+stop music_overlay fadeout 1
 
 return
 

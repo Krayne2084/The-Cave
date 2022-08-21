@@ -2,9 +2,7 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 1284: end of line expected.
-    show bg outside at bg_topish with fadeout 0.5
-                                              ^
+File "game/script.rpy", line 1302: Indentation mismatch.
 
 Ren'Py Version: Ren'Py 8.0.2.22081402
-Sun Aug 21 13:34:15 2022
+Sun Aug 21 18:28:21 2022
