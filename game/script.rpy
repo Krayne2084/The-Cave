@@ -968,7 +968,152 @@ label choice5_right:
     player "Heh. You must be a mind reader 'cause I was thinkin' the same thing."
     C "Well, you were making a face. Like you were staring into the void...well technically you were but y'know what I mean."
 
+label endgame:
 
+if lifeidol in bag:
+
+    if Charlotte is injured:
+        player "Okay Charlotte, you gotta take my bag with you when you jump. It has the idol and the paracord so you can throw it to me and help me make it to the other side."
+        "The ground starts to shake."
+        player "Again?!?"
+        C "We have to get moving then. It's not safe for us here."
+        "Charlotte takes your bag and both of you shake off the nerves and loosen your muscles to prepare for the boost. Charlotte plants her foot in your hands and just when you are about to launch her forward, her knee buckles and she starts to fall forward. In your efforts to try and save her, you lunge forward to catch her, only to realize that the idol on her back added a significant amount of weight to her body. The collective weight sends you forward. You and Charlotte start to fall into the endless abyss and you can't help but replay Charlotte's words from earlier."
+        
+        show effect vignette_white_wide
+
+        C "[player]! Don't touch it! What if something bad happens 'cause we took it?"
+        player "You remember what the tablet said right? It needs a counterpart. Something bad'll happen if we dont take it! It's currently imbalance since the Death idol isn't here."
+        C "That's just our speculation though, you know we both can't read whatever language that is!"
+        
+        hide effect
+
+        "As your consciousness starts to fade, you couldn't help but think." 
+        player "{i} If only I had listened to you...Charlotte, I'm sorry.{/i}"
+
+
+    if player is injured:
+        player "Okay Charlotte, you gotta take my bag with you when you jump. It has the idol and the paracord so you can throw it to me and help me make it to the other side."
+        "The ground starts to shake."
+        player "Again?!?"
+        C "We have to get moving then. It's not safe for us here."
+        "Charlotte takes your bag and both of you shake off the nerves and loosen your muscles to prepare for the boost. Charlotte plants her foot in your hands and just when you are about to launch her forward, Your arm gives out. The whole time you were carrying the idol, the pain in your arm subsided, but not that it's not in your possession, you feel the excruciating pain. Despite this, you see Charlotte falling forward. In your efforts to try and save her, you lunge forward to catch her, only to realize that the idol on her back added a significant amount of weight to her body. The collective weight sends you forward. You and Charlotte start to fall into the endless abyss and you can't help but replay Charlotte's words from earlier."
+
+        show effect vignette_white_wide
+
+        C "[player]! Don't touch it! What if something bad happens 'cause we took it?"
+        player "You remember what the tablet said right? It needs a counterpart. Something bad'll happen if we dont take it! It's currently imbalance since the Death idol isn't here."
+        C "That's just our speculation though, you know we both can't read whatever language that is!"
+
+        hide effect
+
+        "As your consciousness starts to fade, you couldn't help but think." 
+        player "{i} If only I had listened to you...Charlotte, I'm sorry.{/i}"
+        #[Secret's Untold Ending]
+
+    if injuries_C < 1 and injuries_player < 1:
+        player "Here, you're taking my bag. The idol and my paracord are in there so you can toss it to me when you make it on the other side."
+        "The ground starts to shake."
+        player "Again?!?"
+        C "We have to get moving then. Let's stay calm and get it done!"
+        "Charlotte takes your bag and both of you shake off the nerves and loosen your muscles to prepare for the boost. Charlotte plants her foot in your hands and with the strength of your legs, you launch her into the air, across the gap, and she rolls onto the other side unscathed. She looks up and sees the exit to the cave."
+        C "[player]! I See the exit up ahead! *hops with excitement*"
+        player "Yes. Beautiful. Now please throw the paracord or so help me!"
+        C "Ah! Right!"
+        "Charlotte tosses one end of the paracord to you and you tie it securely on your belt. You make a running jump with the available length you have attached to the paracord. You manage to grab the ledge safely,hanging by your fingertips miraculously uninjured. You feel a tug on the rope and with its aid, you hoist your arm up on the ledge. Charlotte expertly ties the other end of the cord to a large, heavy rock and runs to you to lift you up. The ceiling starts to crumble behind you, and with no time to untie the paracord, you unbuckle your belt and both of you sprint to the exit."
+        "The rubble collapses and blocks the exit, sealing the cave."
+        player "*Huff* *Huff*"
+        extend "Boy am I glad we made it outta there..."
+        C "*Huff* *Huff*"
+        extend "Smart thinking with your belt. We'd both still be stuck in there if it weren't for that."
+        player "Haha, quit flirtin'."
+        C "Oh shut up."
+        "Charlotte bonks you lightly on the head."
+
+        "As you two celebrate the fact that you are alive, well and breathing, you discuss several unanswered questions: Who took The Idol of Death? Why did they only take the one idol? How long ago did they take it? How large scale of an effect can these Idols have? What do we do now? You two glance at each other and realize that you have some researching to do when you get back to camp."
+        #[Secrets to Unfold Ending]
+
+else:
+    if injuries_C > 0:
+        "The ground starts to shake."
+        player "Again?!?"
+        C "We have to get moving then. It's not safe for us here."
+        "Both of you try to shake off the nerves and loosen your muscles to prepare for the boost. Charlotte plants her foot in your hands and just when you are about to launch her forward, Her knees give out. Charlotte, unable to recover from your weak launch, flails in the air, falls, but manages to grab and hang onto a small ledge 3 feet below on the other side of the gap. In your efforts to try and save her, you lean forward and offer your hand."
+        player "I'm here! Grab my hand!"
+        "Charlotte lifts her legs up against the wall to try and jump for your arm. Unfortunately, she still underestimates her injury and weakly jumps for your hand. She manages to grab it but her weight falling down sends you down the gap with her." 
+            
+        if paracord in bag:
+            "As you fall, you can't but think of all the events that happened today. It slipped your mind that you had a paracord in your bag the whole time."
+            player "{i} This is all my fault...Charlotte, I'm sorry.{/i}"
+        
+        else:
+            "As you fall, you can't but think of all the events that happened today."
+            player "{i} So it all ends like this huh....{/i}"
+            #[Death's Pull Ending]
+
+    if injuries_player > 0:
+        "The ground starts to shake."
+        player "Again?!?"
+        C "We have to get moving then. It's not safe for us here."
+        "Both of you try to shake off the nerves and loosen your muscles to prepare for the boost. Charlotte plants her foot in your hands and just when you are about to launch her forward, Your arm gives out. Charlotte, unable to recover from your weak launch, flails in the air, falls, but manages to grab and hang onto a small ledge 3 feet below. In your efforts to try and save her, you lean forward and offer your good hand."
+        C "No! Go without me! Save yourself!"
+        player "Screw that! I'm not leaving you!"
+        "Charlotte grabs your hand and is able to steady her footing against the gap's wall. You struggle to pull her up with only one hand, and it becomes worse when Charlotte's foot slides down the wall, her hands pulling you down with her."
+        "Your proclamation came true as your collective weight sends you down the gap with her." 
+        
+        if paracord in bag:
+            "As you fall, you can't but think of all the events that happened today. It slipped your mind that you had a paracord in your bag the whole time."
+            player "{i} This is all my fault...Charlotte, I'm sorry.{/i}"
+        
+        else:
+            "As you fall, you can't but think of all the events that happened today."
+            player "{i} So it all ends like this huh....{/i}"
+            #[Death's Cold Embrace Ending]
+
+if injuries_C < 1 and injuries_player < 1:
+        if paracord in bag:
+            "The ground starts to shake."
+            player "Again?!?"
+            C "We have to get moving then. Let's stay calm and get it done!"
+            "Charlotte takes your bag and both of you shake off the nerves and loosen your muscles to prepare for the boost. Charlotte plants her foot in your hands and with the strength of your legs, you launch her into the air, across the gap, and she rolls onto the other side unscathed. She looks up and sees the exit to the cave."
+            C "[player]! I See the exit up ahead! *hops with excitement*"
+            player "Yes. Beautiful. Now please throw the paracord or so help me!"
+            C "Ah! Right!"
+            "Charlotte tosses one end of the paracord to you and you tie it securely on your belt. You make a running jump with the available length you have attached to the paracord. You manage to grab the ledge safely,hanging by your fingertips miraculously uninjured. You feel a tug on the rope and with its aid, you hoist your arm up on the ledge. Charlotte expertly ties the other end of the cord to a large, heavy rock and runs to you to lift you up. The ceiling starts to crumble behind you, and with no time to untie the paracord, you unbuckle your belt and both of you sprint to the exit."
+            "The rubble collapses and blocks the exit, sealing the cave."
+            player "*Huff* *Huff*"
+            extend "Boy am I glad we made it outta there..."
+            C "*Huff* *Huff*"
+            extend "Smart thinking what your belt. We'd both still be stuck in there if it weren't for that."
+            player "Haha, quit flirtin'."
+            C "Oh shut up."
+            "Charlotte bonks you lightly on the head."
+
+            "As you two celebrate the fact that you are alive, well and breathing, you get a sinking feeling in your chest. You see the now sealed exit of the cave and couldn't help but feel that you missed something of grave importance to you, the cave, and maybe even the rest of the world."
+
+        else:
+            "The ground starts to shake."
+            player "Again?!?"
+            C "We have to get moving then. Let's stay calm and get it done!"
+            "Both of you shake off the nerves and loosen your muscles to prepare for the boost. Charlotte plants her foot in your hands and with the strength of your legs, you launch her into the air, across the gap, and she rolls onto the other side unscathed. She looks up and sees the exit to the cave."
+            C "[player]! I See the exit up ahead! *hops with excitement*"
+            player "Yes. Beautiful. Now please try and find something to help me get across!"
+            C "Ah! Right!"
+            "Charlotte frantically looks around the cave on her side. She looks at you and runs to the exit." 
+            player "{i} Did...Did she just abandon me?!?! After everythi-"
+            "You see Charlotte run back inside carrying a long log onone shoulder it looked stable enough to walk on. She lays to act as a bridge and steps on one end. She reachers her arm out."
+            C "Just focus on me and run. I'll grab you when your in my reach!"
+            "You quickly but skillfully balance yourself on the log and quickly grab Charlotte's hand to reach the other side and both of you sprint to the exit."
+            "The rubble collapses and blocks the exit, sealing the cave."
+            player "*Huff* *Huff*"
+            extend "Boy am I glad we made it outta there..."
+            C "*Huff* *Huff*"
+            extend "Smart thinking what your belt. We'd both still be stuck in there if it weren't for that."
+            player "Haha, quit flirtin'."
+            C "Oh shut up."
+            "Charlotte bonks you lightly on the head."
+
+            "As you two celebrate the fact that you are alive, well and breathing, you get a sinking feeling in your chest. You see the now sealed exit of the cave and couldn't help but feel that you missed something of grave importance to you, the cave, and maybe even the rest of the world."
+            #[Bonded Ending]
 
 return
 

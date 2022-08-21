@@ -2,9 +2,17 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 596: expected statement.
-    paracord.add_to_bag()
-                         ^
+File "game/script.rpy", line 1085: end of line expected.
+    C "*Huff* *Huff*" "Smart thinking what your belt. We'd both still be stuck in there if it weren't for that."
+                      ^
+
+File "game/script.rpy", line 1106: end of line expected.
+    player "*Huff* *Huff*" "Boy am I glad we made it outta there..."
+                           ^
+
+File "game/script.rpy", line 1107: end of line expected.
+    C "*Huff* *Huff*""Smart thinking what your belt. We'd both still be stuck in there if it weren't for that."
+                     ^
 
 Ren'Py Version: Ren'Py 8.0.2.22081402
-Sat Aug 20 18:47:54 2022
+Sat Aug 20 20:20:46 2022
