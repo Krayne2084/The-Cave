@@ -18,14 +18,32 @@ transform character_right:
     xpos 0.85
     zoom 0.35
 
+transform character_shake_right:
+    zoom 0.35
+    xanchor 0.5
+    linear 0.05 xpos 0.84
+    linear 0.05 xpos 0.85
+
+    repeat
+
+transform character_fall_down:
+    zoom 0.35
+    xanchor 0.5
+    linear 0.05 ypos 2.0
+
 transform shake_bg_mid:
     linear 0.05 ypos 0.52
     linear 0.05 ypos 0.5
     repeat
 
-transform shake_bg_bottomish:
+transform bg_shake_bottomish:
     linear 0.05 ypos 0.77
     linear 0.05 ypos 0.75
+    repeat
+
+transform bg_shake_exit:
+    linear 0.05 ypos 0.72
+    linear 0.05 ypos 0.7
     repeat
 
 transform bg_top:
@@ -42,6 +60,10 @@ transform bg_bottomish:
 
 transform bg_bottom:
     yalign 1.0
+
+transform bg_exit:
+    yanchor 1.0
+    ypos 0.7
 
 #EFFECTS
 define flashbulb = Fade(0.2, 0.0, 0.8, color='#fff')
@@ -477,12 +499,10 @@ label choice3_cavern:
         "You look away, feeling a bit queasy, while Charlotte focuses on disinfecting and wrapping her wounds."
         
         show charlotte happy
-        
-        C "All good to go!"
-        
         $ injuries_C = injuries_C - 1
-        $ firstaidkit.use()
+        $ firstaidkit.use()    
 
+        C "All good to go!"
         player "*trying not to gag* {p}Mhm *thumbs up*"
 
     else:
@@ -493,17 +513,20 @@ label choice3_cavern:
 
     "The two of you start to walk back towards the crevice."
 
-    show bg at shake_bg_bottomish
-    play sound "audio/earth-rumble-6953.mp3"
+    show bg at bg_shake_bottomish
+    play music_overlay "audio/earth-rumble-6953.mp3"
 
     show charlotte shocked
     
     "An unexpected rumble startles you both as you scramble to hug the walls for stability."
-    "Now that Charlotte has a flashlight, you can clearly see the stone ceiling above the crevice crumble and fall, sealing off your intended path."
     
+    stop music_overlay fadeout 3
+    play sound "audio/stones-falling-6375.mp3" volume 0.7
     show bg at bg_bottomish
     show charlotte worried
 
+    "Now that Charlotte has a flashlight, you can clearly see the stone ceiling above the crevice crumble and fall, sealing off your intended path."
+    
     player "Well, uh, looks like that's not an option anymore?"
     C "*moves her flashlight around*"
     
@@ -635,6 +658,7 @@ label choice4_climb:
         "She mimes out her visual route and starts to climb, with you tagging behind. As she climbs and grabs onto a pattern of protrusions and pitons, Charlotte details her movements for you to follow suit."
         "You start to feel your strength wither away, arms and legs both shaking. You grab onto a piton and it snaps, your hand slips and ends up wedged into a crack in the wall.{nw}"
         
+        play sound "audio/rock-destroy-6409.mp3" volume 0.4
         with hurt_flash
 
         extend "You screech as the pain shoots from your wrist and up into your shoulders."
@@ -845,6 +869,7 @@ show charlotte shocked
 
 C "Wait, what?!"
 
+stop music_overlay fadeout 1
 scene bg cave1_lit at bg_top with dissolve
 
 "You and Charlotte sit in an open section of the path you've been walking, the light from outside giving you a bit of warmth and hope. Drinking the last drops of water and remaining snacks you get up from your spot and dust off your uniform."
@@ -868,6 +893,7 @@ show charlotte idle
 extend "Anyway, the moment's gone now so you lost your chance to be sentimental."
 
 hide charlotte
+$Play_Sound.run()
 
 "Charlotte skips ahead and you can't help but chuckle at your new friend."
 C "Hey [player], check this out!"
@@ -913,6 +939,7 @@ if paracord in bag and knocker in bag:
     C "Well, now that we have it, we can find out maybe?"
     player "Yup. I'm sure the opportunity will present itself."
     "Charlotte places it in your bag. Due to its height, it now comically pokes its head out."
+
 else:
     if injuries_C < 1 and injuries_player < 1:
         player "Wanna try an old fashioned boost?"
@@ -938,13 +965,24 @@ else:
         jump boost_C
   
     label boost_C:
+        show charlotte shocked at character_shake_right
+
         "Charlotte boosts you and her arms immediately start shaking."
         C "Dude, are you made of lead or something!?! Why are you so heavy!"
         player "Hey! Has anyone told you not to mention a man's weight! *reaching out*"
+
+        show charlotte annoyed at character_right
+
         "You jump back to the ground."
         player "Mission failed on this one."
         player "At least we can say we tried."
+
+        show charlotte thinking
+
         C "Yeah... It's prob'ly not important anyway. At least, that's what I'm gonna tell myself."
+
+        show charlotte idle
+
         player "I concur. Let's save our energy while we still have some."
 
 "A fork in the tunnel presents itself."
@@ -970,8 +1008,10 @@ label choice5_left:
     "You and Charlotte go into the tunnel on the left."
 
     scene bg cavelight at bg_bottomish with dissolve
+    $ Play_Sound.walk_loop()
 
     "A few minutes later."
+
     player "Is it just me or is the cave looking{cps=4}...{/cps} cleaner?"
 
     show charlotte thinking at character_right
@@ -981,6 +1021,7 @@ label choice5_left:
     C "I don't think you're imagining it..."
 
     show charlotte idle
+    stop sound fadeout 1
 
     "You and Charlotte stop in your tracks."
     player "Is that a brazier?"
@@ -989,7 +1030,12 @@ label choice5_left:
 
     if pocketknife in bag and statue in bag:
         player "Ah!"
-        "You reach into the side of your bag and grab the wooden statue you were working on and whip the pocket knife out of your pouch. Charlotte watches you as you shave off bits of wood from your carving.The wood shavings start to burn and flames bloom to life."
+        "You reach into the side of your bag and grab the wooden statue you were working on and whip the pocket knife out of your pouch."
+        "Charlotte watches you as you shave off bits of wood from your carving."
+        
+        play sound "audio/fire-39294.mp3"
+        
+        "The wood shavings start to burn and flames bloom to life."
         
         show charlotte shocked
         
@@ -1065,11 +1111,12 @@ label choice5_right:
     player "Right it is."
     "You and Charlotte go into the tunnel on the right."
 
-    scene bg cavewall at bg_bottom with dissolve
+    scene bg cavewall at bg_bottomish with dissolve
 
     "After walking for several minutes, Charlotte notices something."
 
     show charlotte thinking at character_right
+    play music_overlay "audio/birds-19624.mp3" fadein 3
 
     C "I hear birds.{p} I think we-{nw}"
     player "Hup. {w=0.5}Zip it. Don't jinx it."
@@ -1079,9 +1126,12 @@ label choice5_right:
     C "Fine, then I guess those are bats and we accidentally made our way deeper.\nNyeh *Sticks out Tongue*"
     player "Better."
 
-    scene bg caveexit at bg_bottom with dissolve
+    scene effect darkness
+    show bg caveexit at bg_exit with dissolve
 
-    "You stop in your tracks as you stare at the sight before your eyes. You and Charlotte look down at the bottomless gap before you. It's just large enough that you would need to jump to even start climbing. Thankfully, the ledge is just short enough that if one of you gives the other a boost, they should be able to reach the ledge. You can only hope that there's something on the other side that you can use to help the other one across."
+    "You stop in your tracks as you stare at the sight before your eyes."
+    "You and Charlotte look down at the bottomless gap before you. It's just large enough that you would need to jump to even start climbing."
+    "Thankfully, the ledge is just short enough that if one of you gives the other a boost, they should be able to reach the ledge. You can only hope that there's something on the other side that you can use to help the other one across."
     
     show charlotte idle at character_right
     
@@ -1179,6 +1229,9 @@ else:
         C "No! Go without me! Save yourself!"
         player "Screw that! I'm not leaving you!"
         "Charlotte grabs your hand and is able to steady her footing against the gap's wall. You struggle to pull her up with only one hand, and it becomes worse when Charlotte's foot slides down the wall, her hands pulling you down with her."
+        
+        show charlotte at character_fall_down
+
         "Your proclamation came true as your collective weight sends you down the gap with her." 
         
         if paracord in bag:
@@ -1192,8 +1245,15 @@ else:
 
 if injuries_C < 1 and injuries_player < 1:
         if paracord in bag:
+            show bg at bg_shake_exit
+            show charlotte shocked
+            play music_overlay "audio/earth-rumble-6953.mp3"
+
             "The ground starts to shake."
             player "Again?!?"
+
+            show charlotte worried
+
             C "We have to get moving then. Let's stay calm and get it done!"
             "Charlotte takes your bag and both of you shake off the nerves and loosen your muscles to prepare for the boost. Charlotte plants her foot in your hands and with the strength of your legs, you launch her into the air, across the gap, and she rolls onto the other side unscathed. She looks up and sees the exit to the cave."
             C "[player]! I See the exit up ahead! *hops with excitement*"
@@ -1201,6 +1261,11 @@ if injuries_C < 1 and injuries_player < 1:
             C "Ah! Right!"
             "Charlotte tosses one end of the paracord to you and you tie it securely on your belt. You make a running jump with the available length you have attached to the paracord. You manage to grab the ledge safely,hanging by your fingertips miraculously uninjured. You feel a tug on the rope and with its aid, you hoist your arm up on the ledge. Charlotte expertly ties the other end of the cord to a large, heavy rock and runs to you to lift you up. The ceiling starts to crumble behind you, and with no time to untie the paracord, you unbuckle your belt and both of you sprint to the exit."
             "The rubble collapses and blocks the exit, sealing the cave."
+
+            play music_overlay "audio/birds-19624.mp3" fadeout 3
+            play sound "audio/stones-falling-6375.mp3" volume 0.7
+            show bg outside at bg_topish with dissolve
+
             player "*huff* *huff*"
             extend "Boy am I glad we made it outta there..."
             C "*huff* *huff*"
@@ -1212,18 +1277,41 @@ if injuries_C < 1 and injuries_player < 1:
             "As you two celebrate the fact that you are alive, well and breathing, you get a sinking feeling in your chest. You see the now sealed exit of the cave and couldn't help but feel that you missed something of grave importance to you, the cave, and maybe even the rest of the world."
 
         else:
+            show bg at bg_shake_exit
+            show charlotte shocked
+            play music_overlay "audio/earth-rumble-6953.mp3"
+
             "The ground starts to shake."
             player "Again?!?"
+
+            show charlotte worried
+
             C "We have to get moving then. Let's stay calm and get it done!"
             "Both of you shake off the nerves and loosen your muscles to prepare for the boost. Charlotte plants her foot in your hands and with the strength of your legs, you launch her into the air, across the gap, and she rolls onto the other side unscathed. She looks up and sees the exit to the cave."
             C "[player]! I See the exit up ahead! *hops with excitement*"
             player "Yes. Beautiful. Now please try and find something to help me get across!"
             C "Ah! Right!"
             "Charlotte frantically looks around the cave on her side. She looks at you and runs to the exit." 
+
+            hide charlotte
+
             player "{i} Did...Did she just abandon me?!?! After everythi-"
-            "You see Charlotte run back inside carrying a long log onone shoulder it looked stable enough to walk on. She lays to act as a bridge and steps on one end. She reachers her arm out."
-            C "Just focus on me and run. I'll grab you when your in my reach!"
+
+            show charlotte worried at character_shake_right
+
+            "You see Charlotte run back inside carrying a long log on one shoulder it looked stable enough to walk on."
+            
+            show charlotte at character_right
+            play sound "audio/wooden-thud-mono-6244.mp3"
+
+            "She lays to act as a bridge and steps on one end. She reachers her arm out."
+            C "Just focus on me and run. I'll grab you when you're in reach!"
             "You quickly but skillfully balance yourself on the log and quickly grab Charlotte's hand to reach the other side and both of you sprint to the exit."
+            
+            play music_overlay "audio/birds-19624.mp3" fadeout 3
+            play sound "audio/stones-falling-6375.mp3" volume 0.7
+            show bg outside at bg_topish with dissolve
+            
             "The rubble collapses and blocks the exit, sealing the cave."
             player "*huff* *huff*"
             extend "Boy am I glad we made it outta there..."
