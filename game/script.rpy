@@ -12,17 +12,17 @@ define g = Character("Girl", color='#0f0')
 image charlotte idle = "charlotte neutral.png"
 
 #TRANSFORMS
-transform character_right:
+transform character_mid:
     yalign 1
     xanchor 0.5
-    xpos 0.85
+    xpos 0.5
     zoom 0.35
 
-transform character_shake_right:
+transform character_shake_mid:
     zoom 0.35
     xanchor 0.5
-    linear 0.05 xpos 0.84
-    linear 0.05 xpos 0.85
+    linear 0.05 xpos 0.49
+    linear 0.05 xpos 0.5
 
     repeat
 
@@ -299,9 +299,9 @@ label get_lighter:
 
     scene bg cave1_warm at bg_bottomish with flashbulb
     if injuries_C > 0:
-        show charlotte injured at character_right
+        show charlotte injured at character_mid
     else:
-        show charlotte idle at character_right
+        show charlotte idle at character_mid
     
     extend "OSH*"
 
@@ -372,7 +372,7 @@ label choice3_crevice:
     
     player "Damn, this shimmy session is gonna be longer than I thought it'd be."
     
-    show charlotte worried at character_right
+    show charlotte worried at character_mid
     
     C "Wha?? You gotta be kidding me. I haven't even stepped in yet and I'm already exhausted from hearing you say that."
     player "You say that as if you're not gonna be in here soon haha."
@@ -397,7 +397,7 @@ label choice3_crevice:
     extend "{w=1} It wouldn't have been a big deal, until you hear crackles of stones and the walls behind Charlotte start to break down."
     player "{size=+20}LET'S HURRY AND MOVE IT. DON'T LOOK BACK."
     
-    show charlotte worried at character_right
+    show charlotte worried at character_mid
 
     C "Wha-{p}*looks back*{w=0.5}{nw}"
     
@@ -477,7 +477,7 @@ label choice3_cavern:
     C "Yeah, it's mine... {w}How'd it even get here?"
     player "Beats me. What do you have in there?"
 
-    show charlotte idle at character_right
+    show charlotte idle at character_mid
 
     C "Let's see, hopefully nothing too important fell out."
     "Charlotte unzips the pockets of her backpack, uncovering essential snacks and water for the scout's adventuring. You catch a glimpse of a small box in the front pocket of her bag."
@@ -567,7 +567,7 @@ play music_overlay "audio/water-drops-6223.mp3"
 "This cavern is significantly larger than the one you passed earlier."
 "The hole in the ceiling conveniently lights the majority of the cavern. In front of you is a pool of water with another area, unfortunately still shadowed in darkness, on the other side with what looks to be a possible exit."
 
-show charlotte happy at character_right
+show charlotte happy at character_mid
 
 C "Oh my gosh, light! {nw}"
 
@@ -642,7 +642,7 @@ label choice4_climb:
         "You reach the top and Charlotte lends you a hand and pulls you up."
 
         $ paracord.add_to_bag()
-        show charlotte happy at character_right
+        show charlotte happy at character_mid
 
         C "Nice to see ya!"
         player "Likewise~ So what were you saying earlier? You found something?"
@@ -874,7 +874,7 @@ label choice4_done:
 "You two continue down the path."
 
 show bg cave1_warm at bg_topish with dissolve
-show charlotte thinking at character_right
+show charlotte thinking at character_mid
 stop music_overlay fadeout 1
 $ Play_Sound.walk_loop()
 
@@ -901,7 +901,7 @@ stop sound
 
 "You and Charlotte sit in an open section of the path you've been walking, the light from outside giving you a bit of warmth and hope. Drinking the last drops of water and remaining snacks you get up from your spot and dust off your uniform."
 
-show charlotte idle at character_right
+show charlotte idle at character_mid
 
 C "Almost feels like we're in the homestretch huh? I gotta say, we just met not too long ago, but it's a nice feeling not having to shoulder the burden of life and death alone."
 player "You gettin' poetic on me?"
@@ -927,7 +927,7 @@ C "Hey [player], check this out!"
 "You follow the sound of Charlotte's voice and find her looking up at the top of a wall at some sort of rock shelf."
 "You squint and notice something relatively large laying on it. The object looks as if it could be pulled off with some effort."
 
-show charlotte idle at character_right
+show charlotte idle at character_mid
 
 player "Think it's worth it?"
 C "Anything's worth it if it helps us out. Of course, if we don't injure ourselves in the process."
@@ -992,13 +992,13 @@ else:
         jump boost_C
   
     label boost_C:
-        show charlotte shocked at character_shake_right
+        show charlotte shocked at character_shake_mid
 
         "Charlotte boosts you and her arms immediately start shaking."
         C "Dude, are you made of lead or something!?! Why are you so heavy!"
         player "Hey! Has anyone told you not to mention a man's weight! *reaching out*"
 
-        show charlotte annoyed at character_right
+        show charlotte annoyed at character_mid
 
         "You jump back to the ground."
         player "Mission failed on this one."
@@ -1041,7 +1041,7 @@ label choice5_left:
 
     player "Is it just me or is the cave looking{cps=4}...{/cps} cleaner?"
 
-    show charlotte thinking at character_right
+    show charlotte thinking at character_mid
 
     C "What do you mean?"
     player "It feels like the cave is traveling straighter, like it's more intentional now. I don't know, I could just be imaginin' things."
@@ -1114,7 +1114,7 @@ label choice5_left:
         extend "You whip your head around and see a stone door opening on the cave wall, debris falling as the doors separates from the wall."
         player "Uh excuse me? Was that building always there??"
 
-        show charlotte worried at character_right
+        show charlotte worried at character_mid
 
         C "What in the world is goin' on around here?"
         player "Your guess is as good as mine."
@@ -1210,7 +1210,7 @@ label choice5_right:
 
     "After walking for several minutes, Charlotte notices something."
 
-    show charlotte thinking at character_right
+    show charlotte thinking at character_mid
     play music_overlay "audio/birds-19624.mp3" fadein 3
 
     C "I hear birds.{p} I think we-{nw}"
@@ -1228,7 +1228,7 @@ label choice5_right:
     "You and Charlotte look down at the bottomless gap before you. It's just large enough that you would need to jump to even start climbing."
     "Thankfully, the ledge is just short enough that if one of you gives the other a boost, they should be able to reach the ledge. You can only hope that there's something on the other side that you can use to help the other one across."
     
-    show charlotte idle at character_right
+    show charlotte idle at character_mid
     
     C "Looks like we can boost each other. One of us is sure to make it."
     player "Heh. You must be a mind reader 'cause I was thinkin' the same thing."
@@ -1321,11 +1321,11 @@ else:
 
             player "{i} Did...Did she just abandon me?!?! After everythi-"
 
-            show charlotte worried at character_shake_right
+            show charlotte worried at character_shake_mid
 
             "You see Charlotte run back inside carrying a long log on one shoulder it looked stable enough to walk on."
             
-            show charlotte at character_right
+            show charlotte at character_mid
             play sound "audio/wooden-thud-mono-6244.mp3"
 
             "She lays the log to act as a bridge and steps on one end. She reaches her arm out."
@@ -1417,7 +1417,7 @@ label survive_paracord:
 
 label flashback:
     scene bg cavetemple_edit at bottom
-    show charlotte worried at character_right
+    show charlotte worried at character_mid
     show effect vignette_white_wide
 
     C "[player]! Don't touch it! What if something bad happens 'cause we took it?"
