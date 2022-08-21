@@ -230,14 +230,14 @@ menu:
     "Check your Pockets":
         jump choice2_pockets
     
-    "Find the cave wall":
+    "Find the Cave Wall":
         jump choice2_wall
 
 label choice2_pockets:
     $ pockets = True
     player "*pats pockets*{p}*rummages through waist pouch*"
     C "Watcha doin' there bud?"
-    player "Checkin' if I got anythin' useful on me"
+    player "Checkin' if I got anythin' useful on me."
     C "Ah! Good call. {size=-18}Why didn't I think of that?{/size}"
 
     jump get_lighter
@@ -285,7 +285,7 @@ label get_lighter:
     "Charlotte feels through her pockets and examines the contents of her pouch."
 
     if pockets:
-        extend "She manages to pull out a lighter from the inner pocket of her pouch."
+        extend " She manages to pull out a lighter from the inner pocket of her pouch."
     else:
         player "What's all that rustlin'?"
         C "I'm seeing if I got anything useful before I start wanderin' in this pitch blackness again."
@@ -313,7 +313,7 @@ label get_lighter:
     show charlotte worried
     C "O-oh no it's uh.. I just wasn't expecting to see you right away haha."
     player "Are{cps=4}...{/cps}{w=0.25} Are you callin' me ugly?"
-    C "No no, not at all" 
+    C "No no, not at all." 
     C "*coughs*"
     show charlotte idle
     C "Anyways, looks like this is all I have, everything else must've fallen out. You got anything useful?"
@@ -350,10 +350,10 @@ extend "Oh hey look over there!"
 C "It looks big enough for both of us to shimmy through! Maybe that's where the air current is coming from. Worth a shot right?"
 
 menu:
-    "Shimmy through the crevice":
+    "Shimmy through the Crevice":
         jump choice3_crevice
 
-    "Explore the area":
+    "Explore the Area":
         jump choice3_cavern
 
 label choice3_crevice:
@@ -361,7 +361,7 @@ label choice3_crevice:
     show charlotte idle
 
     player "Like you said, worth the shot so let's try it!"
-    "The two of you walk up to the crevice and Charlotte gives you her lighter and gestures to the crevice"
+    "The two of you walk up to the crevice and Charlotte gives you her lighter and gestures to the crevice."
     C "Lead the way~"
 
     hide charlotte
@@ -480,7 +480,7 @@ label choice3_cavern:
     show charlotte idle at character_right
 
     C "Let's see, hopefully nothing too important fell out."
-    "Charlotte unzips the pockets of her backpack, uncovering essential snacks and water for for the scout's adventuring. You catch a glimpse of a small box in the front pocket of her bag."
+    "Charlotte unzips the pockets of her backpack, uncovering essential snacks and water for the scout's adventuring. You catch a glimpse of a small box in the front pocket of her bag."
     player "What's that?"
     C "*pulls out a first aid kit*"
 
@@ -543,7 +543,7 @@ label choice3_cavern:
     show charlotte idle
 
     extend "\nHaha, you know what they say. When one door closes, another opens and well, something did open."
-    "You follow the direction of her flashlight and see a broken wall on the other side of the cavern. You walk towards and and see a path to who knows where. You look at each other."
+    "You follow the direction of her flashlight and see a broken wall on the other side of the cavern. You walk towards it and see a path to who knows where. You look at each other."
     C "Any other options?"
     player "Nope."
 
@@ -615,7 +615,7 @@ label choice4_climb:
         
         $ paracord.use()
 
-        extend"\nAlright muscles, you think you can climb all the way up there and then send this down for me?"
+        extend"\nAlright Muscles, you think you can climb all the way up there and then send this down for me?"
         C "*stretches*\nI got this."
 
         if injuries_C > 0:
@@ -925,12 +925,12 @@ $Play_Sound.run()
 "Charlotte skips ahead and you can't help but chuckle at your new friend."
 C "Hey [player], check this out!"
 "You follow the sound of Charlotte's voice and find her looking up at the top of a wall at some sort of rock shelf."
-"You squint and notice something relatively large balancing laying on it. The object looks as if it could be pulled off with some effort."
+"You squint and notice something relatively large laying on it. The object looks as if it could be pulled off with some effort."
 
 show charlotte idle at character_right
 
 player "Think it's worth it?"
-C "Anything's worth it if it helps us out. Of course if we don't injure ourselves in the process."
+C "Anything's worth it if it helps us out. Of course, if we don't injure ourselves in the process."
 
 if paracord in bag and knocker in bag:
     "You look at Charlotte's belt, at the large knocker ring you found recently."
@@ -1308,11 +1308,11 @@ else:
             "Both of you shake off the nerves and loosen your muscles to prepare for the boost. Charlotte plants her foot in your hands and with the strength of your legs, you launch her into the air, across the gap, and she rolls onto the other side unscathed. She looks up and sees the exit to the cave."
             
             show charlotte happy
-
+            
             C "[player]! I See the exit up ahead! *hops with excitement*"
             player "Yes. Beautiful. Now please try and find something to help me get across!"
             
-            show charlotte idle
+            show charlotte worried
             
             C "Ah! Right!"
             "Charlotte frantically looks around the cave on her side. She looks at you and runs to the exit." 
@@ -1328,7 +1328,7 @@ else:
             show charlotte at character_right
             play sound "audio/wooden-thud-mono-6244.mp3"
 
-            "She lays it to act as a bridge and steps on one end. She reachers her arm out."
+            "She lays the log to act as a bridge and steps on one end. She reaches her arm out."
             C "Just focus on me and run. I'll grab you when you're in reach!"
             "You quickly but skillfully balance yourself on the log and quickly grab Charlotte's hand to reach the other side and both of you sprint to the exit."
             
@@ -1338,7 +1338,10 @@ else:
             
             "The rubble collapses and blocks the exit, sealing the cave."
             player "*huff* *huff*"
-            extend "Boy am I glad we made it outta there..."
+            extend " Boy am I glad we made it outta there..."
+            
+            show charlotte neutral
+            
             C "*huff* *huff*"
             extend "Nice job on the log. Didn't know you had it in ya'."
             player "Haha, quit flirtin'."
@@ -1374,7 +1377,7 @@ label survive_paracord:
     C "[player]! I See the exit up ahead! *hops with excitement*"
     player "Yes. Beautiful. Now please throw the paracord or so help me!"
 
-    show charlotte idle
+    show charlotte worried
 
     C "Ah! Right!"
     "Charlotte tosses one end of the paracord to you and you tie it securely on your belt. You make a running jump with the available length you have attached to the paracord."
@@ -1389,6 +1392,9 @@ label survive_paracord:
 
     player "*huff* *huff*"
     extend "\nBoy am I glad we made it outta there..."
+
+    show charlotte idle
+
     C "*huff* *huff*"
     extend "\nSmart thinking what your belt. We'd both still be stuck in there if it weren't for that."
     player "Haha, quit flirtin'."
