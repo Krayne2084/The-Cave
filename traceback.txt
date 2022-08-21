@@ -1,37 +1,47 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "renpy/common/00keymap.rpy", line 473, in script
-    python hide:
-  File "renpy/common/00keymap.rpy", line 473, in <module>
-    python hide:
-  File "renpy/common/00keymap.rpy", line 497, in _execute_python_hide
-    renpy.save("_reload-1", "reload save game")
-RecursionError: maximum recursion depth exceeded while pickling an object
+  File "game/script.rpy", line 325, in script
+    C "*Huff*{w=0.8} *Huff*{w=1}\nYeah, let's not do that again. {w}No more crevices."
+OSError: Couldn't find file 'stones-falling-6375.mp3'.
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "renpy/common/00keymap.rpy", line 473, in script
-    python hide:
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\ast.py", line 1131, in execute
-    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\python.py", line 1052, in py_exec_bytecode
-    exec(bytecode, globals, locals)
-  File "renpy/common/00keymap.rpy", line 473, in <module>
-    python hide:
-  File "renpy/common/00keymap.rpy", line 497, in _execute_python_hide
-    renpy.save("_reload-1", "reload save game")
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\loadsave.py", line 403, in save
-    reraise(t, e, tb)
+  File "game/script.rpy", line 325, in script
+    C "*Huff*{w=0.8} *Huff*{w=1}\nYeah, let's not do that again. {w}No more crevices."
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\ast.py", line 921, in execute
+    renpy.exports.say(who, what, *args, **kwargs)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\exports.py", line 1373, in say
+    who(what, *args, **kwargs)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\character.py", line 1266, in __call__
+    self.do_display(who, what, cb_args=self.cb_args, dtt=dtt, **display_args)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\character.py", line 927, in do_display
+    display_say(who,
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\character.py", line 666, in display_say
+    rv = renpy.ui.interact(mouse='say', type=type, roll_forward=roll_forward)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\ui.py", line 299, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\core.py", line 3377, in interact
+    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs) # type: ignore
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\core.py", line 4097, in interact_core
+    renpy.audio.audio.periodic()
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\audio\audio.py", line 1166, in periodic
+    raise_(exc[0], exc[1], exc[2])
   File "/home/tom/ab/renpy-build/tmp/install.linux-x86_64/lib/python3.9/site-packages/future/utils/__init__.py", line 441, in raise_
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\loadsave.py", line 389, in save
-    dump((roots, renpy.game.log), logf)
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\compat\pickle.py", line 103, in dump
-    pickle.dump(o, f, pickle.HIGHEST_PROTOCOL if highest else PROTOCOL)
-RecursionError: maximum recursion depth exceeded while pickling an object
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\audio\audio.py", line 1144, in periodic_thread_main
+    periodic_pass()
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\audio\audio.py", line 1086, in periodic_pass
+    c.periodic()
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\audio\audio.py", line 517, in periodic
+    topf = load(filename)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\audio\audio.py", line 70, in load
+    rv = renpy.loader.load(fn)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\loader.py", line 820, in load
+    raise IOError("Couldn't find file '%s'." % name)
+OSError: Couldn't find file 'stones-falling-6375.mp3'.
 
 Windows-10-10.0.19043 AMD64
 Ren'Py 8.0.2.22081402
 The Cave 0.1.1.1
-Sun Aug 21 12:18:22 2022
+Sat Aug 20 22:27:29 2022
