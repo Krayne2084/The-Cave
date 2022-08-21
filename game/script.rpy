@@ -136,7 +136,7 @@ g "My name is Charlotte! I'm so glad I'm not alone! Unless you're a bad guy! Are
 
 define C = Character("Charlotte", color='#0f0')
 
-b "Whoa easy there, I'm not a bad guy haha"
+b "Whoa easy there, I'm not a bad guy haha."
 b "You're real rapid-fire ain't ya?"
 
 python:
@@ -146,7 +146,7 @@ python:
 
 define player = Character("[name]")
 
-player "My name is [name]. Nice to meet you [C],{w} I'm sure you look lovely through all this darkness haha"
+player "My name is [name]. Nice to meet you [C],{w} I'm sure you look lovely through all this darkness haha."
 
 C "I hope you're not flirting with me."
 player "Haha no sorry. I'm just relieved to not be the only one here and it's nice that we have two heads to work with and I just ramble nonsense to calm nerves. It happens, y'know?"
@@ -156,7 +156,7 @@ C "So what do you make of this?"
 player "Looks like some sort of cave?"
 C "Looks? {w}Haha Mr. Funny Man."
 player "Figure of speech! You know what I mean..."
-C "{cps=4}Mhm...{/cps}{w=1} Anyways, how do we get out? {p}No use sitting here and waiting. Even if anyone knows we're missing I'm not even sure they can reach us wherever we are."
+C "{cps=4}Mhm...{/cps}{w=1} Anyways, how do we get out? {p}No use sitting here and waiting. Even if anyone knows we're missing, I'm not even sure they can reach us wherever we are."
 player "{i}What to do?{/i}"
 
 menu:
@@ -429,7 +429,7 @@ label choice3_cavern:
     else:
         show charlotte idle
         player "Keep that first aid kit close. Who knows if we'll need it down the line."
-        C "No need to tell me twice. Also, don't jinx it! I really wouldn't want to be forced to use    it." 
+        C "No need to tell me twice. Also, don't jinx it! I really wouldn't want to be forced to use it." 
         "Charlotte drops the first aid kit in her bag, zips it closed, and slings it on her back."
 
     "The two of you start to walk back towards the crevice."
@@ -548,7 +548,7 @@ label choice4_climb:
 
         show charlotte idle
         
-        C "Yeah, I walked a bit ahead while waiting for you and snagged this"
+        C "Yeah, I walked a bit ahead while waiting for you and snagged this."
 
         jump choice4a_getknocker
 
@@ -619,7 +619,7 @@ label choice4_climb:
             jump choice4a_getknocker
 
     label choice4a_getknocker:
-        "Charlotte hands you something while she starts collecting the paracord"
+        "Charlotte hands you something while she starts collecting the paracord."
 
         $ paracord.add_to_bag()
 
@@ -631,7 +631,7 @@ label choice4_climb:
         $ knocker.add_to_bag()
         show charlotte happy
 
-        C "Haha alright.\n*Loops it through her belt and buckles her belt up again.*"
+        C "Haha alright.\n*Loops it through her belt and buckles her belt up again*"
 
         show charlotte idle
     
@@ -640,7 +640,7 @@ label choice4_climb:
 label choice4_water:
     player "Let's go across the water, I'm not too confident in my arm strength."
     C "With noodles like those I ain't too surprised."
-    "You both approach the water"
+    "You both approach the water."
 
     if flashlight in bag:
         player "Could you do me a favor and shine up the water for me? I wanna see how deep it is."
@@ -652,7 +652,7 @@ label choice4_water:
     else:
         "[player] sticks his leg into the water all the way and it still doesn't reach the bottom."
         player "Well, {w}wish me luck."
-        "[player] plunges into the water"
+        "[player] plunges into the water."
 
         with hurt_flash
         $ injuries_player = injuries_player + 1
@@ -662,12 +662,12 @@ label choice4_water:
         show charlotte shocked
         
         C "[player]! What happened!?"
-        "Charlotte reaches into the water and grabs [player]'s arm to pull him up but she notices some oddly warm water on the arm she grabbed"
+        "Charlotte reaches into the water and grabs [player]'s arm to pull him up but she notices some oddly warm water on the arm she grabbed."
         player "*surfaces*\n Ah tits, be more gentle will ya!"
         
         show charlotte worried
 
-        "[player] clambers back onto land, cursing in ways Charlotte never heard before"
+        "[player] clambers back onto land, cursing in ways Charlotte never heard before."
         C "What happened? Why's your arm covered in blood!?"
         player "\^\%\#\$\%\$ rock happened that's what! Gashed me bloomin' arm!"
         C "A rock? Where?"
@@ -682,10 +682,10 @@ label choice4_water:
         
         C "You didn't need to get wet. The good news is that the rock seems to be a ledge and I think I can barely see it going all the way over."
         "[player] begins to curse for several minutes."
-        "You both cross the water as you curse up another storm about how blood loss and hypothermia are having a race to see who can kill him first"
+        "You both cross the water as you curse up another storm about how blood loss and hypothermia are having a race to see who can kill him first."
         "By the time you get to the other side, you've calmed down significantly and even your accent seems to have retreated."
         C "So British huh?"
-        player "Sort of, grew up all over Europe but yeah I was born in Britain. Ma and Pa loved road trips before the triplets. Hopefully when the triplets grow up, Ma and Pa find the energy to go on road trips again. "
+        player "Sort of, grew up all over Europe but yeah I was born in Britain. Ma and Pa loved road trips before the triplets. Hopefully when the triplets grow up, Ma and Pa find the energy to go on road trips again."
 
         $ injuries_player = injuries_player + 1
 
@@ -702,7 +702,7 @@ label choice4_water:
     C "First off, this species of moss is mostly under whatever surface it's on and the parts in open air are usually bone dry and therefore not slippery."
     C "Secondly, this moss is super rare and in high demand since it has very strong healing and antibacterial properties."
     player "So that means we don't gotta worry about any more injuries! At least in the long term."
-    C "THIRDLY, a side effect of how it grows means that the surface part, the only part we can even gather right now, is mostly air. So we're gonna need basically everything we see just for a poultice big enough{nw}"
+    C "THIRDLY, a side effect of how it grows means that the surface part, the only part we can even gather right now, is mostly air. So we're gonna need basically everything we see just for a poultice big enough {nw}"
     
     if pockets == False:
         extend " for this knee."
@@ -715,7 +715,7 @@ label choice4_water:
             extend " for anything larger than a scraped knee."
     
     C "Regardless, it's a nice thing to have even if we've barely got one use of it."
-    "You and Charlotte grab all the moss you see, the armload you both got really compacting down to the size of both of your fists"
+    "You and Charlotte grab all the moss you see, the armload you both got really compacting down to the size of both of your fists."
     $ moss.add_to_bag()
     C "Wait till you add water to apply it, it'll shrink to like half that."        
 
@@ -732,24 +732,24 @@ label choice4_water:
 
     label choice4a_C:
         player "I insist, you must've powered through more than enough injuries to be as nonplussed as you are about your knee. I think I should take a page from your book and \"build some character\" myself"
-        "You mix the moss with water and it shrinks even more, barely enough to cover the gash on her knee"
+        "You mix the moss with water and it shrinks even more, barely enough to cover the gash on her knee."
         
         $ moss.use()
         $ injuries_C = injuries_C - 1
         
-        "You both decide to get back to getting out of here"
+        "You both decide to get back to getting out of here."
 
         jump choice4a_done
 
     label choice4a_player:
         player "Yeah I guess you do seem to be doin' fine with that leg."
         player "Me on the other hand.{w} I feel like I'd faint if so much as a breeze touches me arm."
-        "You mix the moss with water and it shrinks even more, barely enough to cover the gash on your arm"
+        "You mix the moss with water and it shrinks even more, barely enough to cover the gash on your arm."
         
         $ moss.use()
         $ injuries_player = injuries_player - 1
         
-        "You both decide to get back to getting out of here"
+        "You both decide to get back to getting out of here."
         
         jump choice4a_done
 
@@ -918,20 +918,20 @@ label choice5_left:
 
     show charlotte idle
 
-    "You and Charlotte stop in your tracks"
+    "You and Charlotte stop in your tracks."
     player "Is that a brazier?"
     C "Either that or a real fancy stalagmite."
     "You start walking towards the brazier. It felt as if it was calling you. Surprisingly, there are hot coals inside it, hot enough to light something on fire."
 
     if pocketknife in bag and statue in bag:
         player "Ah!"
-        "You reach into your bag and grab the wooden statue you were working on and whip the pocket knife out of your pouch. Charlotte watches you and you shave off bits of wood from your carving.The wood shavings start to burn and flames bloom to life."
+        "You reach into the side of your bag and grab the wooden statue you were working on and whip the pocket knife out of your pouch. Charlotte watches you as you shave off bits of wood from your carving.The wood shavings start to burn and flames bloom to life."
         
         show charlotte shocked
         
         C "Whoa [player], there's something emerging from the coal!"
-        "Staring into the flames, you noticed a stone pedestal"
-        C "*Pulls out the stone idol from your bag"
+        "Staring into the flames, you noticed a stone pedestal sprout from the coal."
+        C "*Pulls out the stone idol from your bag*"
         extend "Wild assumption, but do you think this is meant to be on there?."
         player "*stares into the idol's eyes*"
         extend "Be my guest."
