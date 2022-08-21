@@ -104,6 +104,7 @@ python:
     lifeidol = Item("Life Idol", "item totemwhite.png")
 
 scene bg darkness
+play music "audio/Cave 4 Loop.wav"
 
 b "{i}Uugghhh my head..."
 b "{i}Feels like I got hit by a semi..."
@@ -184,10 +185,21 @@ label choice2_wall:
     C "Are you serious? It's pitch black! My ears aren't that good y'know."
     player "You can stay there if you reaalllly want to." 
     player "*pretends to walk away*"
-    extend "\n*step*{w=1}\n*step*{w=1}\n*step*"
+
+    play sound "audio/footstep_gravel_walk_11.wav"
+    extend "\n*step*{w=1}{nw}"
+    queue sound "audio/footstep_gravel_walk_11.wav"
+    extend "\n*step*{w=1}{nw}"
+    queue sound "audio/footstep_gravel_walk_11.wav"
+    extend "\n*step*"
+    
+
     C "NO, wait for me!!" 
     "In a sudden panic, Charlotte blindly runs in the direction where she last heard [player]'s voice."
     "Charlotte, oblivious that her shoelace was undone the whole time, steps on the lace and lifts her other foot. She stumbles and lands on her knees, scraping them on the cold rugged ground. The impact of her fall echoes around the cave walls."
+    
+    play sound "audio/wooden-thud-mono-6244.mp3"
+
     "{size=+20} *THUD*"
     
     $ injuries_C = injuries_C + 1
@@ -304,6 +316,7 @@ label choice3_crevice:
     "You and Charlotte are almost out of the crevice and suddenly, you feel the world shake.{nw}"
     
     show bg at shake_bg_mid
+    play sound "audio/earth-rumble-6953.mp3"
     
     extend "{w=1} It wouldn't have been a big deal, until you hear crackles of stones and the walls behind Charlotte start to break down."
     player "{size=+20}LET'S HURRY AND MOVE IT. DON'T LOOK BACK."
@@ -318,6 +331,7 @@ label choice3_crevice:
     "Both of you shimmy as quick as you can without blowing the lighter's flame out. You finally reach the crevice's exit. You take Charlotte's hand and pull her out before the rubble could get to her."
     
     show bg at bg_mid
+    play sound "audio/stones-falling-6375.mp3" fadeout 1
     
     show charlotte worried
     C "*Huff*{w=0.8} *Huff*{w=1}\nYeah, let's not do that again. {w}No more crevices."
@@ -435,6 +449,8 @@ label choice3_cavern:
     "The two of you start to walk back towards the crevice."
 
     show bg at shake_bg_bottomish
+    play sound "audio/earth-rumble-6953.mp3"
+
     show charlotte shocked
     
     "An unexpected rumble startles you both as you scramble to hug the walls for stability."

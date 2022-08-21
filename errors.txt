@@ -2,17 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 934: end of line expected.
-    C "*Pulls out the stone idol from your bag" "Wild assumption, but do you think this is meant to be on there?."
-                                                ^
-
-File "game/script.rpy", line 935: end of line expected.
-    player "*stares into the idol's eyes*" "Be my guest."
-                                           ^
-
-File "game/script.rpy", line 945: expected statement.
-    "You find a tablet beside the entrance to the temple. You don't know what language it is but it's definitely not English. Despite that, you can both seem to understand what it says subconsciously. "Pay tribute to the 6 elements of creation! Fire and Water in harmony gives us just the heat we need to live, no more no less. Earth and Air in harmony give us the substance and emptiness that gives us form so that we can move. Life and Death in harmony gives us sustainability so that we can return the favour that Mother Nature has given us so it can be given again in the future. Pray that our tributes may be enough for the elements to allow us to channel them through their Idols so that we may tip the scales but never break them.""
-                                                                                                                                                                                                                                                   ^
+File "game/script.rpy", line 322: expected end of line
+    play sound "audio/stones-falling-6375.mp3" with fadeout 2
+                                               ^
 
 Ren'Py Version: Ren'Py 8.0.2.22081402
-Sat Aug 20 20:30:09 2022
+Sat Aug 20 22:28:10 2022
