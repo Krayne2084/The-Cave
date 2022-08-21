@@ -13,7 +13,8 @@ image charlotte idle = "charlotte neutral.png"
 
 #TRANSFORMS
 transform character_mid:
-    yalign 1
+    yanchor 1.0
+    ypos 1.13
     xanchor 0.5
     xpos 0.5
     zoom 0.35
@@ -155,6 +156,7 @@ python:
     Play_Sound = Sound()
 
 scene bg darkness
+"Note on item use: \nItems will automatically used based on the situation, you cannot proactively use items."
 play music "audio/Cave 4 Loop.wav"
 
 b "{i}Uugghhh my head..."
@@ -186,12 +188,13 @@ label choice1_throw:
     "*throws*"
     
     play sound "audio/dropping-rocks-5996.mp3"
+    
     extend "\n*clatters*{nw}"
+    
     stop sound fadeout 1
+    
     extend ""
 
-    
-    
     g "{size=+20}EEEEP{/size}"
     b "A girl?{p}Hello?{w} Sorry if I scared you, I didn't know you were a person."
     b "What's your name?"
@@ -207,7 +210,7 @@ b "Whoa easy there, I'm not a bad guy haha."
 b "You're real rapid-fire ain't ya?"
 
 python:
-    name = renpy.input("My name is:")
+    name = renpy.input("{size=-10}(default: Adam){/size}\nName:")
 
     name = name.strip() or "Adam"
 
@@ -216,7 +219,7 @@ define player = Character("[name]")
 player "My name is [name]. Nice to meet you [C],{w} I'm sure you look lovely through all this darkness haha."
 
 C "I hope you're not flirting with me."
-player "Haha no sorry. I'm just relieved to not be the only one here and it's nice that we have two heads to work with and I just ramble nonsense to calm nerves. It happens, y'know?"
+player "Haha sorry. I'm just relieved to not be the only one here and it's nice that we have two heads to work with and I just ramble nonsense to calm nerves. It happens, y'know?"
 C "Hmmm{cps=2}...{/cps}{w=0.5} Alright then?"
 
 C "So what do you make of this?"
@@ -667,15 +670,15 @@ label choice4_climb:
         C "As long as you follow exactly what I do, you should be fine."
         "Both of you stretch and loosen up a bit before Charlotte takes the lead."
         "She mimes out her visual route and starts to climb, with you tagging behind. As she climbs and grabs onto a pattern of protrusions and pitons, Charlotte details her movements for you to follow suit."
-        "You start to feel your strength wither away, arms and legs both shaking. You grab onto a piton and it snaps, your hand slips and ends up wedged into a crack in the wall.{nw}"
+        "You start to feel your strength wither away, arms and legs both shaking.{w} You grab onto a piton and it snaps,{nw}"
         
         play sound "audio/rock-destroy-6409.mp3" volume 0.4
-        with hurt_flash
-
-        extend "You screech as the pain shoots from your wrist and up into your shoulders."
-        
         show charlotte shocked
+        with hurt_flash
+        $ injuries_player = injuries_player + 1
         
+        extend " your hand slips and ends up wedged into a crack in the wall."
+        "You screech as the pain shoots from your wrist and up into your shoulders."
         C "[player]!"
         "Charlotte shoots up onto the ledge and reaches her arm out."
         
@@ -924,6 +927,9 @@ $Play_Sound.run()
 
 "Charlotte skips ahead and you can't help but chuckle at your new friend."
 C "Hey [player], check this out!"
+
+$ Play_Sound.walk()
+
 "You follow the sound of Charlotte's voice and find her looking up at the top of a wall at some sort of rock shelf."
 "You squint and notice something relatively large laying on it. The object looks as if it could be pulled off with some effort."
 
@@ -1271,41 +1277,14 @@ if lifeidol in bag:
         jump flashback
         
 else:
-    C "We have to get moving then. It's not safe for us here."
-    "Both of you try to shake off the nerves and loosen your muscles to prepare for the boost. Charlotte plants her foot in your hands and just when you are about to launch her forward,  {nw}"
-    
-    if injuries_C > 0:
-        extend "Her knees give out."
-
-    else:
-        if injuries_player > 0:
-            extend "Your arm gives out."
-
-    show charlotte at character_fall_down
-
-    "Charlotte, unable to recover from the weak launch, flails in the air, falls, but manages to grab and hang onto a small ledge 3 feet below. In your efforts to try and save her, you lean forward and offer "
-    
-    if injuries_player < 1:
-        extend "your hand."
-        player "I'm here! Grab my hand!"
-        "Charlotte lifts her legs up against the wall to try and jump for your arm. Unfortunately, she still underestimates her injury and weakly jumps for your hand. She manages to grab it but her weight falling down sends you down the gap with her." 
-        
-    if injuries_player > 0:
-        extend "your good hand."
-        C "No! Go without me! Save yourself!"
-        player "Screw that! I'm not leaving you!"
-        "Charlotte grabs your hand and is able to steady her footing against the gap's wall. You struggle to pull her up with only one hand, and it becomes worse when Charlotte's foot slides down the wall, her hands pulling you down with her."
-        "Your proclamation came true as your collective weight sends you down the gap with her."
-
-    jump basic_death
-
     if injuries_C < 1 and injuries_player < 1:
         if paracord in bag:
             jump survive_paracord
 
         else:
             C "We have to get moving then. Let's stay calm and get it done!"
-            "Both of you shake off the nerves and loosen your muscles to prepare for the boost. Charlotte plants her foot in your hands and with the strength of your legs, you launch her into the air, across the gap, and she rolls onto the other side unscathed. She looks up and sees the exit to the cave."
+            "Both of you shake off the nerves and loosen your muscles to prepare for the boost."
+            "Charlotte plants her foot in your hands and with the strength of your legs, you launch her into the air, across the gap, and she rolls onto the other side unscathed. She looks up and sees the exit to the cave."
             
             show charlotte happy
             
@@ -1348,9 +1327,41 @@ else:
             C "Oh shut up."
             "Charlotte bonks you lightly on the head."
 
-            "As you two celebrate the fact that you are alive, well and breathing, you get a sinking feeling in your chest. You see the now sealed exit of the cave and couldn't help but feel that you missed something of grave importance to you, the cave, and maybe even the rest of the world."
+            "As you two celebrate the fact that you are alive, well and breathing, you get a sinking feeling in your chest."
+            "You see the now sealed exit of the cave and couldn't help but feel that you missed something of grave importance to you, the cave, and maybe even the rest of the world."
             
+            $ dead = False
             jump ending#[Bonded Ending]
+    
+    C "We have to get moving then. It's not safe for us here."
+    "Both of you try to shake off the nerves and loosen your muscles to prepare for the boost. Charlotte plants her foot in your hands and just when you are about to launch her forward,  {nw}"
+    
+    if injuries_C > 0:
+        extend "Her knees give out."
+
+    else:
+        if injuries_player > 0:
+            extend "Your arm gives out."
+
+    show charlotte at character_fall_down
+
+    "Charlotte, unable to recover from the weak launch, flails in the air, falls, but manages to grab and hang onto a small ledge 3 feet below. In your efforts to try and save her, you lean forward and offer {nw}"
+    
+    if injuries_player < 1:
+        extend "your hand."
+        player "I'm here! Grab my hand!"
+        "Charlotte lifts her legs up against the wall to try and jump for your arm. Unfortunately, she still underestimates her injury and weakly jumps for your hand. She manages to grab it but her weight falling down sends you down the gap with her." 
+        
+    if injuries_player > 0:
+        extend "your good hand."
+        C "No! Go without me! Save yourself!"
+        player "Screw that! I'm not leaving you!"
+        "Charlotte grabs your hand and is able to steady her footing against the gap's wall. You struggle to pull her up with only one hand, and it becomes worse when Charlotte's foot slides down the wall, her hands pulling you down with her."
+        "Your proclamation came true as your collective weight sends you down the gap with her."
+
+    jump basic_death
+
+    
 
 label basic_death:
     scene bg darkness
@@ -1364,6 +1375,7 @@ label basic_death:
         player "{i} So it all ends like this huh....{/i}"
         #[Death's Cold Embrace Ending]
     
+    $ dead = True
     jump ending
 
 label survive_paracord:
@@ -1411,8 +1423,10 @@ label survive_paracord:
         "You two glance at each other and realize that you have some researching to do when you get back to camp."
 
     else:
-        "As you two celebrate the fact that you are alive, well, and breathing, you get a sinking feeling in your chest. You see the now sealed exit of the cave and couldn't help but feel that you missed something of grave importance to you, the cave, and maybe even the rest of the world."
+        "As you two celebrate the fact that you are alive, well, and breathing, you get a sinking feeling in your chest."
+        "You see the now sealed exit of the cave and couldn't help but feel that you missed something of grave importance to you, the cave, and maybe even the rest of the world."
     
+    $ dead = False
     jump ending
 
 label flashback:
@@ -1428,12 +1442,30 @@ label flashback:
 
     "As your consciousness starts to fade, you couldn't help but think." 
     player "{i} If only I had listened to you...Charlotte, I'm sorry.{/i}"
+
+    $ dead = True
     #[Secret's Untold Ending]
     jump ending
 
 label ending:
+scene bg darkness
 stop sound fadeout 1
 stop music_overlay fadeout 1
+
+if dead:
+    if lifeidol in bag:
+        "Ending 3 of 4: Secrets Untold"
+    else:
+        "Ending 1 of 4: Death's Cold Embrace"
+
+else:
+    if lifeidol in bag:
+        "Ending 4 of 4: Secrets to Unfold"
+    else:
+        "Ending 2 of 4: Bonded"
+
+"Art by Sharlaine Sevilla \nProgramming by Kenny Saputra"
+"Thanks for Playing!"
 
 return
 
