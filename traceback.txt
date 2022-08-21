@@ -1,15 +1,15 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/script.rpy", line 325, in script
-    C "*Huff*{w=0.8} *Huff*{w=1}\nYeah, let's not do that again. {w}No more crevices."
-OSError: Couldn't find file 'stones-falling-6375.mp3'.
+  File "game/script.rpy", line 137, in script
+    "{cps=15}*rocks shifting*{nw}"
+OSError: Couldn't find file 'audio/rocks-6129.mp3'.
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 325, in script
-    C "*Huff*{w=0.8} *Huff*{w=1}\nYeah, let's not do that again. {w}No more crevices."
+  File "game/script.rpy", line 137, in script
+    "{cps=15}*rocks shifting*{nw}"
   File "D:\RenPy\renpy-7.4.11-sdk\renpy\ast.py", line 921, in execute
     renpy.exports.say(who, what, *args, **kwargs)
   File "D:\RenPy\renpy-7.4.11-sdk\renpy\exports.py", line 1373, in say
@@ -39,9 +39,9 @@ Full traceback:
     rv = renpy.loader.load(fn)
   File "D:\RenPy\renpy-7.4.11-sdk\renpy\loader.py", line 820, in load
     raise IOError("Couldn't find file '%s'." % name)
-OSError: Couldn't find file 'stones-falling-6375.mp3'.
+OSError: Couldn't find file 'audio/rocks-6129.mp3'.
 
 Windows-10-10.0.19043 AMD64
 Ren'Py 8.0.2.22081402
 The Cave 0.1.1.1
-Sat Aug 20 22:27:29 2022
+Sun Aug 21 12:41:13 2022
