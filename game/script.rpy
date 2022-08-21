@@ -45,7 +45,7 @@ transform bg_bottom:
 
 #EFFECTS
 define flashbulb = Fade(0.2, 0.0, 0.8, color='#fff')
-define hurt_flash = Fade(0.2, 0.0, 0.8, color='#f00')    
+define hurt_flash = Fade(0.2, 0.0, 0.8, color='#f00')
 
 #SCREENS
 screen inventory_bar():
@@ -77,29 +77,10 @@ init python:
             bag.append(self)
             renpy.show_screen("inventory_bar")
             renpy.notify("You have obtained " + self.name)
-            renpy.play("audio/ding-36029.mp3", "sound")
 
         def use(self):
             bag.remove(self)
             renpy.notify("You have used " + self.name)
-            renpy.play("audio/foley_zip_zipper_long_05.wav", "sound")
-    
-    class Sound:
-        def __init__(self):
-            self
-
-        def run(self):
-            renpy.play("audio/footstep_gravel_run_13.wav", "sound")
-            renpy.sound.queue("audio/footstep_gravel_run_14.wav", "sound")
-            renpy.sound.queue("audio/footstep_gravel_run_11.wav", "sound")
-            renpy.sound.queue("audio/footstep_gravel_run_13.wav", "sound")
-            renpy.sound.queue("audio/footstep_gravel_run_11.wav", "sound")
-
-        def walk_loop(self):
-            renpy.play("audio/footstep_gravel_walk_11.wav", "sound", relative_volume = 0.3)
-            renpy.sound.queue(["audio/footstep_gravel_walk_10.wav", "audio/footstep_gravel_walk_11.wav"], "sound", loop = True, relative_volume = 0.3)
-
-    renpy.music.register_channel("music_overlay", "music")
 
 #START
 label start:
@@ -122,23 +103,12 @@ python:
     stoneidol = Item("Stone Idol", "item stoneidol.png")
     lifeidol = Item("Life Idol", "item totemwhite.png")
 
-    #SOUNDS
-    Play_Sound = Sound()
-
 scene bg darkness
-play music "audio/Cave 4 Loop.wav"
 
 b "{i}Uugghhh my head..."
 b "{i}Feels like I got hit by a semi..."
 b "{i}Where am I? Why can't I see nothing?"
-
-play sound "audio/rocks-6129.mp3"
-
-"{cps=15}*Rocks Shifting*{nw}"
-
-stop sound fadeout 1
-extend ""
-
+"{cps=15}*rocks Shifting*"
 b "{i}The hell was that?"
 menu:
     "Call out":
@@ -154,15 +124,7 @@ label choice1_call:
 
 label choice1_throw:
     b "{i}If it's some kind of animal or creature, I'd better throw something far away to not draw attention to my position.{/i}"
-    "*Throws*"
-    
-    play sound "audio/dropping-rocks-5996.mp3"
-    extend "\n*Clatters*{nw}"
-    stop sound fadeout 1
-    extend ""
-
-    
-    
+    "*throws*{p}*clatters*"
     g "{size=+20}EEEEP{/size}"
     b "A girl?{p}Hello?{w} Sorry if I scared you, I didn't know you were a person."
     b "What's your name?"
@@ -222,31 +184,17 @@ label choice2_wall:
     C "Are you serious? It's pitch black! My ears aren't that good y'know."
     player "You can stay there if you reaalllly want to." 
     player "*pretends to walk away*"
-
-    play sound "audio/footstep_gravel_walk_11.wav"
-    extend "\n*step*{w=1}{nw}"
-    queue sound "audio/footstep_gravel_walk_11.wav"
-    extend "\n*step*{w=1}{nw}"
-    queue sound "audio/footstep_gravel_walk_11.wav"
-    extend "\n*step*"
-    
-
+    extend "\n*step*{w=1}\n*step*{w=1}\n*step*"
     C "NO, wait for me!!" 
-    
-    $ Play_Sound.run()
-
     "In a sudden panic, Charlotte blindly runs in the direction where she last heard [player]'s voice."
     "Charlotte, oblivious that her shoelace was undone the whole time, steps on the lace and lifts her other foot. She stumbles and lands on her knees, scraping them on the cold rugged ground. The impact of her fall echoes around the cave walls."
-    
-    play sound "audio/wooden-thud-mono-6244.mp3"
-
     "{size=+20} *THUD*"
     
     $ injuries_C = injuries_C + 1
 
     C "Owwww... That was stupid."
     player "Are you okay?? That didn't sound too good."
-    C "*Whimpers* {p}I-it's fine. Just gotta shake it off. It's just a scrape."
+    C "*whimpers* {p}I-it's fine. Just gotta shake it off. It's just a scrape."
     "Charlotte slowly rises and brushes the dust and dirt of her scout uniform."
     player "Are you feelin' up to it? We can rest up a bit first if you're not ready to be walkin' around."
     C "No no, I can do it. Plus, we can prob'ly find a place to wash my cuts. That'd be something to look forward to."
@@ -256,17 +204,13 @@ label get_lighter:
     "Charlotte feels through her pockets and examines the contents of her pouch."
 
     if pockets:
-        extend " She manages to pull out a lighter from the inner pocket of her pouch."
+        extend "She manages to pull out a lighter from the inner pocket of her pouch."
     else:
         player "What's all that rustlin'?"
         C "I'm seeing if I got anything useful before I start wanderin' in this pitch blackness again."
         player "{i}That's a bright idea{cps=4}...{/cps}{p}Good thing I didn't say that aloud."
 
-    "*click*{p}*click*"
-    
-    extend "\n*Fwo{nw}"
-
-    play sound "audio/fire-39294.mp3"
+    "*click*{p}*click*{p}*FWO{nw}"
 
     scene bg cave1_warm at bg_bottomish with flashbulb
     if injuries_C > 0:
@@ -274,18 +218,18 @@ label get_lighter:
     else:
         show charlotte idle at character_right
     
-    extend "osh*"
+    extend "OSH*"
 
     $ lighter.add_to_bag()
     
     show charlotte shocked
     C "OH GOSH!"
-    player "*Flinches* \n What!?! What happened?!"
+    player "*flinches* \n What!?! What happened?!"
     show charlotte worried
     C "O-oh no it's uh.. I just wasn't expecting to see you right away haha."
     player "Are{cps=4}...{/cps}{w=0.25} Are you callin' me ugly?"
     C "No no, not at all" 
-    C "*Coughs*"
+    C "*coughs*"
     show charlotte idle
     C "Anyways, looks like this is all I have, everything else must've fallen out. You got anything useful?"
     "You rummage through your own pouch and pull out an item."
@@ -353,14 +297,13 @@ label choice3_crevice:
     if injuries_C > 0:
         C "I'd be more limber if only SOMEONE didn't pretend to abandon me earlier."
         show charlotte annoyed
-        C "*Glares*"
-        player "*Whistles*\n*Avoids eye contact*"
+        C "*glares*"
+        player "*whistles*\n*avoids eye contact*"
         hide charlotte
 
     "You and Charlotte are almost out of the crevice and suddenly, you feel the world shake.{nw}"
     
     show bg at shake_bg_mid
-    play music_overlay "audio/earth-rumble-6953.mp3"
     
     extend "{w=1} It wouldn't have been a big deal, until you hear crackles of stones and the walls behind Charlotte start to break down."
     player "{size=+20}LET'S HURRY AND MOVE IT. DON'T LOOK BACK."
@@ -375,12 +318,10 @@ label choice3_crevice:
     "Both of you shimmy as quick as you can without blowing the lighter's flame out. You finally reach the crevice's exit. You take Charlotte's hand and pull her out before the rubble could get to her."
     
     show bg at bg_mid
-    stop music_overlay fadeout 3
-    play sound "audio/stones-falling-6375.mp3" volume 0.7
     
     show charlotte worried
-    C "*Huff*{w=0.8} *Huff*{w=1}\nYeah, let's not do that again. {w}No more crevices."
-    player "*Huff*{w=0.8} *Huff*{w=1}\nI second that."
+    C "*huff*{w=0.8} *huff*{w=1}\nYeah, let's not do that again. {w}No more crevices."
+    player "*huff*{w=0.8} *huff*{w=1}\nI second that."
     C "Never thought I'd experience an earthquake like that."
 
     show charlotte idle
@@ -409,7 +350,7 @@ label choice3_crevice:
 
     show charlotte idle
 
-    C "*Shrugs* I try."
+    C "*shrugs* I try."
     "You sling the bag onto your back and Charlotte returns the lighter to you."
     player "Let's keep goin'."
 
@@ -450,7 +391,7 @@ label choice3_cavern:
     C "Let's see, hopefully nothing too important fell out."
     "Charlotte unzips the pockets of her backpack, uncovering essential snacks and water for for the scout's adventuring. You catch a glimpse of a small box in the front pocket of her bag."
     player "What's that?"
-    C "*Pulls out a first aid kit*"
+    C "*pulls out a first aid kit*"
 
     $ firstaidkit.add_to_bag()
 
@@ -459,7 +400,7 @@ label choice3_cavern:
     show bg cave1_lit
     $ flashlight.add_to_bag()
     
-    C "*Pulls out a flashlight*"
+    C "*pulls out a flashlight*"
     
     show charlotte happy
     
@@ -483,7 +424,7 @@ label choice3_cavern:
         $ injuries_C = injuries_C - 1
         $ firstaidkit.use()
 
-        player "*Trying not to gag* {p}Mhm *Thumbs up*"
+        player "*trying not to gag* {p}Mhm *thumbs up*"
 
     else:
         show charlotte idle
@@ -494,8 +435,6 @@ label choice3_cavern:
     "The two of you start to walk back towards the crevice."
 
     show bg at shake_bg_bottomish
-    play sound "audio/earth-rumble-6953.mp3"
-
     show charlotte shocked
     
     "An unexpected rumble startles you both as you scramble to hug the walls for stability."
@@ -521,15 +460,10 @@ label choice3_done:
 hide charlotte
 
 "The path felt like a long one. No unexpected twists and turns, but seemed never ending."
-
-$ Play_Sound.walk_loop()
-
 "You two walked in silence, not because of the exhaustion of it all nor the fear of mundane conversation, but to recollect your thoughts and take the time to breathe."
 "After what seemed like an hour, you finally reach a large open area. It's been a while since you've been in a well lit room and you finally get a glimpse of your surroundings."
 
-stop sound fadeout 1
 scene bg largecavern1 at bg_bottomish with dissolve
-play music_overlay "audio/water-drops-6223.mp3"
 
 "This cavern is significantly larger than the one you passed earlier."
 "The hole in the ceiling conveniently lights the majority of the cavern. In front of you is a pool of water with another area, unfortunately still shadowed in darkness, on the other side with what looks to be a possible exit."
@@ -539,23 +473,23 @@ show charlotte happy at character_right
 C "Oh my gosh, light! {nw}"
 
 if flashlight in bag:
-    extend "*Turns off flashlight* {nw}"
+    extend "*turns off flashlight* {nw}"
 
-extend "Nice to know we're at least near the surface. Maybe someone will be nearby when we reach an exit."
-player "That'd be a convenient coincidence now wouldn't it. *Turns off lighter*" 
+extend "Nice to know we're at least near the surface. Maybe someone will be near by when we reach an exit."
+player "That'd be a convenient coincidence now wouldn't it. *turns off lighter*" 
 "Charlotte scans around the area and notices something up ahead."
 
 show charlotte idle
 
 C "Speaking of people, I think I see something over there."
-player  "{cps=200}*Jumps*{w=0.5}\nW-What!?!{w=0.5} Where?!{w=0.5} A person?!{/cps}"
+player  "{cps=200}*jumps*{w=0.5}\nW-What!?!{w=0.5} Where?!{w=0.5} A person?!{/cps}"
 C "Oh whoops! I meant these."
 "Charlotte walks you to one of the cave walls and points to what looks to be a series of bronze objects protruding from the walls."
 player "Charlotte, please be more specific. I almost had a heart attack thinking you saw some stranger. I welcome help but who knows what type we'll meet in the middle of a cave?"
 player "No offense."
 C "None taken."
 C "But yeah sorry, these pitons are pretty clear evidence of people before us. Maybe longer ago than we thought though."
-player "*Looks up*\nLook, there's a ledge with an opening up there too! Could be a way to an exit. Maybe we can use them to climb up!"
+player "*looks up*\nLook, there's a ledge with an opening up there too! Could be a way to an exit. Maybe we can use them to climb up!"
 C "True, true. There's also that area past the water. We got some options on our hands." 
 
 menu:
@@ -578,18 +512,18 @@ label choice4_climb:
     C "Climbing without equipment."
 
     if paracord in bag:
-        player "*Pulls out paracord from bag*"
+        player "*pulls out paracord from bag*"
         
         $ paracord.use()
 
         extend"\nAlright muscles, you think you can climb all the way up there and then send this down for me?"
-        C "*Stretches*\nI got this."
+        C "*stretches*\nI got this."
 
         if injuries_C > 0:
             show charlotte annoyed
             
             C "Of course, I'd feel more confident if my legs were in better shape but it's not like I have that luxury." 
-            player "*Stares* {p}You're really just gonna guilt trip me now, are you?"
+            player "*stares* {p}You're really just gonna guilt trip me now, are you?"
             
             show charlotte idle
             
@@ -602,12 +536,11 @@ label choice4_climb:
 
         C "Lemme find something to tie this cord to- Oh what's this?"
         player "Hey, don't leave me here!"
-        C "Don't worry. *Throws paracord down* Just went to secure it to something while you climb up. Also! I found something!"
+        C "Don't worry. *throws paracord down* Just went to secure it to something while you climb up. Also! I found something!"
         "You start to climb the paracord."
         player "{i}I should start working out after this... I'm sweatin' up a storm."
         "You reach the top and Charlotte lends you a hand and pulls you up."
 
-        $ paracord.add_to_bag()
         show charlotte happy at character_right
 
         C "Nice to see ya!"
@@ -650,9 +583,9 @@ label choice4_climb:
         "You take the risk and with all the strength you can muster in your legs. You jump and grab Charlotte's arm to hoist you up. You curl up holding your wrist with your other hand."
 
         if firstaidkit in bag:
-            C "H-Hold on! \n*Takes her bag off and pulls out the first aid kit*" 
-            C "*Looks around for a stick* \nDid you feel it break? Or is it a sprain or something."
-            player "Uhhhh... \n*Dazed*"
+            C "H-Hold on! \n*takes her bag off and pulls out the first aid kit*" 
+            C "*looks around for a stick* \nDid you feel it break? Or is it a sprain or something."
+            player "Uhhhh... \n*dazed*"
             C "It's fine. Let's just do this for now just in case."
             "Charlotte takes your hand, places the firm stick on your forearm and wraps your arm with the leftover gauze in the first aid kit."
 
@@ -664,7 +597,7 @@ label choice4_climb:
             C "How're you feeling?"
             player "Better than before I suppose."
             C "Yeah...You kinda passed out? I wasn't sure what to do so I just waited here. Sorry, I kinda ate a good amount of our snacks, but the water's still available haha."
-            player "*Looks at wrist*\nThanks for your help. I owe ya."
+            player "*looks at wrist*\nThanks for your help. I owe ya."
             
             show charlotte happy
             
@@ -673,20 +606,23 @@ label choice4_climb:
             jump choice4a_getknocker
 
         else:
-            C "*Helps you hold your wrist in place*\nIs it broken or do you think its a sprain?? Scale of 1 to 10 how painful?? 10 is the highest."
+            C "*helps you hold your wrist in place*\nIs it broken or do you think its a sprain?? Scale of 1 to 10 how painful?? 10 is the highest."
             player "Uhhh... 7?"
             C "Oh good. Maybe it's not serious. Uh, maybe try to move your wrist around slowly once you feel the pain ease up."
-            player "Sure thing boss. *Flashes a thumbs up and winces*"
+            player "Sure thing boss. *flashes a thumbs up and winces*"
             C "Wait here, I'll scout out the path ahead if there's anything we can use."
             player "Hey, don't go too far. We can go together."
-            C "*Sighs* Alright, Alright. I'll walk in your field of vision."
+            C "*sighs* Alright, Alright. I'll walk in your field of vision."
             "..."
             player "Found anything?"
 
             jump choice4a_getknocker
 
     label choice4a_getknocker:
-        "Charlotte hands you something."
+        "Charlotte hands you something while she starts collecting the paracord."
+
+        $ paracord.add_to_bag()
+
         player "A giant ring?"
         show charlotte idle
         C "Yup. But doesn't it look like one of those fancy door knocker things? Y'know, the ones that make you feel spiffy when you use it to knock instead of your knuckles."
@@ -695,7 +631,7 @@ label choice4_climb:
         $ knocker.add_to_bag()
         show charlotte happy
 
-        C "Haha alright.\n*Loops it through her belt and buckles her belt up again*"
+        C "Haha alright.\n*loops it through her belt and buckles her belt up again*"
 
         show charlotte idle
     
@@ -709,7 +645,7 @@ label choice4_water:
     if flashlight in bag:
         player "Could you do me a favor and shine up the water for me? I wanna see how deep it is."
         "Charlotte lights up the water."
-        C "Hey look, there's an underwater ledge! I think it goes all the way across? *Whistle*\nIt's wide enough to walk normal."
+        C "Hey look, there's an underwater ledge! I think it goes all the way across? *whistle*\nIt's wide enough to walk normal."
         player "Whew, I thought we were gonna have to wade over. Glad only our little piggies need to take the plunge."
         "You both cross the water with only slightly damp feet."
 
@@ -721,7 +657,7 @@ label choice4_water:
         with hurt_flash
         $ injuries_player = injuries_player + 1
 
-        player "{size=+20}CO- {size=-5}*Gurgle*"
+        player "{size=+20}CO- {size=-5}*gurgle*"
         
         show charlotte shocked
         
@@ -785,7 +721,7 @@ label choice4_water:
 
     if injuries_C > 0 and injuries_player > 0:
         player "So you wanna use it? Your gash looks way uncomfortable to walk on."
-        C "Eh, I got used to it. I got used to getting scratched up and powering through when I got these babies. \n*Points at the badges on her sleeves*"
+        C "Eh, I got used to it. I got used to getting scratched up and powering through when I got these babies. \n*points at the badges on her sleeves*"
 
     menu:
         "Heal Charlotte":
@@ -893,14 +829,14 @@ if paracord in bag and knocker in bag:
     "and hands it to you. Tying a secure knot around the ring, you do some test throws with it to ensure the ring doesn't go rogue."
     C "How nifty. Nice to know the gears are still turning in there after who knows how long."
     player "Haha, ye. You're lucky I still got some brain battery left over."
-    "Swinging the paracord, you take your aim. It takes a few attempts but you finally managed to slot the cylindrical object into the ring and yank it down. Charlotte catches the item in her arms while you collect the paracord and knocker"
+    "Swinging the paracord, you take your aim. It takes a few attempts but you finally managed to slot the cylindrical object into the ring and yank it down. Charlotte catches the item in her arms while you collect the paracord and knocker."
     
     $ paracord.add_to_bag()
     extend ""
     $ knocker.add_to_bag()
 
     player "What a catch! What fish did we reel in?"
-    C "Uhhhh. *Shows you a stone idol* {nw}"
+    C "Uhhhh. *shows you a stone idol* {nw}"
     
     $ stoneidol.add_to_bag()
     show charlotte worried
@@ -925,7 +861,7 @@ else:
     if injuries_C > 0:
         player "Wanna try an old fashion boost?"
         C "Yeah...maybe not, my knees are takin' their toll."
-        player "*Looks at Charlotte's relatively fresh skid marks on her knees* Ah shoot, sorry, I completely forgot."
+        player "*looks at Charlotte's relatively fresh skid marks on her knees* Ah shoot, sorry, I completely forgot."
         C "No biggie."
         player "Sorry about that by the way... Dumb move on my part."
         C "Hey, don't worry about it. We're past that now. Anywho, let's just move on. Doesn't look like we'll get to uncover that treasure."
@@ -995,7 +931,7 @@ label choice5_left:
         
         C "Whoa [player], there's something emerging from the coal!"
         "Staring into the flames, you noticed a stone pedestal sprout from the coal."
-        C "*Pulls out the stone idol from your bag*"
+        C "*pulls out the stone idol from your bag*"
         extend "Wild assumption, but do you think this is meant to be on there?."
         player "*stares into the idol's eyes*"
         extend "Be my guest."
@@ -1013,12 +949,12 @@ label choice5_left:
         player "Good point. If red is fire and blue is water then... *thinking* the Death Idol is missing."
         C "That doesn't sound ominous at all. Wonder where it could've gone."
         "A strange feeling has been resonating within you the longer you stay in the temple. It feels like the temple is asking you to take the White Idol away, The Idol of Life. The absence of the Idol of Death has created an imbalance and with it nowhere to be found, the only feasible solution is to take away the Idol of Life as well to restore some semblance of balance. You start to pick up The Idol of Life."
-        C "[player]! Don't touch it! What if something bad happens 'cause we took it? *holds onto the idol with you."
+        C "[player]! Don't touch it! What if something bad happens 'cause we took it? *holds onto the idol with you*"
 
         if Charlotte is injured:
             C "Whoa..."
             player "Whoa what?"
-            C "*removes her hands from the idol then touches the idol again.* When I touch the idol... I don't feel the pain on my knees."
+            C "*removes her hands from the idol then touches the idol again* When I touch the idol... I don't feel the pain on my knees."
             player "So it's healing you?"
             "You look at Charlotte's knee to see if her skin is magical stitching itself together."
             C "Nah, more like it just doesn't make me feel the pain anymore. Like a numbing agent."
@@ -1029,7 +965,7 @@ label choice5_left:
         if player is injured:
             player "Whoa..."
             C "Whoa what?"
-            player "*You remove your hands from the idol then touch the idol again.* When I touch the idol... I don't feel the throbbing pain in my arm."
+            player "*you remove your hands from the idol then touch the idol again* When I touch the idol... I don't feel the throbbing pain in my arm."
             C "So is it healing you or something?"
             "Charlotte looks at your arm as if she was expecting to see a magical beam of light erupt from it."
             player "I don't think so. It feels like it's soothing and easing the pain I feel. Almost like it's ain't even there. Soooo, it must really wanna join us outta here."
@@ -1042,7 +978,7 @@ label choice5_left:
         label choice5_healthy:
             player "You remember what the tablet said right? It needs a counterpart. Something bad'll happen if we don't take it! It's currently imbalance since the Death idol isn't here."
             C "That's just our speculation though, you know we both can't read whatever language that is!"
-            player "*Sighs* Aight look, I wasn't gonna say it since I didn't wanna look crazy but the temple is telling me to bring it with us."
+            player "*sighs* Aight look, I wasn't gonna say it since I didn't wanna look crazy but the temple is telling me to bring it with us."
             "You put The Idol of Life carefully in your bag, it fits nice and snug compared to the large stone idol from before. You are able to zip your bag up."
             C "You do sound crazy, but honestly, this whole day's already been flipped and twisted all over."
             player "Yup, might as well take the chance on this."
@@ -1142,9 +1078,9 @@ if lifeidol in bag:
         C "Ah! Right!"
         "Charlotte tosses one end of the paracord to you and you tie it securely on your belt. You make a running jump with the available length you have attached to the paracord. You manage to grab the ledge safely,hanging by your fingertips miraculously uninjured. You feel a tug on the rope and with its aid, you hoist your arm up on the ledge. Charlotte expertly ties the other end of the cord to a large, heavy rock and runs to you to lift you up. The ceiling starts to crumble behind you, and with no time to untie the paracord, you unbuckle your belt and both of you sprint to the exit."
         "The rubble collapses and blocks the exit, sealing the cave."
-        player "*Huff* *Huff*"
+        player "*huff* *huff*"
         extend "Boy am I glad we made it outta there..."
-        C "*Huff* *Huff*"
+        C "*huff* *huff*"
         extend "Smart thinking with your belt. We'd both still be stuck in there if it weren't for that."
         player "Haha, quit flirtin'."
         C "Oh shut up."
@@ -1201,9 +1137,9 @@ if injuries_C < 1 and injuries_player < 1:
             C "Ah! Right!"
             "Charlotte tosses one end of the paracord to you and you tie it securely on your belt. You make a running jump with the available length you have attached to the paracord. You manage to grab the ledge safely,hanging by your fingertips miraculously uninjured. You feel a tug on the rope and with its aid, you hoist your arm up on the ledge. Charlotte expertly ties the other end of the cord to a large, heavy rock and runs to you to lift you up. The ceiling starts to crumble behind you, and with no time to untie the paracord, you unbuckle your belt and both of you sprint to the exit."
             "The rubble collapses and blocks the exit, sealing the cave."
-            player "*Huff* *Huff*"
+            player "*huff* *huff*"
             extend "Boy am I glad we made it outta there..."
-            C "*Huff* *Huff*"
+            C "*huff* *huff*"
             extend "Smart thinking what your belt. We'd both still be stuck in there if it weren't for that."
             player "Haha, quit flirtin'."
             C "Oh shut up."
@@ -1225,9 +1161,9 @@ if injuries_C < 1 and injuries_player < 1:
             C "Just focus on me and run. I'll grab you when your in my reach!"
             "You quickly but skillfully balance yourself on the log and quickly grab Charlotte's hand to reach the other side and both of you sprint to the exit."
             "The rubble collapses and blocks the exit, sealing the cave."
-            player "*Huff* *Huff*"
+            player "*huff* *huff*"
             extend "Boy am I glad we made it outta there..."
-            C "*Huff* *Huff*"
+            C "*huff* *huff*"
             extend "Smart thinking what your belt. We'd both still be stuck in there if it weren't for that."
             player "Haha, quit flirtin'."
             C "Oh shut up."
