@@ -931,6 +931,63 @@ label choice5_left:
         
         C "Whoa [player], there's something emerging from the coal!"
         "Staring into the flames, you noticed a stone pedestal"
+        C "*Pulls out the stone idol from your bag"
+        extend "Wild assumption, but do you think this is meant to be on there?."
+        player "*stares into the idol's eyes*"
+        extend "Be my guest."
+        "Charlotte places the idol carefully onto the pedestal, careful not to burn arms in the flames. The idol starts to heat up and...glow?"
+        C "Whaa?? How is it glowing?"
+        "The ground starts to rumble as you hear something open in the distance. You whip your head around and see a stone door opening on the cave wall, debris falling as the doors separates from the wall."
+        player "Uh excuse me? Was that door always there??"
+        C "What in the world is goin' on around here."
+        player "You're guess is as good as mine."
+        "The two walk into the open door and find footprints in the otherwise undisturbed dust leading into a temple where you find an array of 5 idols similar to the stone idol you used to get into this place, but of varying colours: Red, Blue, Yellow, Green, and White. Yellow and Green, are placed opposite each other as are Red and Blue, but there seems to be an empty space where something used to be opposite the White Idol. Upon a second look, you notice that the footprints lead right to that now empty spot."
+        player "Despite feelin' a bit creeped out, you gotta admit this temple looks amazing."
+        C "Pretty well kept too. You'd think it was sealed for centuries if not for these footprints huh."
+        "You find a tablet beside the entrance to the temple. You don't know what language it is but it's definitely not English. Despite that, you can both seem to understand what it says subconsciously. 'Pay tribute to the 6 elements of creation! Fire and Water in harmony gives us just the heat we need to live, no more no less. Earth and Air in harmony give us the substance and emptiness that gives us form so that we can move. Life and Death in harmony gives us sustainability so that we can return the favour that Mother Nature has given us so it can be given again in the future. Pray that our tributes may be enough for the elements to allow us to channel them through their Idols so that we may tip the scales but never break them.'"
+        C "Wait. There's supposed to be 6."
+        player "Good point. If red is fire and blue is water then... *thinking* the Death Idol is missing."
+        C "That doesn't sound ominous at all. Wonder where it could've gone."
+        "A strange feeling has been resonating within you the longer you stay in the temple. It feels like the temple is asking you to take the White Idol away, The Idol of Life. The absence of the Idol of Death has created an imbalance and with it nowhere to be found, the only feasible solution is to take away the Idol of Life as well to restore some semblance of balance. You start to pick up The Idol of Life."
+        C "[player]! Don't touch it! What if something bad happens 'cause we took it? *holds onto the idol with you."
+
+        if Charlotte is injured:
+            C "Whoa..."
+            player "Whoa what?"
+            C "*removes her hands from the idol then touches the idol again.* When I touch the idol... I don't feel the pain on my knees."
+            player "So it's healing you?"
+            "You look at Charlotte's knee to see if her skin is magical stitching itself together."
+            C "Nah, more like it just doesn't make me feel the pain anymore. Like a numbing agent."
+            player "So what you're sayin' is that we can bring it along with us, yeah?"
+            C "Are you serious?"
+            jump choice5_healthy
+
+        if player is injured:
+            player "Whoa..."
+            C "Whoa what?"
+            player "*You remove your hands from the idol then touch the idol again.* When I touch the idol... I don't feel the throbbing pain in my arm."
+            C "So is it healing you or something?"
+            "Charlotte looks at your arm as if she was expecting to see a magical beam of light erupt from it."
+            player "I don't think so. It feels like it's soothing and easing the pain I feel. Almost like it's ain't even there. Soooo, it must really wanna join us outta here."
+            C "Are you serious?"
+            jump choice5_healthy
+
+        if injuries_C < 1 and injuries_player < 1:
+            jump choice5_healthy
+        
+        label choice5_healthy:
+            player "You remember what the tablet said right? It needs a counterpart. Something bad'll happen if we don't take it! It's currently imbalance since the Death idol isn't here."
+            C "That's just our speculation though, you know we both can't read whatever language that is!"
+            player "*Sighs* Aight look, I wasn't gonna say it since I didn't wanna look crazy but the temple is telling me to bring it with us."
+            "You put The Idol of Life carefully in your bag, it fits nice and snug compared to the large stone idol from before. You are able to zip your bag up."
+            C "You do sound crazy, but honestly, this whole day's already been flipped and twisted all over."
+            player "Yup, might as well take the chance on this."
+            "The both of you look around the area to see if there's any path for you to progress."
+            C "Looks like we gotta backtrack."
+            player "At least we got the chance to pass by this place."
+            "You walk away, look back at the temple, and with the idol you your possession, you head back to retrace your steps and check out the other path."
+            jump choice5_right
+
 
         show charlotte idle
 
