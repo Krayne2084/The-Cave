@@ -230,7 +230,7 @@ label choice2_pockets:
     $ pockets = True
     player "*pats pockets*{p}*rummages through waist pouch*"
     C "Watcha doin' there bud?"
-    player "Checkin' if I got anythin' useful on me"
+    player "Checkin' if I got anythin' useful on me."
     C "Ah! Good call. {size=-18}Why didn't I think of that?{/size}"
 
     jump get_lighter
@@ -278,7 +278,7 @@ label get_lighter:
     "Charlotte feels through her pockets and examines the contents of her pouch."
 
     if pockets:
-        extend "She manages to pull out a lighter from the inner pocket of her pouch."
+        extend " She manages to pull out a lighter from the inner pocket of her pouch."
     else:
         player "What's all that rustlin'?"
         C "I'm seeing if I got anything useful before I start wanderin' in this pitch blackness again."
@@ -306,7 +306,7 @@ label get_lighter:
     show charlotte worried
     C "O-oh no it's uh.. I just wasn't expecting to see you right away haha."
     player "Are{cps=4}...{/cps}{w=0.25} Are you callin' me ugly?"
-    C "No no, not at all" 
+    C "No no, not at all." 
     C "*coughs*"
     show charlotte idle
     C "Anyways, looks like this is all I have, everything else must've fallen out. You got anything useful?"
@@ -351,7 +351,7 @@ menu:
 
 label choice3_crevice:
     player "Like you said, worth the shot so let's try it!"
-    "The two of you walk up to the crevice and Charlotte gives you her lighter and gestures to the crevice"
+    "The two of you walk up to the crevice and Charlotte gives you her lighter and gestures to the crevice."
     C "Lead the way~"
 
     hide charlotte
@@ -605,7 +605,7 @@ label choice4_climb:
         
         $ paracord.use()
 
-        extend"\nAlright muscles, you think you can climb all the way up there and then send this down for me?"
+        extend"\nAlright Muscles, you think you can climb all the way up there and then send this down for me?"
         C "*stretches*\nI got this."
 
         if injuries_C > 0:
@@ -898,12 +898,12 @@ $Play_Sound.run()
 "Charlotte skips ahead and you can't help but chuckle at your new friend."
 C "Hey [player], check this out!"
 "You follow the sound of Charlotte's voice and find her looking up at the top of a wall at some sort of rock shelf."
-"You squint and notice something relatively large balancing laying on it. The object looks as if it could be pulled off with some effort."
+"You squint and notice something relatively large laying on it. The object looks as if it could be pulled off with some effort."
 
 show charlotte idle at character_right
 
 player "Think it's worth it?"
-C "Anything's worth it if it helps us out. Of course if we don't injure ourselves in the process."
+C "Anything's worth it if it helps us out. Of course, if we don't injure ourselves in the process."
 
 if paracord in bag and knocker in bag:
     "You look at Charlotte's belt, at the large knocker ring you found recently."
@@ -1256,10 +1256,16 @@ if injuries_C < 1 and injuries_player < 1:
 
             C "We have to get moving then. Let's stay calm and get it done!"
             "Charlotte takes your bag and both of you shake off the nerves and loosen your muscles to prepare for the boost. Charlotte plants her foot in your hands and with the strength of your legs, you launch her into the air, across the gap, and she rolls onto the other side unscathed. She looks up and sees the exit to the cave."
+           
+            show charlotte happy
+            
             C "[player]! I See the exit up ahead! *hops with excitement*"
             player "Yes. Beautiful. Now please throw the paracord or so help me!"
+            
+            show charlotte worried
+            
             C "Ah! Right!"
-            "Charlotte tosses one end of the paracord to you and you tie it securely on your belt. You make a running jump with the available length you have attached to the paracord. You manage to grab the ledge safely,hanging by your fingertips miraculously uninjured. You feel a tug on the rope and with its aid, you hoist your arm up on the ledge. Charlotte expertly ties the other end of the cord to a large, heavy rock and runs to you to lift you up. The ceiling starts to crumble behind you, and with no time to untie the paracord, you unbuckle your belt and both of you sprint to the exit."
+            "Charlotte tosses one end of the paracord to you and you tie it securely on your belt. You make a running jump with the available length you have attached to the paracord. You manage to grab the ledge safely, hanging by your fingertips miraculously uninjured. You feel a tug on the rope and with its aid, you hoist your arm up on the ledge. Charlotte expertly ties the other end of the cord to a large, heavy rock and runs to you to lift you up. The ceiling starts to crumble behind you, and with no time to untie the paracord, you unbuckle your belt and both of you sprint to the exit."
             "The rubble collapses and blocks the exit, sealing the cave."
 
             play music_overlay "audio/birds-19624.mp3" fadeout 3
@@ -1267,9 +1273,12 @@ if injuries_C < 1 and injuries_player < 1:
             show bg outside at bg_topish with dissolve
 
             player "*huff* *huff*"
-            extend "Boy am I glad we made it outta there..."
+            extend " Boy am I glad we made it outta there..."
+            
+            show charlotte neutral
+            
             C "*huff* *huff*"
-            extend "Smart thinking what your belt. We'd both still be stuck in there if it weren't for that."
+            extend " Smart thinking what your belt. We'd both still be stuck in there if it weren't for that."
             player "Haha, quit flirtin'."
             C "Oh shut up."
             "Charlotte bonks you lightly on the head."
