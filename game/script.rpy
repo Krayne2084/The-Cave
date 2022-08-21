@@ -223,7 +223,7 @@ menu:
     "Check your Pockets":
         jump choice2_pockets
     
-    "Find the cave wall":
+    "Find the Cave Wall":
         jump choice2_wall
 
 label choice2_pockets:
@@ -343,10 +343,10 @@ extend "Oh hey look over there!"
 C "It looks big enough for both of us to shimmy through! Maybe that's where the air current is coming from. Worth a shot right?"
 
 menu:
-    "Shimmy through the crevice":
+    "Shimmy through the Crevice":
         jump choice3_crevice
 
-    "Explore the area":
+    "Explore the Area":
         jump choice3_cavern
 
 label choice3_crevice:
@@ -470,7 +470,7 @@ label choice3_cavern:
     show charlotte idle at character_right
 
     C "Let's see, hopefully nothing too important fell out."
-    "Charlotte unzips the pockets of her backpack, uncovering essential snacks and water for for the scout's adventuring. You catch a glimpse of a small box in the front pocket of her bag."
+    "Charlotte unzips the pockets of her backpack, uncovering essential snacks and water for the scout's adventuring. You catch a glimpse of a small box in the front pocket of her bag."
     player "What's that?"
     C "*pulls out a first aid kit*"
 
@@ -533,7 +533,7 @@ label choice3_cavern:
     show charlotte idle
 
     extend "\nHaha, you know what they say. When one door closes, another opens and well, something did open."
-    "You follow the direction of her flashlight and see a broken wall on the other side of the cavern. You walk towards and and see a path to who knows where. You look at each other."
+    "You follow the direction of her flashlight and see a broken wall on the other side of the cavern. You walk towards it and see a path to who knows where. You look at each other."
     C "Any other options?"
     player "Nope."
 
@@ -815,11 +815,11 @@ label choice4_water:
         "Heal Charlotte":
             jump choice4a_C
 
-        "Heal yourself":
+        "Heal Yourself":
             jump choice4a_player
 
     label choice4a_C:
-        player "I insist, you must've powered through more than enough injuries to be as nonplussed as you are about your knee. I think I should take a page from your book and \"build some character\" myself"
+        player "I insist, you must've powered through more than enough injuries to be as nonplussed as you are about your knee. I think I should take a page from your book and \"build some character\" myself."
         "You mix the moss with water and it shrinks even more, barely enough to cover the gash on her knee."
         
         $ moss.use()
@@ -1297,8 +1297,14 @@ if injuries_C < 1 and injuries_player < 1:
 
             C "We have to get moving then. Let's stay calm and get it done!"
             "Both of you shake off the nerves and loosen your muscles to prepare for the boost. Charlotte plants her foot in your hands and with the strength of your legs, you launch her into the air, across the gap, and she rolls onto the other side unscathed. She looks up and sees the exit to the cave."
+            
+            show charlotte happy
+            
             C "[player]! I See the exit up ahead! *hops with excitement*"
             player "Yes. Beautiful. Now please try and find something to help me get across!"
+            
+            show charlotte worried
+            
             C "Ah! Right!"
             "Charlotte frantically looks around the cave on her side. She looks at you and runs to the exit." 
 
@@ -1313,7 +1319,7 @@ if injuries_C < 1 and injuries_player < 1:
             show charlotte at character_right
             play sound "audio/wooden-thud-mono-6244.mp3"
 
-            "She lays to act as a bridge and steps on one end. She reachers her arm out."
+            "She lays the log to act as a bridge and steps on one end. She reaches her arm out."
             C "Just focus on me and run. I'll grab you when you're in reach!"
             "You quickly but skillfully balance yourself on the log and quickly grab Charlotte's hand to reach the other side and both of you sprint to the exit."
             
@@ -1323,9 +1329,12 @@ if injuries_C < 1 and injuries_player < 1:
             
             "The rubble collapses and blocks the exit, sealing the cave."
             player "*huff* *huff*"
-            extend "Boy am I glad we made it outta there..."
+            extend " Boy am I glad we made it outta there..."
+            
+            show charlotte neutral
+            
             C "*huff* *huff*"
-            extend "Smart thinking what your belt. We'd both still be stuck in there if it weren't for that."
+            extend " Smart thinking what your belt. We'd both still be stuck in there if it weren't for that."
             player "Haha, quit flirtin'."
             C "Oh shut up."
             "Charlotte bonks you lightly on the head."
