@@ -24,13 +24,17 @@ transform character_shake_mid:
     xanchor 0.5
     linear 0.05 xpos 0.49
     linear 0.05 xpos 0.5
-
     repeat
 
 transform character_fall_down:
     zoom 0.35
     xanchor 0.5
     linear 0.05 ypos 2.0
+
+transform character_run_right:
+    zoom 0.35
+    xanchor 0.5
+    linear 0.1 xpos 2.0
 
 transform shake_bg_mid:
     linear 0.05 ypos 0.52
@@ -156,7 +160,7 @@ python:
     Play_Sound = Sound()
 
 scene bg darkness
-"Note on item use: \nItems will automatically used based on the situation, you cannot proactively use items."
+"Note on item use: \nItems will automatically be used based on the situation, you cannot proactively use items."
 play music "audio/Cave 4 Loop.wav"
 
 b "{i}Uugghhh my head..."
@@ -279,7 +283,7 @@ label choice2_wall:
     C "Owwww...{w} That was stupid."
     player "Are you okay??{w} That didn't sound too good."
     C "*whimpers* {p}I-it's fine.{w} Just gotta shake it off.{w} It's just a scrape."
-    "Charlotte slowly rises and brushes the dust and dirt of her scout uniform."
+    "Charlotte slowly rises and brushes the dust and dirt off her scout uniform."
     player "Are you feelin' up to it?{w} We can rest up a bit first if you're not ready to be walkin' around."
     C "No no, I can do it.{w} Plus, we can prob'ly find a place to wash my cuts.{w} That'd be something to look forward to."
     jump get_lighter
@@ -756,12 +760,12 @@ label choice4_water:
         player "Well, {w}wish me luck."
         "[player] plunges into the water."
 
-        with hurt_flash
+        play sound "audio/rock-destroy-6409.mp3" volume 0.5
         $ injuries_player = injuries_player + 1
+        show charlotte shocked
+        with hurt_flash
 
         player "{size=+20}CO- {size=-5}*gurgle*"
-        
-        show charlotte shocked
         
         C "[player]! What happened!?"
         "Charlotte reaches into the water and grabs [player]'s arm to pull him up but she notices some oddly warm water on the arm she grabbed."
@@ -791,7 +795,7 @@ label choice4_water:
 
         $ injuries_player = injuries_player + 1
 
-    "As you reach the end of the pool, you notice the ground getting{cps=4}...{/cps}{w=0.3} fuzzy"
+    "As you reach the end of the pool, you notice the ground getting{cps=4}...{/cps}{w=0.3} fuzzy."
     player "Great, another slippin' hazard. {w}At least this one's hard to miss."
     
     show charlotte thinking
@@ -804,7 +808,7 @@ label choice4_water:
     C "First off, this species of moss is mostly under whatever surface it's on and the parts in open air are usually bone dry and therefore not slippery."
     C "Secondly, this moss is super rare and in high demand since it has very strong healing and antibacterial properties."
     player "So that means we don't gotta worry about any more injuries! At least in the long term."
-    C "THIRDLY, a side effect of how it grows means that the surface part, the only part we can even gather right now, is mostly air.{w} So we're gonna need basically everything we see just for a poultice big enough {nw}"
+    C "THIRDLY, a side effect of how it grows means that the surface part, the only part we can even gather right now, is mostly air.{w} So we're gonna need basically everything we see just for a poultice big enough{nw}"
     
     if pockets == False:
         extend " for this knee."
@@ -922,7 +926,7 @@ show charlotte idle
 
 extend "Anyway, the moment's gone now so you lost your chance to be sentimental."
 
-hide charlotte
+show charlotte at character_run_right
 $Play_Sound.run()
 
 "Charlotte skips ahead and you can't help but chuckle at your new friend."

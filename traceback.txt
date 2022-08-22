@@ -1,64 +1,67 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
-While loading <renpy.display.im.Image object ('gui/cover.png') at 0x00000000053e9700>:
-OSError: Couldn't find file 'gui/cover.png'.
+While running game code:
+  File "renpy/common/00action_file.rpy", line 383, in __call__
+    renpy.save(fn, extra_info=save_name)
+RecursionError: maximum recursion depth exceeded while pickling an object
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "renpy/common/_layout/screen_main_menu.rpym", line 28, in script
-    python hide:
+  File "renpy/common/_layout/screen_load_save.rpym", line 35, in script
+    $ ui.interact()
   File "D:\RenPy\renpy-7.4.11-sdk\renpy\ast.py", line 1131, in execute
     renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
   File "D:\RenPy\renpy-7.4.11-sdk\renpy\python.py", line 1052, in py_exec_bytecode
     exec(bytecode, globals, locals)
-  File "renpy/common/_layout/screen_main_menu.rpym", line 28, in <module>
-    python hide:
-  File "renpy/common/_layout/screen_main_menu.rpym", line 35, in _execute_python_hide
-    ui.interact()
+  File "renpy/common/_layout/screen_load_save.rpym", line 35, in <module>
+    $ ui.interact()
   File "D:\RenPy\renpy-7.4.11-sdk\renpy\ui.py", line 299, in interact
     rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
   File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\core.py", line 3377, in interact
     repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs) # type: ignore
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\core.py", line 3906, in interact_core
-    self.draw_screen(root_widget, fullscreen_video, (not fullscreen_video) or video_frame_drawn)
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\core.py", line 2602, in draw_screen
-    surftree = renpy.display.render.render_screen(
-  File "render.pyx", line 495, in renpy.display.render.render_screen
-  File "render.pyx", line 266, in renpy.display.render.render
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 884, in render
-    surf = render(child, width, height, cst, cat)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 266, in renpy.display.render.render
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 884, in render
-    surf = render(child, width, height, cst, cat)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 266, in renpy.display.render.render
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 884, in render
-    surf = render(child, width, height, cst, cat)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 266, in renpy.display.render.render
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\screen.py", line 704, in render
-    child = renpy.display.render.render(self.child, w, h, st, at)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 266, in renpy.display.render.render
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 884, in render
-    surf = render(child, width, height, cst, cat)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 266, in renpy.display.render.render
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\im.py", line 627, in render
-    return cache.get(self, render=True)
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\im.py", line 295, in get
-    surf = image.load()
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\im.py", line 720, in load
-    raise e
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\im.py", line 685, in load
-    filelike = renpy.loader.load(self.filename)
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\loader.py", line 820, in load
-    raise IOError("Couldn't find file '%s'." % name)
-OSError: Couldn't find file 'gui/cover.png'.
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\core.py", line 4252, in interact_core
+    rv = root_widget.event(ev, x, y, 0)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 1175, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\transition.py", line 53, in event
+    return self.new_widget.event(ev, x, y, st) # E1101
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 1175, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 1175, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\screen.py", line 743, in event
+    rv = self.child.event(ev, x, y, st)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 1175, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 1399, in event
+    rv = super(Window, self).event(ev, x, y, st)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 279, in event
+    rv = d.event(ev, x - xo, y - yo, st)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 1175, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 1175, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\behavior.py", line 1070, in event
+    return handle_click(self.clicked)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\behavior.py", line 1005, in handle_click
+    rv = run(action)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\behavior.py", line 322, in run
+    new_rv = run(i, *args, **kwargs)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\behavior.py", line 329, in run
+    return action(*args, **kwargs)
+  File "renpy/common/00action_file.rpy", line 383, in __call__
+    renpy.save(fn, extra_info=save_name)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\loadsave.py", line 403, in save
+    reraise(t, e, tb)
+  File "/home/tom/ab/renpy-build/tmp/install.linux-x86_64/lib/python3.9/site-packages/future/utils/__init__.py", line 441, in raise_
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\loadsave.py", line 389, in save
+    dump((roots, renpy.game.log), logf)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\compat\pickle.py", line 103, in dump
+    pickle.dump(o, f, pickle.HIGHEST_PROTOCOL if highest else PROTOCOL)
+RecursionError: maximum recursion depth exceeded while pickling an object
 
 Windows-10-10.0.19043 AMD64
 Ren'Py 8.0.2.22081402
-The Cave 1.0.R
-Sun Aug 21 21:37:04 2022
+The Cave 1.0
+Sun Aug 21 22:07:18 2022

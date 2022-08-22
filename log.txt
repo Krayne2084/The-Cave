@@ -1,4 +1,4 @@
-Sun Aug 21 21:44:58 2022
+Sun Aug 21 21:50:31 2022
 Windows-10-10.0.19043
 Ren'Py 8.0.2.22081402
  
@@ -7,14 +7,15 @@ Bootstrap to the start of init.init took 0.04s
 Early init took 0.00s
 Loader init took 0.02s
 Loading error handling took 0.02s
-Loading script took 0.16s
-Loading save slot metadata. took 0.06s
+Loading script took 0.13s
+Loading save slot metadata. took 0.02s
 Loading persistent took 0.00s
 Faled to initialize steam: FileNotFoundError("Could not find module 'D:\\RenPy\\renpy-7.4.11-sdk\\lib\\py3-windows-x86_64\\steam_api64.dll' (or one of its dependencies). Try using the full path with constructor syntax.")
 Running init code took 0.04s
 Loading analysis data took 0.01s
 Analyze and compile ATL took 0.00s
 Index archives took 0.00s
+Backing up script files to 'C:\\Users\\Kenny Saputra\\AppData\\Roaming/RenPy/backups\\The-Cave':
 Dump and make backups. took 0.04s
 Cleaning cache took 0.00s
 Making clean stores took 0.00s
@@ -22,19 +23,802 @@ Initial gc. took 0.01s
 DPI scale factor: 1.000000
 nvdrs: Loaded, about to disable thread optimizations.
 nvdrs: Disabled thread optimizations.
-Creating interface object took 0.17s
+Creating interface object took 0.16s
 Cleaning stores took 0.00s
 Init translation took 0.02s
 Build styles took 0.00s
-Load screen analysis took 0.02s
-Analyze screens took 0.00s
-Save screen analysis took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.01s
 Prepare screens took 0.04s
 Save pyanalysis. took 0.00s
 Save bytecode. took 0.02s
 Running _start took 0.00s
 Performance test:
 Interface start took 0.11s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: "b'NVIDIA Corporation'"
+Renderer: b'NVIDIA GeForce RTX 2070 SUPER/PCIe/SSE2'
+Version: b'4.6.0 NVIDIA 472.12'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1214, 683) drawable=(1214, 683)
+Maximum texture size: 4096x4096
+Resetting cache.
+Bootstrap to the start of init.init took 425.82s
+Early init took 0.00s
+Loader init took 0.01s
+Loading error handling took 0.02s
+Loading script took 0.09s
+Loading save slot metadata. took 0.02s
+Loading persistent took 0.00s
+Faled to initialize steam: FileNotFoundError("Could not find module 'D:\\RenPy\\renpy-7.4.11-sdk\\lib\\py3-windows-x86_64\\steam_api64.dll' (or one of its dependencies). Try using the full path with constructor syntax.")
+Running init code took 0.05s
+Loading analysis data took 0.01s
+Analyze and compile ATL took 0.00s
+Index archives took 0.00s
+Dump and make backups. took 0.04s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.02s
+DPI scale factor: 1.000000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.16s
+Cleaning stores took 0.00s
+Init translation took 0.03s
+Build styles took 0.00s
+Load screen analysis took 0.02s
+Analyze screens took 0.00s
+Save screen analysis took 0.00s
+Prepare screens took 0.04s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.00s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.03s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: "b'NVIDIA Corporation'"
+Renderer: b'NVIDIA GeForce RTX 2070 SUPER/PCIe/SSE2'
+Version: b'4.6.0 NVIDIA 472.12'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1214, 683) drawable=(1214, 683)
+Maximum texture size: 4096x4096
+Resetting cache.
+Bootstrap to the start of init.init took 486.25s
+Early init took 0.00s
+Loader init took 0.01s
+Loading error handling took 0.02s
+Loading script took 0.23s
+Loading save slot metadata. took 0.02s
+Loading persistent took 0.00s
+Faled to initialize steam: FileNotFoundError("Could not find module 'D:\\RenPy\\renpy-7.4.11-sdk\\lib\\py3-windows-x86_64\\steam_api64.dll' (or one of its dependencies). Try using the full path with constructor syntax.")
+Running init code took 0.05s
+Loading analysis data took 0.01s
+Analyze and compile ATL took 0.00s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\Kenny Saputra\\AppData\\Roaming/RenPy/backups\\The-Cave':
+Dump and make backups. took 0.04s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.03s
+DPI scale factor: 1.000000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.16s
+Cleaning stores took 0.00s
+Init translation took 0.03s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.01s
+Prepare screens took 0.04s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.02s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.03s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: "b'NVIDIA Corporation'"
+Renderer: b'NVIDIA GeForce RTX 2070 SUPER/PCIe/SSE2'
+Version: b'4.6.0 NVIDIA 472.12'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1214, 683) drawable=(1214, 683)
+Maximum texture size: 4096x4096
+
+Full traceback:
+  File "game/script.rpy", line 763, in script
+    player "{size=+20}CO- {size=-5}*gurgle*"
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\ast.py", line 921, in execute
+    renpy.exports.say(who, what, *args, **kwargs)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\exports.py", line 1373, in say
+    who(what, *args, **kwargs)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\character.py", line 1266, in __call__
+    self.do_display(who, what, cb_args=self.cb_args, dtt=dtt, **display_args)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\character.py", line 927, in do_display
+    display_say(who,
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\character.py", line 666, in display_say
+    rv = renpy.ui.interact(mouse='say', type=type, roll_forward=roll_forward)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\ui.py", line 299, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\core.py", line 3377, in interact
+    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs) # type: ignore
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\core.py", line 4097, in interact_core
+    renpy.audio.audio.periodic()
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\audio\audio.py", line 1166, in periodic
+    raise_(exc[0], exc[1], exc[2])
+  File "/home/tom/ab/renpy-build/tmp/install.linux-x86_64/lib/python3.9/site-packages/future/utils/__init__.py", line 441, in raise_
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\audio\audio.py", line 1144, in periodic_thread_main
+    periodic_pass()
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\audio\audio.py", line 1086, in periodic_pass
+    c.periodic()
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\audio\audio.py", line 517, in periodic
+    topf = load(filename)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\audio\audio.py", line 70, in load
+    rv = renpy.loader.load(fn)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\loader.py", line 820, in load
+    raise IOError("Couldn't find file '%s'." % name)
+OSError: Couldn't find file 'rock-destroy-6409.mp3'.
+
+While running game code:
+  File "game/script.rpy", line 763, in script
+    player "{size=+20}CO- {size=-5}*gurgle*"
+OSError: Couldn't find file 'rock-destroy-6409.mp3'.
+Resetting cache.
+Bootstrap to the start of init.init took 491.12s
+Early init took 0.00s
+Loader init took 0.02s
+Loading error handling took 0.02s
+Loading script took 0.21s
+Loading save slot metadata. took 0.02s
+Loading persistent took 0.00s
+Faled to initialize steam: FileNotFoundError("Could not find module 'D:\\RenPy\\renpy-7.4.11-sdk\\lib\\py3-windows-x86_64\\steam_api64.dll' (or one of its dependencies). Try using the full path with constructor syntax.")
+Running init code took 0.05s
+Loading analysis data took 0.01s
+Analyze and compile ATL took 0.00s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\Kenny Saputra\\AppData\\Roaming/RenPy/backups\\The-Cave':
+Dump and make backups. took 0.04s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.03s
+DPI scale factor: 1.000000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.17s
+Cleaning stores took 0.00s
+Init translation took 0.03s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.01s
+Prepare screens took 0.04s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.01s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.03s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: "b'NVIDIA Corporation'"
+Renderer: b'NVIDIA GeForce RTX 2070 SUPER/PCIe/SSE2'
+Version: b'4.6.0 NVIDIA 472.12'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1214, 683) drawable=(1214, 683)
+Maximum texture size: 4096x4096
+Resetting cache.
+Bootstrap to the start of init.init took 505.08s
+Early init took 0.00s
+Loader init took 0.02s
+Loading error handling took 0.01s
+Loading script took 0.20s
+Loading save slot metadata. took 0.02s
+Loading persistent took 0.00s
+Faled to initialize steam: FileNotFoundError("Could not find module 'D:\\RenPy\\renpy-7.4.11-sdk\\lib\\py3-windows-x86_64\\steam_api64.dll' (or one of its dependencies). Try using the full path with constructor syntax.")
+Running init code took 0.05s
+Loading analysis data took 0.01s
+Analyze and compile ATL took 0.00s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\Kenny Saputra\\AppData\\Roaming/RenPy/backups\\The-Cave':
+Dump and make backups. took 0.04s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.03s
+DPI scale factor: 1.000000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.16s
+Cleaning stores took 0.00s
+Init translation took 0.03s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.01s
+Prepare screens took 0.04s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.01s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.03s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: "b'NVIDIA Corporation'"
+Renderer: b'NVIDIA GeForce RTX 2070 SUPER/PCIe/SSE2'
+Version: b'4.6.0 NVIDIA 472.12'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1214, 683) drawable=(1214, 683)
+Maximum texture size: 4096x4096
+Resetting cache.
+Bootstrap to the start of init.init took 529.50s
+Early init took 0.00s
+Loader init took 0.02s
+Loading error handling took 0.02s
+Loading script took 0.20s
+Loading save slot metadata. took 0.02s
+Loading persistent took 0.00s
+Faled to initialize steam: FileNotFoundError("Could not find module 'D:\\RenPy\\renpy-7.4.11-sdk\\lib\\py3-windows-x86_64\\steam_api64.dll' (or one of its dependencies). Try using the full path with constructor syntax.")
+Running init code took 0.05s
+Loading analysis data took 0.01s
+Analyze and compile ATL took 0.00s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\Kenny Saputra\\AppData\\Roaming/RenPy/backups\\The-Cave':
+Dump and make backups. took 0.04s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.02s
+DPI scale factor: 1.000000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.17s
+Cleaning stores took 0.00s
+Init translation took 0.03s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.01s
+Prepare screens took 0.04s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.02s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.03s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: "b'NVIDIA Corporation'"
+Renderer: b'NVIDIA GeForce RTX 2070 SUPER/PCIe/SSE2'
+Version: b'4.6.0 NVIDIA 472.12'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1214, 683) drawable=(1214, 683)
+Maximum texture size: 4096x4096
+Resetting cache.
+Bootstrap to the start of init.init took 563.02s
+Early init took 0.00s
+Loader init took 0.01s
+Loading error handling took 0.02s
+Loading script took 0.20s
+Loading save slot metadata. took 0.02s
+Loading persistent took 0.00s
+Faled to initialize steam: FileNotFoundError("Could not find module 'D:\\RenPy\\renpy-7.4.11-sdk\\lib\\py3-windows-x86_64\\steam_api64.dll' (or one of its dependencies). Try using the full path with constructor syntax.")
+Running init code took 0.05s
+Loading analysis data took 0.01s
+Analyze and compile ATL took 0.00s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\Kenny Saputra\\AppData\\Roaming/RenPy/backups\\The-Cave':
+Dump and make backups. took 0.04s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.03s
+DPI scale factor: 1.000000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.17s
+Cleaning stores took 0.00s
+Init translation took 0.03s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.01s
+Prepare screens took 0.04s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.02s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.03s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: "b'NVIDIA Corporation'"
+Renderer: b'NVIDIA GeForce RTX 2070 SUPER/PCIe/SSE2'
+Version: b'4.6.0 NVIDIA 472.12'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1214, 683) drawable=(1214, 683)
+Maximum texture size: 4096x4096
+Resetting cache.
+Bootstrap to the start of init.init took 658.24s
+Early init took 0.00s
+Loader init took 0.02s
+Loading error handling took 0.02s
+Loading script took 0.21s
+Loading save slot metadata. took 0.02s
+Loading persistent took 0.00s
+Faled to initialize steam: FileNotFoundError("Could not find module 'D:\\RenPy\\renpy-7.4.11-sdk\\lib\\py3-windows-x86_64\\steam_api64.dll' (or one of its dependencies). Try using the full path with constructor syntax.")
+Running init code took 0.05s
+Loading analysis data took 0.01s
+Analyze and compile ATL took 0.00s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\Kenny Saputra\\AppData\\Roaming/RenPy/backups\\The-Cave':
+Dump and make backups. took 0.04s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.02s
+DPI scale factor: 1.000000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.17s
+Cleaning stores took 0.00s
+Init translation took 0.03s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.01s
+Prepare screens took 0.04s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.01s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.04s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: "b'NVIDIA Corporation'"
+Renderer: b'NVIDIA GeForce RTX 2070 SUPER/PCIe/SSE2'
+Version: b'4.6.0 NVIDIA 472.12'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1214, 683) drawable=(1214, 683)
+Maximum texture size: 4096x4096
+Resetting cache.
+Bootstrap to the start of init.init took 714.13s
+Early init took 0.00s
+Loader init took 0.01s
+Loading error handling took 0.01s
+Loading script took 0.19s
+Loading save slot metadata. took 0.02s
+Loading persistent took 0.00s
+Faled to initialize steam: FileNotFoundError("Could not find module 'D:\\RenPy\\renpy-7.4.11-sdk\\lib\\py3-windows-x86_64\\steam_api64.dll' (or one of its dependencies). Try using the full path with constructor syntax.")
+Running init code took 0.05s
+Loading analysis data took 0.01s
+Analyze and compile ATL took 0.00s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\Kenny Saputra\\AppData\\Roaming/RenPy/backups\\The-Cave':
+Dump and make backups. took 0.04s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.02s
+DPI scale factor: 1.000000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.16s
+Cleaning stores took 0.00s
+Init translation took 0.04s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.01s
+Prepare screens took 0.04s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.01s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.03s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: "b'NVIDIA Corporation'"
+Renderer: b'NVIDIA GeForce RTX 2070 SUPER/PCIe/SSE2'
+Version: b'4.6.0 NVIDIA 472.12'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1214, 683) drawable=(1214, 683)
+Maximum texture size: 4096x4096
+Resetting cache.
+Bootstrap to the start of init.init took 919.48s
+Early init took 0.00s
+Loader init took 0.02s
+Loading error handling took 0.01s
+Loading script took 0.21s
+Loading save slot metadata. took 0.02s
+Loading persistent took 0.00s
+Faled to initialize steam: FileNotFoundError("Could not find module 'D:\\RenPy\\renpy-7.4.11-sdk\\lib\\py3-windows-x86_64\\steam_api64.dll' (or one of its dependencies). Try using the full path with constructor syntax.")
+Running init code took 0.05s
+Loading analysis data took 0.01s
+Analyze and compile ATL took 0.00s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\Kenny Saputra\\AppData\\Roaming/RenPy/backups\\The-Cave':
+Dump and make backups. took 0.04s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.03s
+DPI scale factor: 1.000000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.17s
+Cleaning stores took 0.00s
+Init translation took 0.03s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.01s
+Prepare screens took 0.04s
+Save pyanalysis. took 0.01s
+Save bytecode. took 0.02s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.03s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: "b'NVIDIA Corporation'"
+Renderer: b'NVIDIA GeForce RTX 2070 SUPER/PCIe/SSE2'
+Version: b'4.6.0 NVIDIA 472.12'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1214, 683) drawable=(1214, 683)
+Maximum texture size: 4096x4096
+Resetting cache.
+Bootstrap to the start of init.init took 964.88s
+Early init took 0.00s
+Loader init took 0.02s
+Loading error handling took 0.02s
+Loading script took 0.20s
+Loading save slot metadata. took 0.02s
+Loading persistent took 0.00s
+Faled to initialize steam: FileNotFoundError("Could not find module 'D:\\RenPy\\renpy-7.4.11-sdk\\lib\\py3-windows-x86_64\\steam_api64.dll' (or one of its dependencies). Try using the full path with constructor syntax.")
+Running init code took 0.05s
+Loading analysis data took 0.01s
+Analyze and compile ATL took 0.00s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\Kenny Saputra\\AppData\\Roaming/RenPy/backups\\The-Cave':
+Dump and make backups. took 0.04s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.03s
+DPI scale factor: 1.000000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.16s
+Cleaning stores took 0.00s
+Init translation took 0.03s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.01s
+Prepare screens took 0.04s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.01s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.03s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: "b'NVIDIA Corporation'"
+Renderer: b'NVIDIA GeForce RTX 2070 SUPER/PCIe/SSE2'
+Version: b'4.6.0 NVIDIA 472.12'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1214, 683) drawable=(1214, 683)
+Maximum texture size: 4096x4096
+
+Full traceback:
+  File "renpy/common/00keymap.rpy", line 473, in script
+    python hide:
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\ast.py", line 1131, in execute
+    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\python.py", line 1052, in py_exec_bytecode
+    exec(bytecode, globals, locals)
+  File "renpy/common/00keymap.rpy", line 473, in <module>
+    python hide:
+  File "renpy/common/00keymap.rpy", line 497, in _execute_python_hide
+    renpy.save("_reload-1", "reload save game")
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\loadsave.py", line 403, in save
+    reraise(t, e, tb)
+  File "/home/tom/ab/renpy-build/tmp/install.linux-x86_64/lib/python3.9/site-packages/future/utils/__init__.py", line 441, in raise_
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\loadsave.py", line 389, in save
+    dump((roots, renpy.game.log), logf)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\compat\pickle.py", line 103, in dump
+    pickle.dump(o, f, pickle.HIGHEST_PROTOCOL if highest else PROTOCOL)
+RecursionError: maximum recursion depth exceeded while pickling an object
+
+While running game code:
+  File "renpy/common/00keymap.rpy", line 473, in script
+    python hide:
+  File "renpy/common/00keymap.rpy", line 473, in <module>
+    python hide:
+  File "renpy/common/00keymap.rpy", line 497, in _execute_python_hide
+    renpy.save("_reload-1", "reload save game")
+RecursionError: maximum recursion depth exceeded while pickling an object
+
+Full traceback:
+  File "renpy/common/_layout/screen_load_save.rpym", line 35, in script
+    $ ui.interact()
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\ast.py", line 1131, in execute
+    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\python.py", line 1052, in py_exec_bytecode
+    exec(bytecode, globals, locals)
+  File "renpy/common/_layout/screen_load_save.rpym", line 35, in <module>
+    $ ui.interact()
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\ui.py", line 299, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\core.py", line 3377, in interact
+    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs) # type: ignore
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\core.py", line 4252, in interact_core
+    rv = root_widget.event(ev, x, y, 0)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 1175, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\transition.py", line 53, in event
+    return self.new_widget.event(ev, x, y, st) # E1101
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 1175, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 1175, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\screen.py", line 743, in event
+    rv = self.child.event(ev, x, y, st)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 1175, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 1399, in event
+    rv = super(Window, self).event(ev, x, y, st)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 279, in event
+    rv = d.event(ev, x - xo, y - yo, st)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 1175, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 1175, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\behavior.py", line 1070, in event
+    return handle_click(self.clicked)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\behavior.py", line 1005, in handle_click
+    rv = run(action)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\behavior.py", line 322, in run
+    new_rv = run(i, *args, **kwargs)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\behavior.py", line 329, in run
+    return action(*args, **kwargs)
+  File "renpy/common/00action_file.rpy", line 383, in __call__
+    renpy.save(fn, extra_info=save_name)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\loadsave.py", line 403, in save
+    reraise(t, e, tb)
+  File "/home/tom/ab/renpy-build/tmp/install.linux-x86_64/lib/python3.9/site-packages/future/utils/__init__.py", line 441, in raise_
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\loadsave.py", line 389, in save
+    dump((roots, renpy.game.log), logf)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\compat\pickle.py", line 103, in dump
+    pickle.dump(o, f, pickle.HIGHEST_PROTOCOL if highest else PROTOCOL)
+RecursionError: maximum recursion depth exceeded while pickling an object
+
+While running game code:
+  File "renpy/common/00action_file.rpy", line 383, in __call__
+    renpy.save(fn, extra_info=save_name)
+RecursionError: maximum recursion depth exceeded while pickling an object
+
+Full traceback:
+  File "renpy/common/_layout/screen_load_save.rpym", line 35, in script
+    $ ui.interact()
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\ast.py", line 1131, in execute
+    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\python.py", line 1052, in py_exec_bytecode
+    exec(bytecode, globals, locals)
+  File "renpy/common/_layout/screen_load_save.rpym", line 35, in <module>
+    $ ui.interact()
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\ui.py", line 299, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\core.py", line 3377, in interact
+    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs) # type: ignore
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\core.py", line 4252, in interact_core
+    rv = root_widget.event(ev, x, y, 0)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 1175, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\transition.py", line 53, in event
+    return self.new_widget.event(ev, x, y, st) # E1101
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 1175, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 1175, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\screen.py", line 743, in event
+    rv = self.child.event(ev, x, y, st)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 1175, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 1399, in event
+    rv = super(Window, self).event(ev, x, y, st)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 279, in event
+    rv = d.event(ev, x - xo, y - yo, st)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 1175, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 1175, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\behavior.py", line 1070, in event
+    return handle_click(self.clicked)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\behavior.py", line 1005, in handle_click
+    rv = run(action)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\behavior.py", line 322, in run
+    new_rv = run(i, *args, **kwargs)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\behavior.py", line 329, in run
+    return action(*args, **kwargs)
+  File "renpy/common/00action_file.rpy", line 383, in __call__
+    renpy.save(fn, extra_info=save_name)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\loadsave.py", line 403, in save
+    reraise(t, e, tb)
+  File "/home/tom/ab/renpy-build/tmp/install.linux-x86_64/lib/python3.9/site-packages/future/utils/__init__.py", line 441, in raise_
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\loadsave.py", line 389, in save
+    dump((roots, renpy.game.log), logf)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\compat\pickle.py", line 103, in dump
+    pickle.dump(o, f, pickle.HIGHEST_PROTOCOL if highest else PROTOCOL)
+RecursionError: maximum recursion depth exceeded while pickling an object
+
+While running game code:
+  File "renpy/common/00action_file.rpy", line 383, in __call__
+    renpy.save(fn, extra_info=save_name)
+RecursionError: maximum recursion depth exceeded while pickling an object
+Cleaning stores took 0.00s
+Init translation took 0.00s
+Build styles took 0.00s
+Load screen analysis took 0.02s
+Analyze screens took 0.00s
+Prepare screens took 0.00s
+Running _start took 0.00s
+Cleaning stores took 0.00s
+Init translation took 0.00s
+Build styles took 0.00s
+Load screen analysis took 0.02s
+Analyze screens took 0.00s
+Prepare screens took 0.00s
+Running _start took 0.00s
+Resetting cache.
+Bootstrap to the start of init.init took 1116.11s
+Early init took 0.00s
+Loader init took 0.02s
+Loading error handling took 0.01s
+Loading script took 0.20s
+Loading save slot metadata. took 0.02s
+Loading persistent took 0.00s
+Faled to initialize steam: FileNotFoundError("Could not find module 'D:\\RenPy\\renpy-7.4.11-sdk\\lib\\py3-windows-x86_64\\steam_api64.dll' (or one of its dependencies). Try using the full path with constructor syntax.")
+Running init code took 0.05s
+Loading analysis data took 0.01s
+Analyze and compile ATL took 0.00s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\Kenny Saputra\\AppData\\Roaming/RenPy/backups\\The-Cave':
+Dump and make backups. took 0.04s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.03s
+DPI scale factor: 1.000000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.16s
+Cleaning stores took 0.00s
+Init translation took 0.03s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.01s
+Prepare screens took 0.04s
+Save pyanalysis. took 0.01s
+Save bytecode. took 0.01s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.03s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: "b'NVIDIA Corporation'"
+Renderer: b'NVIDIA GeForce RTX 2070 SUPER/PCIe/SSE2'
+Version: b'4.6.0 NVIDIA 472.12'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1214, 683) drawable=(1214, 683)
+Maximum texture size: 4096x4096
+Resetting cache.
+Bootstrap to the start of init.init took 1440.00s
+Early init took 0.00s
+Loader init took 0.02s
+Loading error handling took 0.02s
+Loading script took 0.20s
+Loading save slot metadata. took 0.02s
+Loading persistent took 0.00s
+Faled to initialize steam: FileNotFoundError("Could not find module 'D:\\RenPy\\renpy-7.4.11-sdk\\lib\\py3-windows-x86_64\\steam_api64.dll' (or one of its dependencies). Try using the full path with constructor syntax.")
+Running init code took 0.05s
+Loading analysis data took 0.01s
+Analyze and compile ATL took 0.00s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\Kenny Saputra\\AppData\\Roaming/RenPy/backups\\The-Cave':
+Dump and make backups. took 0.04s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.03s
+DPI scale factor: 1.000000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.17s
+Cleaning stores took 0.00s
+Init translation took 0.03s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.01s
+Prepare screens took 0.04s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.01s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.03s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: "b'NVIDIA Corporation'"
+Renderer: b'NVIDIA GeForce RTX 2070 SUPER/PCIe/SSE2'
+Version: b'4.6.0 NVIDIA 472.12'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1214, 683) drawable=(1214, 683)
+Maximum texture size: 4096x4096
+Resetting cache.
+Bootstrap to the start of init.init took 2095.30s
+Early init took 0.00s
+Loader init took 0.02s
+Loading error handling took 0.02s
+Loading script took 0.10s
+Loading save slot metadata. took 0.02s
+Loading persistent took 0.00s
+Faled to initialize steam: FileNotFoundError("Could not find module 'D:\\RenPy\\renpy-7.4.11-sdk\\lib\\py3-windows-x86_64\\steam_api64.dll' (or one of its dependencies). Try using the full path with constructor syntax.")
+Running init code took 0.05s
+Loading analysis data took 0.01s
+Analyze and compile ATL took 0.00s
+Index archives took 0.00s
+Dump and make backups. took 0.05s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.04s
+DPI scale factor: 1.000000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.17s
+Cleaning stores took 0.00s
+Init translation took 0.03s
+Build styles took 0.00s
+Load screen analysis took 0.02s
+Analyze screens took 0.00s
+Save screen analysis took 0.00s
+Prepare screens took 0.04s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.00s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.03s
 
 Initializing gl2 renderer:
 primary display bounds: (0, 0, 1920, 1080)
