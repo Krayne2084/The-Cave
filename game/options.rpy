@@ -23,7 +23,7 @@ define gui.show_name = True
 
 ## The version of the game.
 
-define config.version = "1.0.R"
+define config.version = "1.0"
 
 
 ## Text that is placed on the game's about screen. Place the text between the
@@ -48,7 +48,7 @@ define build.name = "TheCave"
 
 define config.has_sound = True
 define config.has_music = True
-define config.has_voice = True
+define config.has_voice = False
 
 
 ## To allow the user to play a test sound on the sound or voice channel,

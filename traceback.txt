@@ -1,90 +1,64 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
-While parsing game/script.rpy.
-  File "game/script.rpy", line 1366, in script
-    
-  File "renpy/common/00director.rpy", line 1308, in event
-    rv = self.child.event(ev, x, y, st)
-  File "renpy/common/00director.rpy", line 1077, in __call__
-    update_ast()
-  File "renpy/common/00director.rpy", line 457, in update_ast
-    renpy.scriptedit.add_to_ast_before(statement, state.filename, linenumber)
-ScriptError: could not find label '('game/script.rpy', 1661110086, 23)'.
+While loading <renpy.display.im.Image object ('gui/cover.png') at 0x00000000053e9700>:
+OSError: Couldn't find file 'gui/cover.png'.
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 1366, in script
-    
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\ast.py", line 921, in execute
-    renpy.exports.say(who, what, *args, **kwargs)
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\exports.py", line 1373, in say
-    who(what, *args, **kwargs)
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\character.py", line 1266, in __call__
-    self.do_display(who, what, cb_args=self.cb_args, dtt=dtt, **display_args)
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\character.py", line 927, in do_display
-    display_say(who,
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\character.py", line 666, in display_say
-    rv = renpy.ui.interact(mouse='say', type=type, roll_forward=roll_forward)
+  File "renpy/common/_layout/screen_main_menu.rpym", line 28, in script
+    python hide:
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\ast.py", line 1131, in execute
+    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\python.py", line 1052, in py_exec_bytecode
+    exec(bytecode, globals, locals)
+  File "renpy/common/_layout/screen_main_menu.rpym", line 28, in <module>
+    python hide:
+  File "renpy/common/_layout/screen_main_menu.rpym", line 35, in _execute_python_hide
+    ui.interact()
   File "D:\RenPy\renpy-7.4.11-sdk\renpy\ui.py", line 299, in interact
     rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
   File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\core.py", line 3377, in interact
     repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs) # type: ignore
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\core.py", line 4252, in interact_core
-    rv = root_widget.event(ev, x, y, 0)
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 1175, in event
-    rv = i.event(ev, x - xo, y - yo, cst)
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 1175, in event
-    rv = i.event(ev, x - xo, y - yo, cst)
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 1175, in event
-    rv = i.event(ev, x - xo, y - yo, cst)
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\screen.py", line 743, in event
-    rv = self.child.event(ev, x, y, st)
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 1175, in event
-    rv = i.event(ev, x - xo, y - yo, cst)
-  File "renpy/common/00director.rpy", line 1308, in event
-    rv = self.child.event(ev, x, y, st)
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 1399, in event
-    rv = super(Window, self).event(ev, x, y, st)
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 279, in event
-    rv = d.event(ev, x - xo, y - yo, st)
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 1175, in event
-    rv = i.event(ev, x - xo, y - yo, cst)
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 1175, in event
-    rv = i.event(ev, x - xo, y - yo, cst)
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 1399, in event
-    rv = super(Window, self).event(ev, x, y, st)
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 279, in event
-    rv = d.event(ev, x - xo, y - yo, st)
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 279, in event
-    rv = d.event(ev, x - xo, y - yo, st)
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\viewport.py", line 298, in event
-    rv = super(Viewport, self).event(ev, x, y, st)
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 279, in event
-    rv = d.event(ev, x - xo, y - yo, st)
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 1175, in event
-    rv = i.event(ev, x - xo, y - yo, cst)
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\behavior.py", line 1070, in event
-    return handle_click(self.clicked)
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\behavior.py", line 1005, in handle_click
-    rv = run(action)
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\behavior.py", line 329, in run
-    return action(*args, **kwargs)
-  File "renpy/common/00director.rpy", line 1077, in __call__
-    update_ast()
-  File "renpy/common/00director.rpy", line 457, in update_ast
-    renpy.scriptedit.add_to_ast_before(statement, state.filename, linenumber)
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\scriptedit.py", line 365, in add_to_ast_before
-    renpy.game.log.replace_node(old, block[0])
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\rollback.py", line 561, in replace_node
-    i.context.replace_node(old, new)
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\execution.py", line 336, in replace_one
-    n = renpy.game.script.lookup(name)
-  File "D:\RenPy\renpy-7.4.11-sdk\renpy\script.py", line 927, in lookup
-    raise ScriptError("could not find label '%s'." % str(original))
-ScriptError: could not find label '('game/script.rpy', 1661110086, 23)'.
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\core.py", line 3906, in interact_core
+    self.draw_screen(root_widget, fullscreen_video, (not fullscreen_video) or video_frame_drawn)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\core.py", line 2602, in draw_screen
+    surftree = renpy.display.render.render_screen(
+  File "render.pyx", line 495, in renpy.display.render.render_screen
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 884, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 884, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 884, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\screen.py", line 704, in render
+    child = renpy.display.render.render(self.child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\layout.py", line 884, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\im.py", line 627, in render
+    return cache.get(self, render=True)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\im.py", line 295, in get
+    surf = image.load()
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\im.py", line 720, in load
+    raise e
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\display\im.py", line 685, in load
+    filelike = renpy.loader.load(self.filename)
+  File "D:\RenPy\renpy-7.4.11-sdk\renpy\loader.py", line 820, in load
+    raise IOError("Couldn't find file '%s'." % name)
+OSError: Couldn't find file 'gui/cover.png'.
 
 Windows-10-10.0.19043 AMD64
 Ren'Py 8.0.2.22081402
-The Cave 0.1.1.1
-Sun Aug 21 18:32:28 2022
+The Cave 1.0.R
+Sun Aug 21 21:37:04 2022

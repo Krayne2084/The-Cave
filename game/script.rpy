@@ -202,7 +202,7 @@ label choice1_throw:
 
 label choice1_done:
 
-g "My name is Charlotte!{w} I'm so glad I'm not alone!{w} Unless you're a bad guy!{w} Are you a bad guy?{w} What's your name?"
+g "My name is Charlotte!{w=0.2} I'm so glad I'm not alone!{w=0.2} Unless you're a bad guy!{w=0.2} Are you a bad guy?{w=0.2} What's your name?"
 
 define C = Character("Charlotte", color='#0f0')
 
@@ -210,7 +210,7 @@ b "Whoa easy there, I'm not a bad guy haha."
 b "You're real rapid-fire ain't ya?"
 
 python:
-    name = renpy.input("{size=-10}(default: Adam){/size}\nName:")
+    name = renpy.input("{size=-14}(default: Adam){/size}\nMy name is:")
 
     name = name.strip() or "Adam"
 
@@ -577,8 +577,8 @@ C "Oh my gosh, light! {nw}"
 if flashlight in bag:
     extend "*turns off flashlight* {nw}"
 
-extend "Nice to know we're at least near the surface.{w} Maybe someone will be nearby when we reach an exit."
-player "That'd be a convenient coincidence now wouldn't it.{w} *turns off lighter*" 
+extend "\nNice to know we're at least near the surface.{w} Maybe someone will be nearby when we reach an exit."
+player "That'd be a convenient coincidence now wouldn't it. \n*turns off lighter*" 
 "Charlotte scans around the area and notices something up ahead."
 
 show charlotte idle
@@ -1322,8 +1322,14 @@ else:
             show charlotte neutral
             
             C "*huff* *huff*"
-            extend "Nice job on the log.{w} Didn't know you had it in ya."
+
+            show charlotte happy
+
+            extend "\nNice job on the log.{w} Didn't know you had it in ya."
             player "Haha, quit flirtin'."
+            
+            show charlotte idle
+
             C "Oh shut up."
             "Charlotte bonks you lightly on the head."
 
@@ -1396,12 +1402,12 @@ label survive_paracord:
     "You manage to grab the ledge safely, hanging by your fingertips miraculously uninjured.{w} You feel a tug on the rope and with its aid, you hoist your arm up on the ledge."
     "Charlotte expertly ties the other end of the cord to a large, heavy rock and runs to you to lift you up."
     "The ceiling starts to crumble behind you, and with no time to untie the paracord, you unbuckle your belt and both of you sprint to the exit."
-    "The rubble collapses and blocks the exit, sealing the cave."
-
+    
     play music_overlay "audio/birds-19624.mp3" fadeout 3
     play sound "audio/stones-falling-6375.mp3" volume 0.7
     show bg outside at bg_topish with dissolve
 
+    "The rubble collapses and blocks the exit, sealing the cave."
     player "*huff* *huff*"
     extend "\nBoy am I glad we made it outta there..."
 
