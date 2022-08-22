@@ -1258,6 +1258,8 @@ screen notify(message):
 transform notify_appear:
     on show:
         alpha 0
+        yanchor 0
+        ypos 0.15
         linear .25 alpha 1.0
     on hide:
         linear .5 alpha 0.0
