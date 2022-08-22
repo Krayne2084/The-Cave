@@ -754,6 +754,7 @@ label choice4_water:
         C "Hey look, there's an underwater ledge!{w} I think it goes all the way across?{w} *whistle*\nIt's wide enough to walk normal."
         player "Whew, I thought we were gonna have to wade over.{w} Glad only our little piggies need to take the plunge."
         "You both cross the water with only slightly damp feet."
+        $ slipped = False
 
     else:
         "[player] sticks his leg into the water all the way and it still doesn't reach the bottom."
@@ -764,6 +765,7 @@ label choice4_water:
         $ injuries_player = injuries_player + 1
         show charlotte shocked
         with hurt_flash
+        $ slipped = True
 
         player "{size=+20}CO- {size=-5}*gurgle*"
         
@@ -787,22 +789,36 @@ label choice4_water:
         show charlotte idle
         
         C "You didn't need to get wet.{w} The good news is that the rock seems to be a ledge and I think I can barely see it going all the way over."
-        "[player] begins to curse for several minutes."
+        "[player] begins to curse for several minutes.{nw}"
+
+        if injuries_player > 0:
+            $ firstaidkit.use()
+            $ injuries_player = injuries_player - 1
+            extend " While Charlotte takes the chance to dress his wounds."
+        
+        else:
+            extend ""
+
         "You both cross the water as you curse up another storm about how blood loss and hypothermia are having a race to see who can kill him first."
         "By the time you get to the other side, you've calmed down significantly and even your accent seems to have retreated."
         C "So British huh?"
         player "Sort of, grew up all over Europe but yeah I was born in Britain.{w} Ma and Pa loved road trips before the triplets.{w} Hopefully when the triplets grow up, Ma and Pa find the energy to go on road trips again."
 
-        $ injuries_player = injuries_player + 1
 
     "As you reach the end of the pool, you notice the ground getting{cps=4}...{/cps}{w=0.3} fuzzy."
-    player "Great, another slippin' hazard. {w}At least this one's hard to miss."
+    if slipped:
+        player "Great, another slippin' hazard. {w}At least this one's hard to miss."
     
     show charlotte thinking
     
     C "Wait...{w} Is this what I think it is?"
-    player "I just see some fuzzy patches of asininity waiting to get our arses bruised."
+
+    if slipped:
+        player "I just see some fuzzy patches of asininity waiting to get our arses bruised."
     
+    else:
+        player "Moss?"
+
     show charlotte idle
     
     C "First off, this species of moss is mostly under whatever surface it's on and the parts in open air are usually bone dry and therefore not slippery."

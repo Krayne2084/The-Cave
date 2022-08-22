@@ -2,7 +2,13 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 1302: Indentation mismatch.
+File "game/script.rpy", line 794: expected statement.
+    firstaidkit.use()
+                     ^
+
+File "game/script.rpy", line 795: expected statement.
+    injuries_player = injuries_player - 1
+                    ^
 
 Ren'Py Version: Ren'Py 8.0.2.22081402
-Sun Aug 21 18:28:21 2022
+Sun Aug 21 22:35:23 2022
