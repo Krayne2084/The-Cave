@@ -1162,7 +1162,7 @@ label choice5_left:
         "{i}Pray that our tributes may be enough for the elements to allow us to channel them through their Idols"
         "{i}That we may tip the scales but never break them.{/i}"
         C "Wait. There's supposed to be 6."
-        player "Good point.{w} If red is fire and blue is water then... *thinking* the Death Idol is missing."
+        player "Good point.{w} If red is fire and blue is water then{cps=4}...{/cps} *thinking* {p}The Death Idol is missing."
         C "That doesn't sound ominous at all.{w} Especially with those footprints leading right to where it used to be.{w} Wonder where it could've gone."
         "A strange feeling has begun resonating in you the longer you stay in the temple.{w} It feels like the temple is asking you to take the White Idol away, {w}The Idol of Life."
         "You start to pick up The Idol of Life."
@@ -1175,7 +1175,7 @@ label choice5_left:
         if injuries_C > 0:
             C "Whoa..."
             player "Whoa what?"
-            C "*removes her hands from the idol then touches the idol again* {w}When I touch the idol... I don't feel the pain on my knees."
+            C "*removes her hands from the idol then touches the idol again* {p}When I touch the idol... I don't feel the pain on my knees."
             player "So it's healing you?"
             "You look at Charlotte's knee to see if her skin is magical stitching itself together."
             C "Nah, more like it just doesn't make me feel the pain anymore.{w} Like a numbing agent."
@@ -1186,7 +1186,7 @@ label choice5_left:
         if injuries_player > 0:
             player "Whoa..."
             C "Whoa what?"
-            player "*you remove your hands from the idol then touch the idol again* {w}When I touch the idol... I don't feel the throbbing pain in my arm."
+            player "*you remove your hands from the idol then touch the idol again* {p}When I touch the idol... I don't feel the throbbing pain in my arm."
             C "So is it healing you or something?"
             "Charlotte looks at your arm as if she was expecting to see a magical beam of light erupt from it."
             player "I don't think so.{w} It feels like it's soothing and easing the pain I feel.{w} Almost like it's ain't even there.{w} Soooo, it must really wanna join us outta here."
@@ -1197,7 +1197,7 @@ label choice5_left:
             jump choice5_healthy
         
         label choice5_healthy:
-            player "You remember what the tablet said right?{w} It needs a counterpart.{w} Something bad'll happen if we don't take it!{w} It's currently imbalance since the Death idol isn't here."
+            player "You remember what the tablet said right?{w} It needs a counterpart.{w} Something bad'll happen if we don't take it!{w} It's currently imbalanced since the Death idol isn't here."
 
             show charlotte worried
 
@@ -1215,7 +1215,7 @@ label choice5_left:
             "The both of you look around the area to see if there's any path for you to progress."
             C "Looks like we gotta backtrack."
             player "At least we got the chance to pass by this place."
-            "You walk away, look back at the temple, and with the idol you your possession, you head back to retrace your steps and check out the other path."
+            "You walk away, look back at the temple, and with the idol in your possession, you head back to retrace your steps to the other path."
             jump choice5_right
 
 
