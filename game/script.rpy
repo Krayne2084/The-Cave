@@ -1434,7 +1434,7 @@ label survive_paracord:
     show charlotte idle
 
     C "*huff* *huff*"
-    extend "\nSmart thinking what your belt.{w} We'd both still be stuck in there if it weren't for that."
+    extend "\nSmart thinking with your belt.{w} We'd both still be stuck in there if it weren't for that."
     player "Haha, quit flirtin'."
     C "Oh shut up."
     "Charlotte bonks you lightly on the head."
